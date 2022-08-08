@@ -1,0 +1,477 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta property="og:title" content="The Good Research Code Handbook" />
+  
+<meta property="og:type" content="website" />
+  
+<meta property="og:url" content="https://goodresearch.dev/index.html" />
+  
+<meta property="og:description" content="This handbook is for grad students, postdocs and PIs who do a lot of programming as part of their research. It will teach you, in a practical manner, how to organize your code so that it is easy to..." />
+  
+<meta property="og:image" content="https://goodresearch.dev/_images/unicorn.png" />
+  
+<meta property="og:image:alt" content="The Good Research Code Handbook" />
+  
+    <title>The Good Research Code Handbook &#8212; TTS for ASR</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+  <!-- add `style` or `link` tags with your CSS `@font-face` declarations here -->
+  <!-- ... and optionally preload the `woff2` for snappier page loads -->
+  <link rel="preload" href="_static/et-book/et-book-bold-line-figures/et-book-bold-line-figures.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="_static/et-book/et-book-display-italic-old-style-figures/et-book-display-italic-old-style-figures.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="_static/et-book/et-book-roman-line-figures/et-book-roman-line-figures.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="_static/et-book/et-book-roman-old-style-figures/et-book-roman-old-style-figures.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="_static/et-book/et-book-semi-bold-old-style-figures/et-book-semi-bold-old-style-figures.woff" as="font" type="font/woff" crossorigin>
+
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.59e7d1499aa759519747cb2a1a335dc4.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/tufte.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.90c857b2bf8f3d46aa488b0ed8bf60a6.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://cdminix.me/tts-for-asr/index.html" />
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Roadmap" href="roadmap.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@patrickmineault" />
+    <meta name="twitter:title" content="The Good Research Code Handbook" />
+    <meta name="twitter:description" content="This handbook is for grad students, postdocs and PIs who do a lot of programming as part of their research. It will teach you, in a practical manner, how to organize your code so that it is easy to understand and works reliably." />
+    <meta name="twitter:image" content="https://goodresearch.dev/_images/unicorn.png" />
+
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-3Q6LDVNS0X"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){ dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-3Q6LDVNS0X');
+    </script>
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="#">
+      
+      <img src="_static/unicorn.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">TTS for ASR</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1 current">
+  <a class="reference internal" href="#">
+   The Good Research Code Handbook
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Intro
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="roadmap.html">
+   Roadmap
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="brains.html">
+   Brains &amp; coding
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Lessons
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="setup.html">
+   Set up your project
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tidy.html">
+   Keep things tidy
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="decoupled.html">
+   Write decoupled code
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="testing.html">
+   Test your code
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="docs.html">
+   Document your code
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="pipelines.html">
+   Document your project
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="social.html">
+   Make it social
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="zipf.html">
+   A sample project: Zipf’s law
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Extras
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="cka.html">
+   Test numerical code: CKA
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tools.html">
+   Use good tools
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="acknowledgements.html">
+   Acknowledgements
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+<nav class="bd-links" id="nav-social">
+    <div class="bd-toc-item">
+        <p class="caption">
+            <span class="caption-text">Social</span>
+        </p>
+        <ul class="nav bd-sidenav" style="display:block">
+            <li class="toctree-l1"><a class="github-button" href="https://github.com/patrickmineault/codebook" data-icon="octicon-star" data-show-count="true" data-size="large" aria-label="Star patrickmineault/codebook on GitHub">Star on Github</a></li>
+            <li class="toctree-l1"><a href="http://eepurl.com/hHgNOH">Subscribe for updates</a></li>
+            <li class="toctree-l1"><a href="http://twitter.com/share?text=The+Good+Research+Code+Handbook.+Learn+to+write+readable%2C+maintainable+research+code+in+Python.&url=https://goodresearch.dev&user&via=patrickmineault" class="twitter-share-button" data-text="The Good Research Code Handbook. Learn to write readable, maintainable code in Python." data-via="patrickmineault" data-show-count="false">Tweet this handbook</a></li>
+        </ul>
+    </div>
+</nav>
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/index.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cdminix/tts-for-asr"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cdminix/tts-for-asr/issues/new?title=Issue%20on%20page%20%2Findex.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cdminix/tts-for-asr/edit/main/./index.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#prerequisites">
+   Prerequisites
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#why-did-i-make-this">
+   Why did I make this?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#citing-this-handbook">
+   Citing this handbook
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#alternative-formats">
+   Alternative formats
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#contact-me">
+   Contact me
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="the-good-research-code-handbook">
+<h1>The Good Research Code Handbook<a class="headerlink" href="#the-good-research-code-handbook" title="Permalink to this headline">¶</a></h1>
+<p>This handbook is for grad students, postdocs and PIs who do a lot of programming as part of their research. It will teach you, in a practical manner, how to organize your code so that it is easy to understand and works reliably.</p>
+<p>Most people who write research code are not trained in computer science or software engineering. It can feel like an uphill battle when you have to write code without the right training. Do you ever:</p>
+<ul class="simple">
+<li><p>Feel like you don’t know what you’re doing</p></li>
+<li><p>Feel like an impostor</p></li>
+<li><p>Write code with lots of bugs</p></li>
+<li><p>Hate your code and don’t want to work on it</p></li>
+<li><p>Have trouble finishing projects</p></li>
+<li><p>Contemplate buying a small organic farm in upstate Vermont and read far too much about goat husbandry</p></li>
+</ul>
+<p>Did I hit a nerve? Yes?! Then you’re in for a treat! This book will help you get from 0 to 1 on good software engineering practices for research projects.</p>
+<blockquote class="epigraph">
+<div><p>Is my code fast? No. But is it well documented? No. But does it work? Also no.</p>
+<p class="attribution">—<a class="reference external" href="https://twitter.com/KyleMorgenstein">&#64;KyleMorgenstein</a></p>
+</div></blockquote>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<p>I’ve tried to write this book in a progressive manner: some content is targeted at complete novices, other to programmers who are farther along on their journey. However, I generally assume that you have some familiarity with the following:</p>
+<ul class="simple">
+<li><p><strong>Python</strong>: this intro is Python-centric. You can write good code for Matlab, R, or Julia, but we won’t cover that here. You don’t need to be a Python expert, but you’ll get the most out of this if you’ve been using Python on a regular basis for at least a month, and if you have some passing familiarity with the python data science ecosystem (numpy, matplotlib, pandas, etc.).</p></li>
+<li><p><strong>Git &amp; Github</strong>: a lot of the practices introduced here will require you to change your code, which could cause existing functionality to break. You might even accidentally delete something important! Mastering git and github means you will have a time machine for your code, so you can revert to an earlier state. <a class="reference external" href="https://swcarpentry.github.io/git-novice/">There’s a great intro to git for beginners from software carpentries</a>.</p></li>
+<li><p><strong>The command line</strong>: You will need to run some commands on the command line to implement some of the advice in this book. I’m going to assume that you have some familiarity with running commands from a Unix-style shell (e.g. bash). <a class="reference external" href="http://swcarpentry.github.io/shell-novice/">There’s a great intro to the unix shell from software carpentries</a>. If you’re using Windows, you will still be able to run many tools from the Windows command prompt. Long term, your life will be easier if you <a class="reference internal" href="tools.html#wsl"><span class="std std-ref">install the Windows Subsystem for Linux (WSL)</span></a> which will give you access to a Unix-style shell.</p></li>
+</ul>
+<p>Some of the examples I use are neuroscience-inspired - but neuroscience background is absolutely not a requirement. Appreciation for unicorns <a class="reference internal" href="_images/unicorn.png"><img alt="unicorns" src="_images/unicorn.png" style="width: 24px; height: 24px;" /></a> is a big plus.</p>
+</div>
+<div class="section" id="why-did-i-make-this">
+<h2>Why did I make this?<a class="headerlink" href="#why-did-i-make-this" title="Permalink to this headline">¶</a></h2>
+<p>I’m <a class="reference external" href="https://xcorr.net">Patrick Mineault</a> <a class="reference internal" href="_images/twitter.svg"><img alt="Twitter" height="1" src="_images/twitter.svg" width="1" /></a>. I did my PhD in computational neuroscience at McGill University, in Montreal. I wrote a lot of not very good code, mostly in Matlab. One time, my code was in a non-working state for an entire month - I would furiously type on the keyboard all day in the hopes it would eventually work, and it didn’t. It made me sad. But I managed to graduate. Then I did a postdoc. More of the same.</p>
+<p>Eventually, I decided to properly study CS. I studied data structures, algorithms and software engineering practices, and I got a big-boy job as a software engineer at Google in California. It was then that I learned the error of my ways. I had lost time during my research days because I didn’t know how to organize and write code that didn’t self-destruct out of spite. But this is fixable! With knowledge!</p>
+<p>At the invitation of Ella Batty, I gave a workshop for the students in neuroscience at Harvard in January of 2021 on writing good research code. The feedback was overwhelmingly positive, so I decided to expand it into this handbook. I hope you enjoy it!</p>
+<p><img alt="It me" src="_images/pic.jpeg" /></p>
+</div>
+<div class="section" id="citing-this-handbook">
+<h2>Citing this handbook<a class="headerlink" href="#citing-this-handbook" title="Permalink to this headline">¶</a></h2>
+<p><span class='Z3988' title='url_ver=Z39.88-2004&amp;ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fzotero.org%3A2&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Adc&amp;rft.type=computerProgram&amp;rft.title=The%20Good%20Research%20Code%20Handbook&amp;rft.publisher=Zenodo&amp;rft.description=patrickmineault%2Fcodebook%3A%201.0.0.%20Initial%20release%20on%20Dec%2017th%2C%202021%2C%20plus%20hotpatches%20for%20style%20and%20typos.&amp;rft.identifier=https%3A%2F%2Fzenodo.org%2Frecord%2F5796873&amp;rft.aufirst=Patrick&amp;rft.aulast=Mineault&amp;rft.au=Patrick%20Mineault&amp;rft.au=The%20Good%20Research%20Code%20Handbook%20community%20&amp;rft.date=2021-12-21'></span></p>
+<img alt="10.5281/zenodo.5796873" src="https://zenodo.org/badge/398390273.svg" /><p>Patrick J Mineault &amp; The Good Research Code Handbook Community (2021). <em>The Good Research Code Handbook</em>. Zenodo. <a class="reference external" href="https://dx.doi.org/10.5281/zenodo.5796873">doi:10.5281/zenodo.5796873</a></p>
+</div>
+<div class="section" id="alternative-formats">
+<h2>Alternative formats<a class="headerlink" href="#alternative-formats" title="Permalink to this headline">¶</a></h2>
+<p><a href="_static/book.pdf">You can download a PDF version of this book here</a>. You can also take a look at a presentation I gave covering <a class="reference external" href="https://github.com/patrickmineault/research_code">the same materials</a> <a class="reference external" href="https://www.crowdcast.io/e/nma2021/29">here</a>. Please contact me if you’d like to see a print edition of this book.</p>
+</div>
+<div class="section" id="contact-me">
+<h2>Contact me<a class="headerlink" href="#contact-me" title="Permalink to this headline">¶</a></h2>
+<p><a href="https://github.com/patrickmineault/codebook/issues">You can report issues with the handbook here</a>. <a href='https://twitter.com/patrickmineault'>I’m active on Twitter</a>. For speaking engagements or collaborations, send me an email at patrick DOT mineault AT gmail DOT com.</p>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cdminix/tts-for-asr",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+     <div id="next">
+        <a class="right-next" href="roadmap.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Roadmap</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By <a href='https://xcorr.net'>Christoph Minixhofer</a> <a href='https://twitter.com/cdminix'><img height='24' width='24' src='_images/twitter.svg' alt='Twitter' style='width:24px'></a><br/>
+        
+            &copy; Copyright 2021.<br/>
+          <div class="extra_footer">
+            Licensed under <a href='https://github.com/patrickmineault/codebook/blob/main/LICENSE'>CC-BY 4.0</a> [<a href='https://github.com/patrickmineault/codebook'>source</a>].<br /><a href='https://github.com/patrickmineault/codebook/issues'>Report issue</a>.
+          </div>
+      </p>
+    </div>
+  </footer>
+  <!-- Place this tag in your head or just before your close body tag. -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-3Q6LDVNS0X"></script>
+<script>
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){ dataLayer.push(arguments); }
+                    gtag('config', 'G-3Q6LDVNS0X');
+                </script>
+
+  </body>
+</html>

@@ -1,0 +1,527 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta property="og:title" content="Keep things tidy" />
+  
+<meta property="og:type" content="website" />
+  
+<meta property="og:url" content="https://goodresearch.dev/tidy.html" />
+  
+<meta property="og:description" content="Does it spark joy? Marie Kondo, Keeping things consistent and tidy will free your working memory from having to remember extraneous information like variable names and paths. Use the style guide: G..." />
+  
+<meta property="og:image" content="https://goodresearch.dev/_images/unicorn.png" />
+  
+<meta property="og:image:alt" content="Keep things tidy" />
+  
+    <title>Keep things tidy &#8212; TTS for ASR</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+  <!-- add `style` or `link` tags with your CSS `@font-face` declarations here -->
+  <!-- ... and optionally preload the `woff2` for snappier page loads -->
+  <link rel="preload" href="_static/et-book/et-book-bold-line-figures/et-book-bold-line-figures.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="_static/et-book/et-book-display-italic-old-style-figures/et-book-display-italic-old-style-figures.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="_static/et-book/et-book-roman-line-figures/et-book-roman-line-figures.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="_static/et-book/et-book-roman-old-style-figures/et-book-roman-old-style-figures.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="_static/et-book/et-book-semi-bold-old-style-figures/et-book-semi-bold-old-style-figures.woff" as="font" type="font/woff" crossorigin>
+
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.59e7d1499aa759519747cb2a1a335dc4.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/tufte.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.90c857b2bf8f3d46aa488b0ed8bf60a6.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://cdminix.me/tts-for-asr/tidy.html" />
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Write decoupled code" href="decoupled.html" />
+    <link rel="prev" title="Set up your project" href="setup.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@patrickmineault" />
+    <meta name="twitter:title" content="The Good Research Code Handbook" />
+    <meta name="twitter:description" content="This handbook is for grad students, postdocs and PIs who do a lot of programming as part of their research. It will teach you, in a practical manner, how to organize your code so that it is easy to understand and works reliably." />
+    <meta name="twitter:image" content="https://goodresearch.dev/_images/unicorn.png" />
+
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-3Q6LDVNS0X"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){ dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-3Q6LDVNS0X');
+    </script>
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      <img src="_static/unicorn.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">TTS for ASR</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="index.html">
+   The Good Research Code Handbook
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Intro
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="roadmap.html">
+   Roadmap
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="brains.html">
+   Brains &amp; coding
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Lessons
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="setup.html">
+   Set up your project
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Keep things tidy
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="decoupled.html">
+   Write decoupled code
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="testing.html">
+   Test your code
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="docs.html">
+   Document your code
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="pipelines.html">
+   Document your project
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="social.html">
+   Make it social
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="zipf.html">
+   A sample project: Zipf’s law
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Extras
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="cka.html">
+   Test numerical code: CKA
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tools.html">
+   Use good tools
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="acknowledgements.html">
+   Acknowledgements
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+<nav class="bd-links" id="nav-social">
+    <div class="bd-toc-item">
+        <p class="caption">
+            <span class="caption-text">Social</span>
+        </p>
+        <ul class="nav bd-sidenav" style="display:block">
+            <li class="toctree-l1"><a class="github-button" href="https://github.com/patrickmineault/codebook" data-icon="octicon-star" data-show-count="true" data-size="large" aria-label="Star patrickmineault/codebook on GitHub">Star on Github</a></li>
+            <li class="toctree-l1"><a href="http://eepurl.com/hHgNOH">Subscribe for updates</a></li>
+            <li class="toctree-l1"><a href="http://twitter.com/share?text=The+Good+Research+Code+Handbook.+Learn+to+write+readable%2C+maintainable+research+code+in+Python.&url=https://goodresearch.dev&user&via=patrickmineault" class="twitter-share-button" data-text="The Good Research Code Handbook. Learn to write readable, maintainable code in Python." data-via="patrickmineault" data-show-count="false">Tweet this handbook</a></li>
+        </ul>
+    </div>
+</nav>
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/tidy.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cdminix/tts-for-asr"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cdminix/tts-for-asr/issues/new?title=Issue%20on%20page%20%2Ftidy.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cdminix/tts-for-asr/edit/main/./tidy.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#use-the-style-guide">
+   Use the style guide
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#delete-dead-code">
+   Delete dead code
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#keep-jupyter-notebooks-tidy">
+   Keep jupyter notebooks tidy
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#make-sure-your-notebooks-run-top-to-bottom">
+     Make sure your notebooks run top to bottom
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#be-productive-mixing-modules-and-notebooks">
+     Be productive mixing modules and notebooks
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#refactor-comfortably">
+     Refactor comfortably
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#discussion">
+   Discussion
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="keep-things-tidy">
+<h1>Keep things tidy<a class="headerlink" href="#keep-things-tidy" title="Permalink to this headline">¶</a></h1>
+<blockquote class="epigraph">
+<div><p>Does it spark joy?</p>
+<p class="attribution">—Marie Kondo</p>
+</div></blockquote>
+<p>Keeping things consistent and tidy will free your working memory from having to remember extraneous information like variable names and paths.</p>
+<div class="section" id="use-the-style-guide">
+<h2>Use the style guide<a class="headerlink" href="#use-the-style-guide" title="Permalink to this headline">¶</a></h2>
+<p>Generally, Python uses:</p>
+<ul class="simple">
+<li><p>Snake case for variables and module: <code class="docutils literal notranslate"><span class="pre">variable_name</span></code>, <code class="docutils literal notranslate"><span class="pre">my_module.py</span></code></p></li>
+<li><p>Camel case for class name: <code class="docutils literal notranslate"><span class="pre">MyClass</span></code></p></li>
+<li><p>Camel case with spaces for jupyter notebook: <code class="docutils literal notranslate"><span class="pre">Analyze</span> <span class="pre">Brain</span> <span class="pre">Data.ipynb</span></code></p></li>
+</ul>
+<p>You might know that Python generally uses 4 spaces for indentation, and that files are expected to be at most 80 columns long. These and many other elements of style are written in <a class="reference external" href="https://www.python.org/dev/peps/pep-0008/">PEP 8</a>. Code that adheres to style tends to be easier to read.</p>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Big software companies like Google <a class="reference external" href="https://google.github.io/styleguide/pyguide.html">have their own coding style guide</a>. Even Guido von Rossum, inventor of Python, had to follow Google’s style guide when he was working at Google.</p>
+</div>
+<p>Reading style guides is nobody’s idea of a good time, but thankfully tools exist to help you maintain good coding style. If you prefer to eventually learn the rules, you can install <code class="docutils literal notranslate"><span class="pre">flake8</span></code> or <code class="docutils literal notranslate"><span class="pre">pylint</span></code>. Both tools are <em>linters</em> - detectors of bad style - which allow you to find and correct common deviations from the style guide. The ideal place to use the linter is inside of an IDE, <a class="reference internal" href="tools.html#vscode"><span class="std std-ref">for example VSCode</span></a>. It’s also possible to use linters from the command line.</p>
+<p>A more radical way to impose style is to use a <em>code formatter</em>. A linter suggests fixes which you implement yourself; a formatter fixes issues automatically whenever you save a file. <code class="docutils literal notranslate"><span class="pre">black</span></code> <a class="reference external" href="https://github.com/psf/black">imposes consistent Python style</a>, and has plugins for all the popular IDEs. <code class="docutils literal notranslate"><span class="pre">black</span></code> is particularly useful to run on old code with haphazard style; run it once to upgrade code to a standard format.</p>
+</div>
+<div class="section" id="delete-dead-code">
+<h2>Delete dead code<a class="headerlink" href="#delete-dead-code" title="Permalink to this headline">¶</a></h2>
+<div class="figure align-default" id="id1">
+<a class="reference internal image-reference" href="_images/final.doc.gif"><img alt="_images/final.doc.gif" src="_images/final.doc.gif" style="width: 450px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 7 </span><span class="caption-text">Dead code is a liability. From “Piled Higher and Deeper” by Jorge Cham. <a class="reference external" href="https://www.phdcomics.com">www.phdcomics.com</a></span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+<p>Code that gets developed over time can accumulate lots of dead ends and odds and ends. After a while, the majority of the code in your project might be dead: code that never gets called. You know who hates dead code? You, in three months. Navigating a project that contains stale or incorrect code can waste a huge amount of time. Whenever you’re about to put aside a project for a long time - for instance, after submitting a manuscript - <em>clean up dead code</em>. Delete dead code from the main branch. With git and github, you have access to a time machine, so you can always revert if you mess up.</p>
+<p>If you’re not used to this workflow, you might be scared of messing something up. You can download an archive of the repo before the cleanup to reassure yourself. If you’ve been diligent about committing and pushing code to Github, however, deleting dead code is a safe process. <a class="reference external" href="https://github.com/jendrikseipp/vulture"><code class="docutils literal notranslate"><span class="pre">vulture</span></code> can help you find dead code in your codebase</a>. Unit tests can help you verify that your codebase will still run after you eliminate dead code – we will cover this in a later lesson.</p>
+</div>
+<div class="section" id="keep-jupyter-notebooks-tidy">
+<h2>Keep jupyter notebooks tidy<a class="headerlink" href="#keep-jupyter-notebooks-tidy" title="Permalink to this headline">¶</a></h2>
+<blockquote class="epigraph">
+<div><p>If you use notebooks to develop software, you are probably using the wrong tool.</p>
+<p class="attribution">—<a class="reference external" href="https://yihui.org/en/2018/09/notebook-war/">Yihui Xie</a></p>
+</div></blockquote>
+<p>Jupyter notebooks present a special challenge to keep tidy because of their inherently nonlinear nature. It’s commonplace for long-running notebooks to accumulate lots of cruft: dead cells, out-of-date analyses, inaccurate commentary. Moreover, it takes a lot of discipline to put imports and functions at the start of notebooks. They don’t play well with source control, so it can be hard to track down what has changed from one version of a notebook to another.</p>
+<div class="figure align-default" id="id2">
+<a class="reference internal image-reference" href="_images/jupyter.svg"><img alt="_images/jupyter.svg" src="_images/jupyter.svg" width="500px" /></a>
+<p class="caption"><span class="caption-number">Fig. 8 </span><span class="caption-text">Jupyter notebooks are very good at literate programming - play to their strengths by focusing your jupyter notebooks on mixing explanations, text and graphics.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+<p>My <a class="reference external" href="https://news.ycombinator.com/item?id=18336202"><em>somewhat</em> controversial advice</a> is to keep IO, long-running pipelines, and functions and classes out of jupyter notebooks. Jupyter notebooks excel at literate programming - mixing code, textual explanations, and graphics. If you focus the scope of your jupyter notebooks to literate programming, you’ll reduce the amount of cruft that you will need to clean up. As a side benefit, you’ll be able to develop more software inside of an IDE - like VSCode or PyCharm - which has a deeper understanding of your code and supports powerful multi-file search - and you’ll be well on your way to develop testable code.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>When you start a jupyter notebook, write 3-5 bullet points on what you want the analysis to accomplish. You’d be surprised how much this prevents notebooks from getting out of hand.</p>
+</div>
+<div class="section" id="make-sure-your-notebooks-run-top-to-bottom">
+<h3>Make sure your notebooks run top to bottom<a class="headerlink" href="#make-sure-your-notebooks-run-top-to-bottom" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://link.springer.com/article/10.1007/s10664-021-09961-9#Sec18">Pimentel et al. (2021)</a> found that only about 25% of jupyter notebooks scraped from GitHub ran from top to bottom without error. When you have context, it might only take a couple of minutes to re-order the cells and fix the errors; in several months, you could waste days on this.</p>
+<p>Therefore, before you commit a notebook to git, get into the habit of <em>restarting the kernel and running all</em>. Often, you will find that the notebook will not run top to bottom; fix the underlying error, and <em>restart and run all</em> until your notebook runs again. If it’s impractical to restart a notebook because you have a long-running pipeline in a cell, and executing the whole notebook takes a long time, move the relevant code outside the notebook and into a separate script. As a rule of thumb, a jupyter notebook <em>should run from top to bottom in a minute or less</em>.</p>
+</div>
+<div class="section" id="be-productive-mixing-modules-and-notebooks">
+<h3>Be productive mixing modules and notebooks<a class="headerlink" href="#be-productive-mixing-modules-and-notebooks" title="Permalink to this headline">¶</a></h3>
+<p>It can be difficult to co-develop a notebook and a module side-by-side, because whenever you change the module you will need to reload the library, often by restarting the kernel. Using these two magics - special commands recognized by jupyter - will ensure that the module is automatically reloaded in jupyter whenever the module code is changed.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">load_ext</span> <span class="n">autoreload</span>
+<span class="o">%</span><span class="n">autoreload</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<p>Now, it will feel uncomfortable to move away from jupyter notebooks for some workflows. You might be used to writing small snippets of code and then interact with it immediately to see whether it works - moving the code to a module means you can’t use it in this very immediate fashion. We’ll fix this discomfort later as we learn about <a class="reference internal" href="testing.html"><span class="doc std std-doc">testing</span></a>.</p>
+</div>
+<div class="section" id="refactor-comfortably">
+<h3>Refactor comfortably<a class="headerlink" href="#refactor-comfortably" title="Permalink to this headline">¶</a></h3>
+<p>Refactoring and cleaning up a notebook can be a pain in the jupyter environment: moving a cell across several screens is a pain. <a class="reference external" href="https://jupytext.readthedocs.io/en/latest/"><code class="docutils literal notranslate"><span class="pre">jupytext</span></code> can seamlessly translate between a regular jupyter notebook and a markdown-based textual representation</a>. In my opinion, refactoring and moving cells around is far easier in the text representation. Checking in the jupytext representation of a notebook to source control also makes it easy to compare different versions of the same analysis.</p>
+<p>Move imports and function definitions to the top of your notebook. Look at Markdown headers and verify that they meaningfully summarize the analysis presented in that section. I find that it’s better to write good headings and little long-form text at the start of an analysis, when the analysis still has a lot of room to shift, and to fill in the text later. Read the descriptions and check that they’re up-to-date. Delete cells with obsolete analyses from the bottom of notebook - you can always recover them with source control if you’ve checked in the jupytext representation.</p>
+</div>
+</div>
+<div class="section" id="discussion">
+<h2>Discussion<a class="headerlink" href="#discussion" title="Permalink to this headline">¶</a></h2>
+<blockquote class="epigraph">
+<div><p>There should be one – and preferably only one – obvious way to do it.</p>
+<p class="attribution">—<a class="reference external" href="https://zen-of-python.info/there-should-be-one-and-preferably-only-one-obvious-way-to-do-it.html#13">The Zen of Python</a></p>
+</div></blockquote>
+<p>It’s easy to mock style guides as pedantic nitpicking. After all, style, like spelling, is ultimately arbitrary. However, adhering to a standard style can help you preserve your working memory. Don’t spend precious mental energy making lots of micro-decisions about variable names and how many spaces to put after a parenthesis: use the style guide. If there’s an obvious way of doing things, do it that way.</p>
+<p>The short term advantage of using consistent structure compounds over time. Once you’ve put aside a project for long enough, you will need to reacquaint yourself with it anew, and cruft and dead ends will no longer make sense. Maintaining good code hygiene will make your future self happy.</p>
+<div class="admonition-minute-exercise admonition">
+<p class="admonition-title">5-minute exercise</p>
+<p>Install <code class="docutils literal notranslate"><span class="pre">pylint</span></code> and run on a script you’re currently working on. What did you learn?</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cdminix/tts-for-asr",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="setup.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Set up your project</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="decoupled.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Write decoupled code</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By <a href='https://xcorr.net'>Christoph Minixhofer</a> <a href='https://twitter.com/cdminix'><img height='24' width='24' src='_images/twitter.svg' alt='Twitter' style='width:24px'></a><br/>
+        
+            &copy; Copyright 2021.<br/>
+          <div class="extra_footer">
+            Licensed under <a href='https://github.com/patrickmineault/codebook/blob/main/LICENSE'>CC-BY 4.0</a> [<a href='https://github.com/patrickmineault/codebook'>source</a>].<br /><a href='https://github.com/patrickmineault/codebook/issues'>Report issue</a>.
+          </div>
+      </p>
+    </div>
+  </footer>
+  <!-- Place this tag in your head or just before your close body tag. -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-3Q6LDVNS0X"></script>
+<script>
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){ dataLayer.push(arguments); }
+                    gtag('config', 'G-3Q6LDVNS0X');
+                </script>
+
+  </body>
+</html>

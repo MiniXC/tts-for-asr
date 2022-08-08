@@ -1,0 +1,867 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta property="og:title" content="Set up your project" />
+  
+<meta property="og:type" content="website" />
+  
+<meta property="og:url" content="https://goodresearch.dev/setup.html" />
+  
+<meta property="og:description" content="Setting up a organized project will help you remain productive as your project grows. The broad steps involved are: Pick a name and create a folder for your project, Initialize a git repository and..." />
+  
+<meta property="og:image" content="https://goodresearch.dev/_images/unicorn.png" />
+  
+<meta property="og:image:alt" content="Set up your project" />
+  
+    <title>Set up your project &#8212; TTS for ASR</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+  <!-- add `style` or `link` tags with your CSS `@font-face` declarations here -->
+  <!-- ... and optionally preload the `woff2` for snappier page loads -->
+  <link rel="preload" href="_static/et-book/et-book-bold-line-figures/et-book-bold-line-figures.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="_static/et-book/et-book-display-italic-old-style-figures/et-book-display-italic-old-style-figures.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="_static/et-book/et-book-roman-line-figures/et-book-roman-line-figures.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="_static/et-book/et-book-roman-old-style-figures/et-book-roman-old-style-figures.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="_static/et-book/et-book-semi-bold-old-style-figures/et-book-semi-bold-old-style-figures.woff" as="font" type="font/woff" crossorigin>
+
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.59e7d1499aa759519747cb2a1a335dc4.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/tufte.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.90c857b2bf8f3d46aa488b0ed8bf60a6.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://cdminix.me/tts-for-asr/setup.html" />
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Keep things tidy" href="tidy.html" />
+    <link rel="prev" title="Brains &amp; coding" href="brains.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@patrickmineault" />
+    <meta name="twitter:title" content="The Good Research Code Handbook" />
+    <meta name="twitter:description" content="This handbook is for grad students, postdocs and PIs who do a lot of programming as part of their research. It will teach you, in a practical manner, how to organize your code so that it is easy to understand and works reliably." />
+    <meta name="twitter:image" content="https://goodresearch.dev/_images/unicorn.png" />
+
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-3Q6LDVNS0X"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){ dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-3Q6LDVNS0X');
+    </script>
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      <img src="_static/unicorn.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">TTS for ASR</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="index.html">
+   The Good Research Code Handbook
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Intro
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="roadmap.html">
+   Roadmap
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="brains.html">
+   Brains &amp; coding
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Lessons
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Set up your project
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tidy.html">
+   Keep things tidy
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="decoupled.html">
+   Write decoupled code
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="testing.html">
+   Test your code
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="docs.html">
+   Document your code
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="pipelines.html">
+   Document your project
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="social.html">
+   Make it social
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="zipf.html">
+   A sample project: Zipf’s law
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Extras
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="cka.html">
+   Test numerical code: CKA
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tools.html">
+   Use good tools
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="acknowledgements.html">
+   Acknowledgements
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+<nav class="bd-links" id="nav-social">
+    <div class="bd-toc-item">
+        <p class="caption">
+            <span class="caption-text">Social</span>
+        </p>
+        <ul class="nav bd-sidenav" style="display:block">
+            <li class="toctree-l1"><a class="github-button" href="https://github.com/patrickmineault/codebook" data-icon="octicon-star" data-show-count="true" data-size="large" aria-label="Star patrickmineault/codebook on GitHub">Star on Github</a></li>
+            <li class="toctree-l1"><a href="http://eepurl.com/hHgNOH">Subscribe for updates</a></li>
+            <li class="toctree-l1"><a href="http://twitter.com/share?text=The+Good+Research+Code+Handbook.+Learn+to+write+readable%2C+maintainable+research+code+in+Python.&url=https://goodresearch.dev&user&via=patrickmineault" class="twitter-share-button" data-text="The Good Research Code Handbook. Learn to write readable, maintainable code in Python." data-via="patrickmineault" data-show-count="false">Tweet this handbook</a></li>
+        </ul>
+    </div>
+</nav>
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/setup.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cdminix/tts-for-asr"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cdminix/tts-for-asr/issues/new?title=Issue%20on%20page%20%2Fsetup.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cdminix/tts-for-asr/edit/main/./setup.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pick-a-name-and-create-a-folder-for-your-project">
+   Pick a name and create a folder for your project
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#initialize-a-git-repository-and-sync-to-github">
+   Initialize a git repository and sync to Github
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#set-up-a-virtual-environment">
+   Set up a virtual environment
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#conda">
+     Conda
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#export-your-environment">
+     Export your environment
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-a-project-skeleton">
+   Create a project skeleton
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#folders">
+     Folders
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#files">
+     Files
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#install-a-project-package">
+   Install a project package
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#change-your-python-path-not-recommended">
+     Change your Python path (not recommended)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#create-a-pip-installable-package-recommended">
+     Create a pip-installable package (recommended)
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#create-a-setup-py-file">
+       1. Create a
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         setup.py
+        </span>
+       </code>
+       file
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#create-a-init-py-file">
+       2. Create a
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         __init__.py
+        </span>
+       </code>
+       file
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#pip-install-your-package">
+       3.
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         pip
+        </span>
+        <span class="pre">
+         install
+        </span>
+       </code>
+       your package
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#use-the-package">
+       4. Use the package
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#optional-change-the-name-of-the-package">
+       5. (optional) Change the name of the package
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#use-the-true-neutral-cookiecutter">
+   Use the true-neutral cookiecutter
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#discussion">
+   Discussion
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="set-up-your-project">
+<h1>Set up your project<a class="headerlink" href="#set-up-your-project" title="Permalink to this headline">¶</a></h1>
+<p>Setting up a organized project will help you remain productive as your project grows. The broad steps involved are:</p>
+<ol class="simple">
+<li><p>Pick a name and create a folder for your project</p></li>
+<li><p>Initialize a git repository and sync to Github</p></li>
+<li><p>Set up a virtual environment</p></li>
+<li><p>Create a project skeleton</p></li>
+<li><p>Install a project package</p></li>
+</ol>
+<p>The end result will be a logically organized project skeleton that’s synced to version control.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>I will present most of the project setup in the terminal, but you can do many of these steps inside of an IDE or file explorer.</p>
+</div>
+<div class="section" id="pick-a-name-and-create-a-folder-for-your-project">
+<h2>Pick a name and create a folder for your project<a class="headerlink" href="#pick-a-name-and-create-a-folder-for-your-project" title="Permalink to this headline">¶</a></h2>
+<p>When you start a project, you will need to decide how to structure it. As an academic, a project will tend to naturally map to a paper. Therefore, <strong>one project = one paper = one folder = one git repository</strong> is a generally a good default structure.</p>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>You might want to create extra standalone projects for tools you re-use across different papers.</p>
+</div>
+<p>Pick a short and descriptive name for your project and create a folder in your Documents folder. For instance, when I created the project for this book, the first step was to create the <code class="docutils literal notranslate"><span class="pre">codebook</span></code> folder:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">~/Documents$ mkdir codebook</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="initialize-a-git-repository-and-sync-to-github">
+<h2>Initialize a git repository and sync to Github<a class="headerlink" href="#initialize-a-git-repository-and-sync-to-github" title="Permalink to this headline">¶</a></h2>
+<p>Since git is such a core tool to manage code-heavy projects, I recommend that you set it up immediately. The way I prefer to do this is by going to <a class="reference external" href="https://github.com">Github</a> and clicking the big green <strong>New</strong> button to create a new repository. I name the remote the same as my local folder and hit <strong>Create Repository</strong>.</p>
+<div class="figure align-default" id="id1">
+<a class="reference internal image-reference" href="_images/github-repo.png"><img alt="_images/github-repo.png" src="_images/github-repo.png" style="width: 313px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">The big green New button.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+<p>I then follow Github’s instructions to initialize the repo. In <code class="docutils literal notranslate"><span class="pre">~/Documents/codebook</span></code>, I run:</p>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>I’ve never attempted to remember these commands. I always copy and paste.</p>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">echo</span> <span class="s2">&quot;# codebook&quot;</span> <span class="o">&gt;&gt;</span> <span class="n">README</span><span class="o">.</span><span class="n">md</span>
+<span class="n">git</span> <span class="n">init</span>
+<span class="n">git</span> <span class="n">add</span> <span class="n">README</span><span class="o">.</span><span class="n">md</span>
+<span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;first commit&quot;</span>
+<span class="n">git</span> <span class="n">branch</span> <span class="o">-</span><span class="n">M</span> <span class="n">main</span>
+<span class="n">git</span> <span class="n">remote</span> <span class="n">add</span> <span class="n">origin</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">patrickmineault</span><span class="o">/</span><span class="n">codebook</span><span class="o">.</span><span class="n">git</span>
+<span class="n">git</span> <span class="n">push</span> <span class="o">-</span><span class="n">u</span> <span class="n">origin</span> <span class="n">main</span>
+</pre></div>
+</div>
+<p>How often do you think you should commit to git?</p>
+<details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+⚠️ Spoilers<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<p class="card-text">Depending on your pace, you should aim to commit your code from <em>a few times a day</em> to <em>a few times per week</em>. Don’t wait until the project is almost finished before you start to commit.</p>
+</div>
+</details><p>The general rule of thumb is that one commit should represent a unit of related work. For example, if you made changes in 3 files to add a new functionality, that should be <em>one</em> commit. Splitting the commit into 3 would lose the relationship between the changes; combining these changes with 100 other changed files would make it very hard to track down what changed. Try to make your git commit messages meaningful, as it will help you keep track down bugs several months down the line.</p>
+<p>If you don’t use git very often, you might not like the idea of committing to git daily or multiple times per day. The git command line can feel like a formidable adversary; GUIs can ease you into it. I used to use the git command line exclusively. These days, I tend to prefer <a class="reference internal" href="tools.html#vscode"><span class="std std-ref">the git panel in VSCode</span></a>.</p>
+<div class="figure align-default" id="id2">
+<a class="reference internal image-reference" href="_images/git-vscode.png"><img alt="_images/git-vscode.png" src="_images/git-vscode.png" style="width: 250px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text">The git panel in VSCode.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="set-up-a-virtual-environment">
+<h2>Set up a virtual environment<a class="headerlink" href="#set-up-a-virtual-environment" title="Permalink to this headline">¶</a></h2>
+<blockquote class="epigraph">
+<div><p>Why do I use virtual Python environments? So I don’t fuck up all my local shit.</p>
+<p class="attribution">—<a class="reference external" href="https://twitter.com/nickwan">Nick Wan</a></p>
+</div></blockquote>
+<div class="figure align-default" id="id3">
+<a class="reference internal image-reference" href="_images/python_environment_2x.png"><img alt="_images/python_environment_2x.png" src="_images/python_environment_2x.png" style="width: 492px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 6 </span><span class="caption-text">Python environments can be a real pain. From <a class="reference external" href="https://xkcd.com/1987/">xkcd.com</a> by Randall Munroe.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+<p>Many novices starting out in Python use one big monolithic Python environment. Every package is installed in that one environment. The problem is that this environment is not documented anywhere. Hence, if they need to move to another computer, or they need to recreate the environment from scratch several months later, they’re in for several hours or days of frustration.</p>
+<p>The solution is to use a <em>virtual environment</em> to manage dependencies. Each virtual environment specifies which versions of software and packages a project uses. The specs can be different for different projects, and each virtual environment can be easily swapped, created, duplicated or destroyed. You can use software like <code class="docutils literal notranslate"><span class="pre">conda</span></code>, <code class="docutils literal notranslate"><span class="pre">pipenv</span></code>, <code class="docutils literal notranslate"><span class="pre">poetry</span></code>, <code class="docutils literal notranslate"><span class="pre">venv</span></code>, <code class="docutils literal notranslate"><span class="pre">virtualenv</span></code>, <code class="docutils literal notranslate"><span class="pre">asdf</span></code> or <code class="docutils literal notranslate"><span class="pre">docker</span></code> - among others - to manage dependencies. Which one you prefer is a matter of personal taste and <a class="reference external" href="https://twitter.com/patrickmineault/status/1429560804869873664?s=20">countless internet feuds</a>. Here I present the <code class="docutils literal notranslate"><span class="pre">conda</span></code> workflow, which is particularly popular among data scientists and researchers.</p>
+<div class="section" id="conda">
+<h3>Conda<a class="headerlink" href="#conda" title="Permalink to this headline">¶</a></h3>
+<p>Conda is the <em>de facto</em> standard package manager for data science-centric Python. <code class="docutils literal notranslate"><span class="pre">conda</span></code> is both a package manager (something that installs package on your system) and a virtual environment manager (something that can swap out different combinations of packages and binaries - virtual environments - easily).</p>
+<p><a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html">Once conda is installed</a> - for instance, through miniconda - you can create a new environment and activate it like so:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">~/Documents/codebook$ conda create --name codebook python=3.8</span>
+<span class="go">~/Documents/codebook$ conda activate codebook</span>
+</pre></div>
+</div>
+<p>From this point on, you can install packages through the conda installer like so:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(codebook)</span> <span class="go">~/Documents/codebook$ conda install pandas numpy scipy matplotlib seaborn</span>
+</pre></div>
+</div>
+<p>Now, you might ask yourself, can I use both pip and conda together?</p>
+<details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+⚠️ Spoilers<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<p class="card-text"><strong>You can use pip inside of a conda environment</strong>. A big point of confusion is how conda relates to <code class="docutils literal notranslate"><span class="pre">pip</span></code>. For conda:</p>
+<ul class="simple">
+<li><p class="card-text">Conda is both a package manager and a virtual environment manager</p></li>
+<li><p class="card-text">Conda can install big, complicated-to-install, non-Python software, like <code class="docutils literal notranslate"><span class="pre">gcc</span></code></p></li>
+<li><p class="card-text">Not all Python packages can be installed through conda</p></li>
+</ul>
+<p class="card-text">For pip:</p>
+<ul class="simple">
+<li><p class="card-text">pip is just a package manager</p></li>
+<li><p class="card-text">pip only installs Python packages</p></li>
+<li><p class="card-text">pip can install every package on PyPI in additional to local packages</p></li>
+</ul>
+<p class="card-text"><code class="docutils literal notranslate"><span class="pre">conda</span></code> tracks which packages are pip installed and will include a special section in <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> for pip packages. <a class="reference external" href="https://www.anaconda.com/blog/using-pip-in-a-conda-environment">However, installing pip packages may negatively affect conda’s ability to install conda packages correctly after the first pip install</a>. Therefore, people generally recommend installing <strong>big conda packages first</strong>, then installing <strong>small pip packages second</strong>.</p>
+</div>
+</details></div>
+<div class="section" id="export-your-environment">
+<h3>Export your environment<a class="headerlink" href="#export-your-environment" title="Permalink to this headline">¶</a></h3>
+<p>To export a list of dependencies so you can easily recreate your environment, use the <code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">env</span></code> command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(codebook)</span> <span class="go">~/Documents/codebook$ conda env export &gt; environment.yml</span>
+</pre></div>
+</div>
+<p>You can then commit <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> to document this environment. You can recreate this environment - when you move to a different computer, for example - using:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>conda env create --name recoveredenv --file environment.yml
+</pre></div>
+</div>
+<p>This <code class="docutils literal notranslate"><span class="pre">export</span></code> method will create a well-documented, perfectly <em>reproducible</em> conda environment on your OS. However, it will document low-level, OS-specific packages, which means it won’t be <em>portable</em> to a different OS. If you need portability, you can instead write an <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> file manually. Here’s an example file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">name</span><span class="p">:</span> <span class="n">cb</span>
+<span class="n">channels</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
+  <span class="o">-</span> <span class="n">defaults</span>
+<span class="n">dependencies</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">python</span><span class="o">=</span><span class="mf">3.8</span>
+  <span class="o">-</span> <span class="n">numpy</span><span class="o">=</span><span class="mf">1.21.2</span>
+  <span class="o">-</span> <span class="n">pip</span>
+  <span class="o">-</span> <span class="n">pip</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">tqdm</span><span class="o">==</span><span class="mf">4.62.3</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">pip</span></code> and <code class="docutils literal notranslate"><span class="pre">conda</span></code> packages are documented separately. Note that <code class="docutils literal notranslate"><span class="pre">pip</span></code> package versions use <code class="docutils literal notranslate"><span class="pre">==</span></code> to identify the package number, while <code class="docutils literal notranslate"><span class="pre">conda</span></code> packages use <code class="docutils literal notranslate"><span class="pre">=</span></code>. If you need to add dependencies to your project, change the <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> file, then run this command to update your conda environment:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>(cb) $ conda env update --prefix ./env --file environment.yml --prune
+</pre></div>
+</div>
+<p>You can <a class="reference external" href="https://carpentries-incubator.github.io/introduction-to-conda-for-data-scientists/04-sharing-environments/index.html">read more about creating reproducible environments in this Carpentries tutorial</a>. You can also <a class="reference external" href="https://github.com/patrickmineault/codebook/blob/main/environment.yml">use the <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> file for this book’s repo</a> as an inspiration.</p>
+</div>
+</div>
+<div class="section" id="create-a-project-skeleton">
+<h2>Create a project skeleton<a class="headerlink" href="#create-a-project-skeleton" title="Permalink to this headline">¶</a></h2>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>This project skeleton combines ideas from <a class="reference external" href="https://github.com/uwescience/shablona">shablona</a> and <a class="reference external" href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510">good enough practices in scientific computing</a>.</p>
+</div>
+<p>In many different programming frameworks - Ruby on Rails, React, etc. - people use a highly consistent directory structure from project to project, which makes it seamless to jump back into an old project. In Python, things are much less standardized. I went into a deep rabbit hole looking at different directory structures suggested by different projects. Here’s a consensus structure you can use as inspiration:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>├── data
+├── docs
+├── results
+├── scripts
+├── src
+├── tests
+└── .gitignore
+└── environment.yml
+└── README.md
+</pre></div>
+</div>
+<p>Let’s look at each of these components in turn.</p>
+<div class="section" id="folders">
+<h3>Folders<a class="headerlink" href="#folders" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">data</span></code>: Where you put raw data for your project. You usually won’t sync this to source control, unless you use very small, text-based datasets (&lt; 10 MBs).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">docs</span></code>: Where you put documentation, including Markdown and reStructuredText (reST). Calling it <code class="docutils literal notranslate"><span class="pre">docs</span></code> makes it easy to publish documentation online through Github pages.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">results</span></code>: Where you put results, including checkpoints, hdf5 files, pickle files, as well as figures and tables. If these files are heavy, you won’t put these under source control.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scripts</span></code>: Where you put scripts - Python and bash alike - as well as .ipynb notebooks.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">src</span></code>: Where you put reusable Python modules for your project. This is the kind of python code that you <code class="docutils literal notranslate"><span class="pre">import</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests</span></code>: Where you put tests for your code. We’ll cover testing in a later lesson.</p></li>
+</ul>
+<p>You can create this project structure manually using <code class="docutils literal notranslate"><span class="pre">mkdir</span></code> on the command line:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>mkdir <span class="o">{</span>data,docs,results,scripts,src,tests<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="files">
+<h3>Files<a class="headerlink" href="#files" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> contains a list of files that git should ignore.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">README.md</span></code> contains a description of your project, including installation instructions. This file is what people see by default when they navigate to your project on GitHub.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> contains the description of your conda environment.</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> can be initialized to the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*.</span><span class="n">egg</span><span class="o">-</span><span class="n">info</span>
+<span class="n">data</span>
+</pre></div>
+</div>
+<p>A <code class="docutils literal notranslate"><span class="pre">README.md</span></code> should have already been created during the initial sync to Github. You can either create an <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> file manually or export an exhaustive list of the packages you are currently using:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>conda env <span class="nb">export</span> &gt; environment.yml
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="install-a-project-package">
+<h2>Install a project package<a class="headerlink" href="#install-a-project-package" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Creating a project package is slightly annoying, but the payoff is quite substantial: your project structure will be clean, you won’t need to change Python’s path, and your project will be pip installable.</p>
+</div>
+<p>You might notice a flaw in the preceding project structure. Let’s say you create a reusable <code class="docutils literal notranslate"><span class="pre">lib.py</span></code> under the <code class="docutils literal notranslate"><span class="pre">src</span></code> folder, with a function <code class="docutils literal notranslate"><span class="pre">my_very_good_function</span></code>. How would you reference that function in <code class="docutils literal notranslate"><span class="pre">scripts/use_lib.py</span></code>? This doesn’t work:</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..src.lib</span> <span class="kn">import</span> <span class="n">my_very_good_function</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+<span class="gr">ImportError</span>: <span class="n">attempted relative import with no known parent package</span>
+</pre></div>
+</div>
+<p>You need to tell Python where to look for your library code. You have two options, change your Python path, or create an installable package. I recommend the installable package route, but cover the Python path route first because you’re likely to encounter it in other projects.</p>
+<div class="section" id="change-your-python-path-not-recommended">
+<h3>Change your Python path (not recommended)<a class="headerlink" href="#change-your-python-path-not-recommended" title="Permalink to this headline">¶</a></h3>
+<p>You can put the <code class="docutils literal notranslate"><span class="pre">src</span></code> folder on your Python path. To do so, you can <a class="reference external" href="https://bic-berkeley.github.io/psych-214-fall-2016/using_pythonpath.html">append the <code class="docutils literal notranslate"><span class="pre">src</span></code> folder to the system variable PYTHONPATH when bash starts up (in ~/.bashrc)</a>. You might alternatively dynamically append to the system path from Python, via:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;/home/me/Documents/codebook/src&#39;</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">src.lib</span> <span class="kn">import</span> <span class="n">my_very_good_function</span>
+</pre></div>
+</div>
+<p>This pattern is also frequently used in jupyter notebooks - I often see it in code cells at the top of notebooks.</p>
+<p>The disadvantage of changing the path is that it tends to be pretty brittle. You have to hard-code the name of folders in multiple places. If they move, you will break your package. It won’t work on another computer with different paths, so it will make it hard to share your project with colleagues. Furthermore, dynamic paths don’t play well with IDEs like <a class="reference internal" href="tools.html#vscode"><span class="std std-ref">vscode</span></a> that can only look in the static environment, so you won’t get automatic code completion.</p>
+</div>
+<div class="section" id="create-a-pip-installable-package-recommended">
+<h3>Create a pip-installable package (recommended)<a class="headerlink" href="#create-a-pip-installable-package-recommended" title="Permalink to this headline">¶</a></h3>
+<p>This is a more scalable solution. <a class="reference external" href="https://packaging.python.org/guides/">The packaging ecosystem in Python can feel frankly daunting</a>, but a lot of it we don’t need for our purposes. Creating a locally pip installable package actually only involves a few steps.</p>
+<div class="section" id="create-a-setup-py-file">
+<h4>1. Create a <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> file<a class="headerlink" href="#create-a-setup-py-file" title="Permalink to this headline">¶</a></h4>
+<p>Create a <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> file in the root of your project. Here’s a minimal setup file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">setuptools</span> <span class="kn">import</span> <span class="n">find_packages</span><span class="p">,</span> <span class="n">setup</span>
+
+<span class="n">setup</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;src&#39;</span><span class="p">,</span>
+    <span class="n">packages</span><span class="o">=</span><span class="n">find_packages</span><span class="p">(),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="create-a-init-py-file">
+<h4>2. Create a <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> file<a class="headerlink" href="#create-a-init-py-file" title="Permalink to this headline">¶</a></h4>
+<p>Create an empty <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> file under the <code class="docutils literal notranslate"><span class="pre">src</span></code> directory. This will allow the <code class="docutils literal notranslate"><span class="pre">find_packages</span></code> function to find the package.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(codebook)</span> <span class="go">~/Documents/codebook $ touch src/__init__.py</span>
+</pre></div>
+</div>
+<p>Your files should now look like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>├── data
+├── doc
+├── results
+├── scripts
+├── src
+│   └── __init__.py
+├── tests
+├── .gitignore
+├── environment.yml
+├── README.md
+└── setup.py
+</pre></div>
+</div>
+</div>
+<div class="section" id="pip-install-your-package">
+<h4>3. <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code> your package<a class="headerlink" href="#pip-install-your-package" title="Permalink to this headline">¶</a></h4>
+<p>Now comes the fun part, installing the package. You can do so using:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(codebook)</span> <span class="go">~/Documents/codebook $ pip install -e .</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">.</span></code> indicates that we’re installing the package in the current directory. <code class="docutils literal notranslate"><span class="pre">-e</span></code> indicates that the package should be editable. That means that if you change the files inside the <code class="docutils literal notranslate"><span class="pre">src</span></code> folder, you don’t need to re-install the package for your changes to be picked up by Python.</p>
+</div>
+<div class="section" id="use-the-package">
+<h4>4. Use the package<a class="headerlink" href="#use-the-package" title="Permalink to this headline">¶</a></h4>
+<p>Once the package is locally installed, it can be easily used <em>regardless of which directory you’re in</em>. For instance:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(codebook)</span> <span class="go">~/Documents/codebook $ echo &quot;print(&#39;hello world&#39;)&quot; &gt; src/helloworld.py</span>
+<span class="gp gp-VirtualEnv">(codebook)</span> <span class="go">~/Documents/codebook $ cd scripts</span>
+<span class="gp gp-VirtualEnv">(codebook)</span> <span class="go">~/Documents/codebook/scripts $ python</span>
+<span class="go">&gt;&gt;&gt; import src.helloworld</span>
+<span class="go">hello world</span>
+<span class="go">&gt;&gt;&gt; exit()</span>
+<span class="gp gp-VirtualEnv">(codebook)</span> <span class="go">~/Documents/codebook/scripts $ cd ~</span>
+<span class="gp gp-VirtualEnv">(codebook)</span> <span class="go">~ $ python</span>
+<span class="go">&gt;&gt;&gt; import src.helloworld</span>
+<span class="go">hello world</span>
+</pre></div>
+</div>
+<p>How does this work? When you install a package in editable mode, Python essentially adds your code to its path. That makes it available from anywhere. The path is changed in such a way that <code class="docutils literal notranslate"><span class="pre">conda</span></code>, <code class="docutils literal notranslate"><span class="pre">vscode</span></code> and other tools are aware that your package is installed, so all these tools will know where to find your code.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To find out where the code for an installed package is located, print the module info in the Python console:</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">src</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">src</span>
+<span class="go">&lt;module &#39;src&#39; from &#39;/home/pmin/Documents/codebook/src/__init__.py&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span>
+<span class="go">&lt;module &#39;numpy&#39; from &#39;/home/pmin/anaconda3/envs/codebook/lib/python3.8/site-packages/numpy/__init__.py&#39;&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="optional-change-the-name-of-the-package">
+<h4>5. (optional) Change the name of the package<a class="headerlink" href="#optional-change-the-name-of-the-package" title="Permalink to this headline">¶</a></h4>
+<p>Note that the name of the folder which contains the code, <code class="docutils literal notranslate"><span class="pre">src</span></code>, becomes the name of the package. If you’d like to rename the package, for example to <code class="docutils literal notranslate"><span class="pre">cb</span></code>, change the name of the folder:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>(codebook) ~/Documents/codebook $ mv src cb
+</pre></div>
+</div>
+<p>If Python doesn’t pick up your changes for whatever reason, re-install your package like so:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>(codebook) ~/Documents/codebook $ pip install -e .
+</pre></div>
+</div>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p><code class="docutils literal notranslate"><span class="pre">setuptools</span></code> knows which folder contains your package by looking for a <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> at the root of that folder.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="use-the-true-neutral-cookiecutter">
+<h2>Use the true-neutral cookiecutter<a class="headerlink" href="#use-the-true-neutral-cookiecutter" title="Permalink to this headline">¶</a></h2>
+<p>If doing all this for every new project sounds like a lot of work, you can save yourself some time using the <em>true neutral</em> cookiecutter, which creates the project skeleton outlined above automatically. <code class="docutils literal notranslate"><span class="pre">cookiecutter</span></code> is a Python tool which generates project folders from templates. You can install it in the base conda environment with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>(base) ~/Documents $ pip install cookiecutter
+</pre></div>
+</div>
+<p>To create the <code class="docutils literal notranslate"><span class="pre">codebook</span></code> folder with all its subfolders and setup.py, use the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>(base) ~/Documents $ cookiecutter gh:patrickmineault/true-neutral-cookiecutter
+</pre></div>
+</div>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>There are many other interesting cookiecutters. Check out the <a class="reference external" href="https://drivendata.github.io/cookiecutter-data-science/">data science cookiecutter</a> for a more elaborate data science project template.</p>
+</div>
+<p>This will create an instance of the <code class="docutils literal notranslate"><span class="pre">true-neutral-cookiecutter</span></code> project skeleton, which is hosted on my personal github. Follow the prompts and it will create the folder structure above, including the setup file. Next, pip install the package you’ve created for yourself, and sync to your own remote repository, following the github instructions.</p>
+</div>
+<div class="section" id="discussion">
+<h2>Discussion<a class="headerlink" href="#discussion" title="Permalink to this headline">¶</a></h2>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>You can reorganize an existing project to align better with the guidelines here. <strong>Make sure to back up everything!</strong></p>
+</div>
+<p>Using structured projects linked to git will help your long-term memory. You will be able to instantly understand how files are laid out months after you’ve last worked on that project. Using a virtual environment will allow you to recreate that environment in the far future. And git will give you a time machine to work with.</p>
+<p>Writing for your future self has an added bonus: it can make it easier for <em>other people</em> to use your project. Consider this: everything at Google is in one giant repository with <a class="reference external" href="https://cacm.acm.org/magazines/2016/7/204032-why-google-stores-billions-of-lines-of-code-in-a-single-repository/fulltext#FNE">billions of lines of code</a>. As a new software engineer, you’re invited to commit to that repository during your first week. Because everything is organized according to <a class="reference external" href="https://github.com/google/styleguide/blob/gh-pages/pyguide.md">strict conventions</a>, so it’s not as <em>terrifying</em> as it sounds to jump in. Structure is what enables sustainable growth.</p>
+<div class="admonition-minute-exercise admonition">
+<p class="admonition-title">5-minute exercise</p>
+<p>Create an empty project with the true-neutral cookiecutter.</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cdminix/tts-for-asr",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="brains.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Brains &amp; coding</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="tidy.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Keep things tidy</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By <a href='https://xcorr.net'>Christoph Minixhofer</a> <a href='https://twitter.com/cdminix'><img height='24' width='24' src='_images/twitter.svg' alt='Twitter' style='width:24px'></a><br/>
+        
+            &copy; Copyright 2021.<br/>
+          <div class="extra_footer">
+            Licensed under <a href='https://github.com/patrickmineault/codebook/blob/main/LICENSE'>CC-BY 4.0</a> [<a href='https://github.com/patrickmineault/codebook'>source</a>].<br /><a href='https://github.com/patrickmineault/codebook/issues'>Report issue</a>.
+          </div>
+      </p>
+    </div>
+  </footer>
+  <!-- Place this tag in your head or just before your close body tag. -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-3Q6LDVNS0X"></script>
+<script>
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){ dataLayer.push(arguments); }
+                    gtag('config', 'G-3Q6LDVNS0X');
+                </script>
+
+  </body>
+</html>
