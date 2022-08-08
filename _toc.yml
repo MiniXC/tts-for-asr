@@ -1,22 +1,24 @@
 format: jb-book
 root: index
 parts:
-- caption: Intro
+- caption: Fundmentals
   chapters:
-    - file: roadmap
-    - file: brains
-- caption: Lessons
+    - file: markdown/other_fields
+    - file: markdown/low_resource_asr
+    - file: markdown/tts
+- caption: TTS for Low-Resource
   chapters:
-    - file: setup
-    - file: tidy
-    - file: decoupled
-    - file: testing
-    - file: docs
-    - file: pipelines
-    - file: social
-    - file: zipf
-- caption: Extras
+    - file: markdown/cross_speaker
+    - file: markdown/cross_lingual
+- caption: Combining ASR & TTS
   chapters:
-    - file: cka
-    - file: tools
-    - file: acknowledgements
+    - file: markdown/augmentation
+    - file: markdown/speechchain
+    - file: markdown/vc
+- caption: My Work
+  chapters:
+    - file: markdown/fastspeech2
+    - file: markdown/priors
+    - file: markdown/snr
+    - file: markdown/german-to-english
+    - file: markdown/future

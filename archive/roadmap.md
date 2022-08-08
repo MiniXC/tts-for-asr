@@ -6,7 +6,7 @@ This roadmap shows some of the concepts we'll cover in the book. Take stock of w
 
 [^four]: [Four. Four is the correct number](https://www.python.org/dev/peps/pep-0008/).
 
-```{figure} figures/concepts.svg
+```{figure} figures/roadmap.svg
 ---
 figclass: boxed
 ---
