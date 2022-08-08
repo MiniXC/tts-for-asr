@@ -5,19 +5,19 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta property="og:title" content="The Good Research Code Handbook" />
+<meta property="og:title" content="TTS for Low-Resource ASR" />
   
 <meta property="og:type" content="website" />
   
-<meta property="og:url" content="https://goodresearch.dev/index.html" />
+<meta property="og:url" content="cdminix.me/index.html" />
   
-<meta property="og:description" content="This handbook is for grad students, postdocs and PIs who do a lot of programming as part of their research. It will teach you, in a practical manner, how to organize your code so that it is easy to..." />
+<meta property="og:description" content="This is a summary of my efforts to generate synthetic speech 1 to improve speech recognition 2 in the first year of my PhD in Speech Recognition at the CSTR. But wait, can’t a model that generates ..." />
   
 <meta property="og:image" content="https://goodresearch.dev/_images/unicorn.png" />
   
-<meta property="og:image:alt" content="The Good Research Code Handbook" />
+<meta property="og:image:alt" content="TTS for Low-Resource ASR" />
   
-    <title>The Good Research Code Handbook &#8212; TTS for ASR</title>
+    <title>TTS for Low-Resource ASR &#8212; TTS for ASR</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
   <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -71,7 +71,7 @@
     <link rel="shortcut icon" href="_static/favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Roadmap" href="roadmap.html" />
+    <link rel="next" title="Synthetic Data in Other Fields" href="markdown/other_fields.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -118,93 +118,100 @@
         <ul class="nav bd-sidenav">
  <li class="toctree-l1 current">
   <a class="reference internal" href="#">
-   The Good Research Code Handbook
+   TTS for Low-Resource ASR
   </a>
  </li>
 </ul>
 <p class="caption">
  <span class="caption-text">
-  Intro
+  Fundmentals
  </span>
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="roadmap.html">
-   Roadmap
+  <a class="reference internal" href="markdown/other_fields.html">
+   Synthetic Data in Other Fields
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="brains.html">
-   Brains &amp; coding
+  <a class="reference internal" href="markdown/low_resource_asr.html">
+   Low-Resource ASR
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="markdown/tts.html">
+   TTS
   </a>
  </li>
 </ul>
 <p class="caption">
  <span class="caption-text">
-  Lessons
+  TTS for Low-Resource
  </span>
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="setup.html">
-   Set up your project
+  <a class="reference internal" href="markdown/cross_speaker.html">
+   Cross-Speaker Transfer
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="tidy.html">
-   Keep things tidy
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="decoupled.html">
-   Write decoupled code
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="testing.html">
-   Test your code
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="docs.html">
-   Document your code
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="pipelines.html">
-   Document your project
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="social.html">
-   Make it social
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="zipf.html">
-   A sample project: Zipf’s law
+  <a class="reference internal" href="markdown/cross_lingual.html">
+   Cross-Lingual Transfer
   </a>
  </li>
 </ul>
 <p class="caption">
  <span class="caption-text">
-  Extras
+  Combining ASR &amp; TTS
  </span>
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="cka.html">
-   Test numerical code: CKA
+  <a class="reference internal" href="markdown/augmentation.html">
+   Synthetic Speech as Augmentation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="tools.html">
-   Use good tools
+  <a class="reference internal" href="markdown/speechchain.html">
+   Speech Chain / Backtransformation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="acknowledgements.html">
-   Acknowledgements
+  <a class="reference internal" href="markdown/vc.html">
+   Voice Conversion
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  My Work
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="markdown/fastspeech2.html">
+   FastSpeech 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="markdown/priors.html">
+   Priors
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="markdown/snr.html">
+   SNR Variance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="markdown/german-to-english.html">
+   German-to-English Transfer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="markdown/future.html">
+   Future Work
   </a>
  </li>
 </ul>
@@ -303,39 +310,6 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#prerequisites">
-   Prerequisites
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#why-did-i-make-this">
-   Why did I make this?
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#citing-this-handbook">
-   Citing this handbook
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#alternative-formats">
-   Alternative formats
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#contact-me">
-   Contact me
-  </a>
- </li>
-</ul>
-
-            </nav>
         </div>
     </div>
 </div>
@@ -344,52 +318,25 @@
         
               <div>
                 
-  <div class="section" id="the-good-research-code-handbook">
-<h1>The Good Research Code Handbook<a class="headerlink" href="#the-good-research-code-handbook" title="Permalink to this headline">¶</a></h1>
-<p>This handbook is for grad students, postdocs and PIs who do a lot of programming as part of their research. It will teach you, in a practical manner, how to organize your code so that it is easy to understand and works reliably.</p>
-<p>Most people who write research code are not trained in computer science or software engineering. It can feel like an uphill battle when you have to write code without the right training. Do you ever:</p>
-<ul class="simple">
-<li><p>Feel like you don’t know what you’re doing</p></li>
-<li><p>Feel like an impostor</p></li>
-<li><p>Write code with lots of bugs</p></li>
-<li><p>Hate your code and don’t want to work on it</p></li>
-<li><p>Have trouble finishing projects</p></li>
-<li><p>Contemplate buying a small organic farm in upstate Vermont and read far too much about goat husbandry</p></li>
-</ul>
-<p>Did I hit a nerve? Yes?! Then you’re in for a treat! This book will help you get from 0 to 1 on good software engineering practices for research projects.</p>
-<blockquote class="epigraph">
-<div><p>Is my code fast? No. But is it well documented? No. But does it work? Also no.</p>
-<p class="attribution">—<a class="reference external" href="https://twitter.com/KyleMorgenstein">&#64;KyleMorgenstein</a></p>
-</div></blockquote>
-<div class="section" id="prerequisites">
-<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
-<p>I’ve tried to write this book in a progressive manner: some content is targeted at complete novices, other to programmers who are farther along on their journey. However, I generally assume that you have some familiarity with the following:</p>
-<ul class="simple">
-<li><p><strong>Python</strong>: this intro is Python-centric. You can write good code for Matlab, R, or Julia, but we won’t cover that here. You don’t need to be a Python expert, but you’ll get the most out of this if you’ve been using Python on a regular basis for at least a month, and if you have some passing familiarity with the python data science ecosystem (numpy, matplotlib, pandas, etc.).</p></li>
-<li><p><strong>Git &amp; Github</strong>: a lot of the practices introduced here will require you to change your code, which could cause existing functionality to break. You might even accidentally delete something important! Mastering git and github means you will have a time machine for your code, so you can revert to an earlier state. <a class="reference external" href="https://swcarpentry.github.io/git-novice/">There’s a great intro to git for beginners from software carpentries</a>.</p></li>
-<li><p><strong>The command line</strong>: You will need to run some commands on the command line to implement some of the advice in this book. I’m going to assume that you have some familiarity with running commands from a Unix-style shell (e.g. bash). <a class="reference external" href="http://swcarpentry.github.io/shell-novice/">There’s a great intro to the unix shell from software carpentries</a>. If you’re using Windows, you will still be able to run many tools from the Windows command prompt. Long term, your life will be easier if you <a class="reference internal" href="tools.html#wsl"><span class="std std-ref">install the Windows Subsystem for Linux (WSL)</span></a> which will give you access to a Unix-style shell.</p></li>
-</ul>
-<p>Some of the examples I use are neuroscience-inspired - but neuroscience background is absolutely not a requirement. Appreciation for unicorns <a class="reference internal" href="_images/unicorn.png"><img alt="unicorns" src="_images/unicorn.png" style="width: 24px; height: 24px;" /></a> is a big plus.</p>
+  <div class="section" id="tts-for-low-resource-asr">
+<h1>TTS for Low-Resource ASR<a class="headerlink" href="#tts-for-low-resource-asr" title="Permalink to this headline">¶</a></h1>
+<p>This is a summary of my efforts to generate synthetic speech <a class="footnote-reference brackets" href="#tts" id="id1">1</a> to improve speech recognition <a class="footnote-reference brackets" href="#asr" id="id2">2</a> in the first year of my PhD in Speech Recognition at the <a class="reference external" href="https://www.cstr.ed.ac.uk/">CSTR</a>. But wait, can’t a model that generates speech only approximate what’s already in the data, making it impossible for the speech recognition system to learn anything new?</p>
+<p>Yes, but only if we have nothing new to add – and there are many things we can add, for example new speakers, new lexical content, or even new variances (such as the pitch or duration of the speech). And we can also do this across languages and domains, making a model trained on English speakers produce Swahili speech or a make model trained on audiobooks read medical transcripts!</p>
+<p>More data is always better, and the closer the data is to the target domain, the better as well. This means that synthetic data is most useful when there isn’t plenty of high-quality data in the target domain available. ASR, in this case, is often described as <strong>low-resource</strong>. A lot of work has been done in this area, with varying definitions of what low-resource means (more on this in <span class="xref myst">Low-Resource ASR</span>). I will give an overview of how synthetic data has been used to improve low-resource ASR, and present my own findings as well. In figure below, you can see all the major areas covered in this report and how they are related to each other.</p>
+<div class="boxed figure align-default" id="id3">
+<img alt="_images/roadmap.svg" src="_images/roadmap.svg" /><p class="caption"><span class="caption-number">Fig. 1 </span><span class="caption-text">The main concepts I cover in this report.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
 </div>
-<div class="section" id="why-did-i-make-this">
-<h2>Why did I make this?<a class="headerlink" href="#why-did-i-make-this" title="Permalink to this headline">¶</a></h2>
-<p>I’m <a class="reference external" href="https://xcorr.net">Patrick Mineault</a> <a class="reference internal" href="_images/twitter.svg"><img alt="Twitter" height="1" src="_images/twitter.svg" width="1" /></a>. I did my PhD in computational neuroscience at McGill University, in Montreal. I wrote a lot of not very good code, mostly in Matlab. One time, my code was in a non-working state for an entire month - I would furiously type on the keyboard all day in the hopes it would eventually work, and it didn’t. It made me sad. But I managed to graduate. Then I did a postdoc. More of the same.</p>
-<p>Eventually, I decided to properly study CS. I studied data structures, algorithms and software engineering practices, and I got a big-boy job as a software engineer at Google in California. It was then that I learned the error of my ways. I had lost time during my research days because I didn’t know how to organize and write code that didn’t self-destruct out of spite. But this is fixable! With knowledge!</p>
-<p>At the invitation of Ella Batty, I gave a workshop for the students in neuroscience at Harvard in January of 2021 on writing good research code. The feedback was overwhelmingly positive, so I decided to expand it into this handbook. I hope you enjoy it!</p>
-<p><img alt="It me" src="_images/pic.jpeg" /></p>
-</div>
-<div class="section" id="citing-this-handbook">
-<h2>Citing this handbook<a class="headerlink" href="#citing-this-handbook" title="Permalink to this headline">¶</a></h2>
-<p><span class='Z3988' title='url_ver=Z39.88-2004&amp;ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fzotero.org%3A2&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Adc&amp;rft.type=computerProgram&amp;rft.title=The%20Good%20Research%20Code%20Handbook&amp;rft.publisher=Zenodo&amp;rft.description=patrickmineault%2Fcodebook%3A%201.0.0.%20Initial%20release%20on%20Dec%2017th%2C%202021%2C%20plus%20hotpatches%20for%20style%20and%20typos.&amp;rft.identifier=https%3A%2F%2Fzenodo.org%2Frecord%2F5796873&amp;rft.aufirst=Patrick&amp;rft.aulast=Mineault&amp;rft.au=Patrick%20Mineault&amp;rft.au=The%20Good%20Research%20Code%20Handbook%20community%20&amp;rft.date=2021-12-21'></span></p>
-<img alt="10.5281/zenodo.5796873" src="https://zenodo.org/badge/398390273.svg" /><p>Patrick J Mineault &amp; The Good Research Code Handbook Community (2021). <em>The Good Research Code Handbook</em>. Zenodo. <a class="reference external" href="https://dx.doi.org/10.5281/zenodo.5796873">doi:10.5281/zenodo.5796873</a></p>
-</div>
-<div class="section" id="alternative-formats">
-<h2>Alternative formats<a class="headerlink" href="#alternative-formats" title="Permalink to this headline">¶</a></h2>
-<p><a href="_static/book.pdf">You can download a PDF version of this book here</a>. You can also take a look at a presentation I gave covering <a class="reference external" href="https://github.com/patrickmineault/research_code">the same materials</a> <a class="reference external" href="https://www.crowdcast.io/e/nma2021/29">here</a>. Please contact me if you’d like to see a print edition of this book.</p>
-</div>
-<div class="section" id="contact-me">
-<h2>Contact me<a class="headerlink" href="#contact-me" title="Permalink to this headline">¶</a></h2>
-<p><a href="https://github.com/patrickmineault/codebook/issues">You can report issues with the handbook here</a>. <a href='https://twitter.com/patrickmineault'>I’m active on Twitter</a>. For speaking engagements or collaborations, send me an email at patrick DOT mineault AT gmail DOT com.</p>
+<p>There is also a more formal version of this report I had to submit to the University, which you can download <span class="xref myst">here</span>.</p>
+<hr class="footnotes docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="tts"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Using a TTS (Text-to-Speech) model.</p>
+</dd>
+<dt class="label" id="asr"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd><p>Using an ASR (Automatic Speech Recognition) model.</p>
+</dd>
+</dl>
+<div class="toctree-wrapper compound">
 </div>
 <div class="toctree-wrapper compound">
 </div>
@@ -429,10 +376,10 @@
 <div class='prev-next-bottom'>
     
      <div id="next">
-        <a class="right-next" href="roadmap.html" title="next page">
+        <a class="right-next" href="markdown/other_fields.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Roadmap</p>
+                <p class="prevnext-title">Synthetic Data in Other Fields</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>
@@ -446,11 +393,11 @@
     <div class="container">
       <p>
         
-          By <a href='https://xcorr.net'>Christoph Minixhofer</a> <a href='https://twitter.com/cdminix'><img height='24' width='24' src='_images/twitter.svg' alt='Twitter' style='width:24px'></a><br/>
+          By <a href='https://cdminix.me'>Christoph Minixhofer</a> <a href='https://twitter.com/cdminix'><img height='24' width='24' src='_images/twitter.svg' alt='Twitter' style='width:24px'></a><br/>
         
             &copy; Copyright 2021.<br/>
           <div class="extra_footer">
-            Licensed under <a href='https://github.com/patrickmineault/codebook/blob/main/LICENSE'>CC-BY 4.0</a> [<a href='https://github.com/patrickmineault/codebook'>source</a>].<br /><a href='https://github.com/patrickmineault/codebook/issues'>Report issue</a>.
+            Licensed under CC-BY 4.0 Template based on <a href='goodresearch.dev'>goodresearch.dev</a>].
           </div>
       </p>
     </div>
@@ -466,12 +413,5 @@
   <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
 
   
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-3Q6LDVNS0X"></script>
-<script>
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){ dataLayer.push(arguments); }
-                    gtag('config', 'G-3Q6LDVNS0X');
-                </script>
-
   </body>
 </html>

@@ -1,0 +1,666 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta property="og:title" content="Document your code" />
+  
+<meta property="og:type" content="website" />
+  
+<meta property="og:url" content="cdminix.me/archive/docs.html" />
+  
+<meta property="og:description" content="Documentation is a love letter that you write to your future self. Damian Conway, When I say documentation, what comes to mind? For many people, documenting code is synonymous with commenting code...." />
+  
+<meta property="og:image" content="https://goodresearch.dev/_images/unicorn.png" />
+  
+<meta property="og:image:alt" content="Document your code" />
+  
+    <title>Document your code &#8212; TTS for ASR</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+  <!-- add `style` or `link` tags with your CSS `@font-face` declarations here -->
+  <!-- ... and optionally preload the `woff2` for snappier page loads -->
+  <link rel="preload" href="../_static/et-book/et-book-bold-line-figures/et-book-bold-line-figures.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="../_static/et-book/et-book-display-italic-old-style-figures/et-book-display-italic-old-style-figures.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="../_static/et-book/et-book-roman-line-figures/et-book-roman-line-figures.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="../_static/et-book/et-book-roman-old-style-figures/et-book-roman-old-style-figures.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="../_static/et-book/et-book-semi-bold-old-style-figures/et-book-semi-bold-old-style-figures.woff" as="font" type="font/woff" crossorigin>
+
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.59e7d1499aa759519747cb2a1a335dc4.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tufte.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.90c857b2bf8f3d46aa488b0ed8bf60a6.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://cdminix.me/tts-for-asr/archive/docs.html" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@patrickmineault" />
+    <meta name="twitter:title" content="The Good Research Code Handbook" />
+    <meta name="twitter:description" content="This handbook is for grad students, postdocs and PIs who do a lot of programming as part of their research. It will teach you, in a practical manner, how to organize your code so that it is easy to understand and works reliably." />
+    <meta name="twitter:image" content="https://goodresearch.dev/_images/unicorn.png" />
+
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-3Q6LDVNS0X"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){ dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-3Q6LDVNS0X');
+    </script>
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      <img src="../_static/unicorn.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">TTS for ASR</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index.html">
+   TTS for Low-Resource ASR
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Fundmentals
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/other_fields.html">
+   Synthetic Data in Other Fields
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/low_resource_asr.html">
+   Low-Resource ASR
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/tts.html">
+   TTS
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  TTS for Low-Resource
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/cross_speaker.html">
+   Cross-Speaker Transfer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/cross_lingual.html">
+   Cross-Lingual Transfer
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Combining ASR &amp; TTS
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/augmentation.html">
+   Synthetic Speech as Data Augmentation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/speechchain.html">
+   Speech Chain / Backtransformation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/vc.html">
+   Voice Conversion
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  My Work
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/fastspeech2.html">
+   FastSpeech 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/priors.html">
+   Priors
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/snr.html">
+   SNR Variance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/german-to-english.html">
+   German-to-English Transfer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/future.html">
+   Future Work
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+<nav class="bd-links" id="nav-social">
+    <div class="bd-toc-item">
+        <p class="caption">
+            <span class="caption-text">Social</span>
+        </p>
+        <ul class="nav bd-sidenav" style="display:block">
+            <li class="toctree-l1"><a class="github-button" href="https://github.com/patrickmineault/codebook" data-icon="octicon-star" data-show-count="true" data-size="large" aria-label="Star patrickmineault/codebook on GitHub">Star on Github</a></li>
+            <li class="toctree-l1"><a href="http://eepurl.com/hHgNOH">Subscribe for updates</a></li>
+            <li class="toctree-l1"><a href="http://twitter.com/share?text=The+Good+Research+Code+Handbook.+Learn+to+write+readable%2C+maintainable+research+code+in+Python.&url=https://goodresearch.dev&user&via=patrickmineault" class="twitter-share-button" data-text="The Good Research Code Handbook. Learn to write readable, maintainable code in Python." data-via="patrickmineault" data-show-count="false">Tweet this handbook</a></li>
+        </ul>
+    </div>
+</nav>
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="../_sources/archive/docs.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/archive/docs.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cdminix/tts-for-asr"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cdminix/tts-for-asr/issues/new?title=Issue%20on%20page%20%2Farchive/docs.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cdminix/tts-for-asr/edit/main/./archive/docs.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/cdminix/tts-for-asr/main?urlpath=tree/./archive/docs.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#raise-errors">
+   Raise errors
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#write-in-line-comments">
+   Write in-line comments
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#write-docstrings">
+   Write docstrings
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#publish-docs-on-readthedocs">
+   Publish docs on Readthedocs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#discussion">
+   Discussion
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="document-your-code">
+<h1>Document your code<a class="headerlink" href="#document-your-code" title="Permalink to this headline">¶</a></h1>
+<blockquote class="epigraph">
+<div><p>Documentation is a love letter that you write to your future self.</p>
+<p class="attribution">—Damian Conway</p>
+</div></blockquote>
+<p>When I say documentation, what comes to mind? For many people, <em>documenting code</em> is synonymous with <em>commenting code</em>. That’s a narrow view of documentation. I take a larger view here - documentation is any meta-information that you write <em>about</em> the code. In that larger view, all of these are documentation:</p>
+<ul class="simple">
+<li><p>Single-line comments</p></li>
+<li><p>Multi-line comments</p></li>
+</ul>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>A unit test is meta-code which tells you the normative behavior of other code. It’s a kind of documentation. Woah.</p>
+</div>
+<ul class="simple">
+<li><p>Unit tests</p></li>
+<li><p>Docstrings at the top of functions</p></li>
+<li><p>Docstrings at the top of modules</p></li>
+<li><p>Makefiles</p></li>
+<li><p>Bash files</p></li>
+<li><p>README.md</p></li>
+<li><p>Usage documentation</p></li>
+<li><p>Tutorial jupyter notebooks on using the code</p></li>
+<li><p>Auto-generated documentation hosted on readthedocs</p></li>
+<li><p>Websites with tutorials</p></li>
+</ul>
+<p>In this chapter, I’ll talk about documenting small units of code - functions and modules. I will cover things that are not conventionally considered documentation, but that nevertheless clarify how to use code. In the next section, I’ll discuss documenting larger units of code - programs, projects and pipelines.</p>
+<div class="section" id="raise-errors">
+<h2>Raise errors<a class="headerlink" href="#raise-errors" title="Permalink to this headline">¶</a></h2>
+<blockquote class="epigraph">
+<div><p>Errors should never pass silently.</p>
+<p class="attribution">—The Zen of Python</p>
+</div></blockquote>
+<p>People don’t read manuals. That includes <em>you</em>. What people do read are <em>error messages</em>. Consider the following function stub, which is meant to convolve two vectors together:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">conv</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;valid&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convolves the 1d signals A and B.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        A (np.array): a 1d numpy array</span>
+<span class="sd">        B (np.array): a 1d numpy array</span>
+<span class="sd">        padding (str): padding type (valid, mirror)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (np.array) The convolution of two vectors.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is a fine docstring; it tells you how to use the code. Now consider the alternative function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">conv</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;valid&#39;</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">A</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;A must be one dimensional&quot;</span>
+    <span class="k">assert</span> <span class="n">B</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;B must be one dimensional&quot;</span>
+    <span class="k">if</span> <span class="n">padding</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;valid&#39;</span><span class="p">,</span> <span class="s1">&#39;mirror&#39;</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">padding</span><span class="si">}</span><span class="s2"> not implemented.&quot;</span><span class="p">)</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This code does not tell you how to use it: it <em>yells</em> at you if you use it wrong. The first way relies on your good nature to read the docs; the second way <em>forces you</em> to use the code as it was intended. I would argue that the second is better <a class="footnote-reference brackets" href="#combine" id="id1">1</a>. There are several ways to generate user errors:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">assert</span></code>: When an assert doesn’t pass, it raises an <code class="docutils literal notranslate"><span class="pre">AssertionError</span></code>. You can optionally add an error message at the end.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">NotImplementedError</span></code>, <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>, <code class="docutils literal notranslate"><span class="pre">NameError</span></code>: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html">Commonly used, generic errors</a> you can raise. I probably overuse <code class="docutils literal notranslate"><span class="pre">NotImplementedError</span></code> compared to other types.</p></li>
+<li><p>Type hints: Python 3 has type hints, and you can optionally enforce type checking using decorators with <a class="reference external" href="https://github.com/RussBaz/enforce"><code class="docutils literal notranslate"><span class="pre">enforce</span></code></a> or <a class="reference external" href="https://pypi.org/project/pytypes/"><code class="docutils literal notranslate"><span class="pre">pytypes</span></code></a>. Type checking is a bit controversial because it goes against Python’s dynamic nature. It depends on your use case: if you like them, use them.</p></li>
+</ul>
+<p>The unit tests that we discussed last chapter are another mechanism through which you can raise errors - not in the main code path of your code, but in a secondary path that you run through the <code class="docutils literal notranslate"><span class="pre">pytest</span></code> command line.</p>
+</div>
+<div class="section" id="write-in-line-comments">
+<h2>Write in-line comments<a class="headerlink" href="#write-in-line-comments" title="Permalink to this headline">¶</a></h2>
+<blockquote class="epigraph">
+<div><p>Don’t comment bad code - rewrite it.
+– Kernighan &amp; Plaugher, cited by Robert Martin in <a class="reference external" href="https://www.oreilly.com/library/view/clean-code-a/9780136083238/">Clean Code</a></p>
+</div></blockquote>
+<p>In-line comments are often used to explain away bad code; you’d be better off rewriting the code rather than to explain the mess. Instead, aim to write code so that it needs few in-line comments. For instance, this code snippet uses meaningless variables names, so we have to explain its function in a comment:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Iterate over lines</span>
+<span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">L</span><span class="p">:</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<p>Instead, we can clarify the code by using more meaningful variable names:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<p>Before commenting in-line on a piece of code, ask yourself: could I write this in a way that the code is self-explanatory? Then change your code to achieve that. You can then reserve in-line comments to give context that is not readily available in the code itself. There are some essential things you should comment in-line:</p>
+<ul class="simple">
+<li><p><em>References to papers</em> with page numbers and equation numbers (e.g. see Mineault et al. (2011), Appendix equation 2 for definition)</p></li>
+<li><p><em>Explanations of tricky code</em>, and why you wrote it the way you did, and why it does the thing that it does</p></li>
+<li><p><em>TODOs</em>. Your Python editor recognizes special <code class="docutils literal notranslate"><span class="pre">TODO</span></code> comments and will highlight them.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO(pmin): Implement generalization to non-integer numbers</span>
+</pre></div>
+</div>
+<p>You can similarly highlight code that needs to be improved with <code class="docutils literal notranslate"><span class="pre">FIXME</span></code>.</p>
+</div>
+<div class="section" id="write-docstrings">
+<h2>Write docstrings<a class="headerlink" href="#write-docstrings" title="Permalink to this headline">¶</a></h2>
+<p>Python uses multi-line strings - docstrings - to document individual functions. Docstrings can be read by humans directly. They can be also be read by machines to create HTML documentation, so they’re particularly useful if your code is part of a publicly available package. There are three prevalent styles of docstrings:</p>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p><a class="reference external" href="https://www.sphinx-doc.org/en/master/">Sphinx</a> is the standard way to generate HTML documentation in Python. Sphinx is very powerful - this book is generated by jupyterbook, which uses sphinx to do its job!</p>
+</div>
+<ul class="simple">
+<li><p><a class="reference external" href="https://sphinx-rtd-tutorial.readthedocs.io/en/latest/docstrings.html">reST (reStructuredText)</a></p></li>
+<li><p><a class="reference external" href="https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html">Google style</a></p></li>
+<li><p><a class="reference external" href="https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_numpy.html">Numpy style</a></p></li>
+</ul>
+<p>reST is more prevalent because it’s the default in Sphinx, but I think the Google style is easier to read for humans and I prefer it. Here’s how you would document a function which counts the number of occurrences of a line:</p>
+<div class="tabbed-set docutils">
+<input checked="checked" id="10e864a4-83a8-40eb-a58e-a8a83239075c" name="c317e929-5083-45f0-82e1-8c83136ae6ac" type="radio">
+</input><label class="tabbed-label" for="10e864a4-83a8-40eb-a58e-a8a83239075c">
+Google-style</label><div class="tabbed-content docutils">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">count_line</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Counts the number of times a line occurs. Case-sensitive.</span>
+
+<span class="sd">    Arguments:</span>
+<span class="sd">        f (file): the file to scan</span>
+<span class="sd">        line (str): the line to count</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        int: the number of times the line occurs.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">num_instances</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">l</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="n">line</span><span class="p">:</span>
+            <span class="n">num_instances</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">num_instances</span>
+</pre></div>
+</div>
+</div>
+<input id="540d6d2f-6498-412e-80e5-69a1d4754213" name="c317e929-5083-45f0-82e1-8c83136ae6ac" type="radio">
+</input><label class="tabbed-label" for="540d6d2f-6498-412e-80e5-69a1d4754213">
+Numpy-style</label><div class="tabbed-content docutils">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">count_line</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Counts the number of times a line occurs. Case-sensitive.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    f: file</span>
+<span class="sd">        the file to scan</span>
+<span class="sd">    line: str</span>
+<span class="sd">        the line to count</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    int</span>
+<span class="sd">        the number of times the line occurs.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">num_instances</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">l</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="n">word</span><span class="p">:</span>
+            <span class="n">num_instances</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">num_instances</span>
+</pre></div>
+</div>
+</div>
+<input id="a7a2fcf0-59c6-44b7-a8d3-c79167e92855" name="c317e929-5083-45f0-82e1-8c83136ae6ac" type="radio">
+</input><label class="tabbed-label" for="a7a2fcf0-59c6-44b7-a8d3-c79167e92855">
+reST</label><div class="tabbed-content docutils">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">count_word</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Counts the number of times a line occurs. Case-sensitive.</span>
+
+<span class="sd">    :param f: the file to scan</span>
+<span class="sd">    :type f: file</span>
+<span class="sd">    :param line: the line to count</span>
+<span class="sd">    :type line: str</span>
+<span class="sd">    :returns: the number of times the line occurs.</span>
+<span class="sd">    :rtype: int</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">num_instances</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">l</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="n">line</span><span class="p">:</span>
+            <span class="n">num_instances</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">num_instances</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Docstrings for this function will appear in the REPL and in jupyter notebook when you type <code class="docutils literal notranslate"><span class="pre">help(count_word)</span></code> - they will also be parsed and displayed in IDEs like vscode and PyCharm.</p>
+<p>See which style of docstring you prefer and stick to it. Autodocstring, an extension in vscode, can you help you <a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=njpwerner.autodocstring">automatically generate a docstring stub</a>. It uses the Google style by default.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Docstrings can age poorly. When your arguments change, it’s easy to forget to change the docstring accordingly. I prefer to wait until later in the development process when function interfaces are stable to start writing docstrings.</p>
+</div>
+</div>
+<div class="section" id="publish-docs-on-readthedocs">
+<h2>Publish docs on Readthedocs<a class="headerlink" href="#publish-docs-on-readthedocs" title="Permalink to this headline">¶</a></h2>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Sphinx can auto-generate docs from Google and Numpy-style docstrings <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/extensions/napoleon.html">with a plugin</a>.</p>
+</div>
+<p>You know those sweet static docs that you see on readthedocs? You can generate this kind of documentation from docstrings using Sphinx. <a class="reference external" href="https://docs.readthedocs.io/en/stable/intro/getting-started-with-sphinx.html">There’s a great tutorial to get you started</a>, but in essence getting basic generated docs is a matter of typing 4 commands:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip install sphinx
+<span class="nb">cd</span> docs
+sphinx-quickstart
+make html
+</pre></div>
+</div>
+<p><a class="reference external" href="https://docs.readthedocs.io/en/stable/tutorial/index.html#importing-the-project-to-read-the-docs">Uploading the docs to readthedocs</a> (or Github pages or netlify) is a one-command affair. Docs which focus exclusively on usage (what arguments to use, their types, the returns) are of pretty limited use by themselves. They’re powerful when combined with high-level instructions, tutorials and walkthroughs. We’ll cover how to write these in the next chapter.</p>
+</div>
+<div class="section" id="discussion">
+<h2>Discussion<a class="headerlink" href="#discussion" title="Permalink to this headline">¶</a></h2>
+<p>Good documentation helps maintain the long-term memory of a project. Very tricky code must be documented with care so that the memory of its intent and implementation is preserved. However, if you have a choice between documenting tricky code and refactoring the code so that it’s less tricky, you’ll often find that refactoring code pays off over the long term. Similarly, it’s often more productive to write unit tests that lock in how the code works than to explain how the code <em>should</em> work in words. Document code that needs to be documented, improve the code that can be improved, and develop the wisdom to tell them apart.</p>
+<div class="admonition-minute-exercise admonition">
+<p class="admonition-title">5-minute exercise</p>
+<p>Write a docstring for a function you’ve worked on.</p>
+</div>
+<hr class="footnotes docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="combine"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>You can combine raising errors and write good docstrings.</p>
+</dd>
+</dl>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cdminix/tts-for-asr",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./archive"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By <a href='https://cdminix.me'>Christoph Minixhofer</a> <a href='https://twitter.com/cdminix'><img height='24' width='24' src='_images/twitter.svg' alt='Twitter' style='width:24px'></a><br/>
+        
+            &copy; Copyright 2021.<br/>
+          <div class="extra_footer">
+            Licensed under CC-BY 4.0 Template based on <a href='goodresearch.dev'>goodresearch.dev</a>].
+          </div>
+      </p>
+    </div>
+  </footer>
+  <!-- Place this tag in your head or just before your close body tag. -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

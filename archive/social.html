@@ -1,0 +1,476 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta property="og:title" content="Make it social" />
+  
+<meta property="og:type" content="website" />
+  
+<meta property="og:url" content="cdminix.me/archive/social.html" />
+  
+<meta property="og:description" content="Maybe the real good research code is the friends we made along the way. Patrick Mineault, People think that programming is a solitary activity. Engineers, and software engineers in particular, are ..." />
+  
+<meta property="og:image" content="https://goodresearch.dev/_images/unicorn.png" />
+  
+<meta property="og:image:alt" content="Make it social" />
+  
+    <title>Make it social &#8212; TTS for ASR</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+  <!-- add `style` or `link` tags with your CSS `@font-face` declarations here -->
+  <!-- ... and optionally preload the `woff2` for snappier page loads -->
+  <link rel="preload" href="../_static/et-book/et-book-bold-line-figures/et-book-bold-line-figures.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="../_static/et-book/et-book-display-italic-old-style-figures/et-book-display-italic-old-style-figures.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="../_static/et-book/et-book-roman-line-figures/et-book-roman-line-figures.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="../_static/et-book/et-book-roman-old-style-figures/et-book-roman-old-style-figures.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="../_static/et-book/et-book-semi-bold-old-style-figures/et-book-semi-bold-old-style-figures.woff" as="font" type="font/woff" crossorigin>
+
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.59e7d1499aa759519747cb2a1a335dc4.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tufte.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.90c857b2bf8f3d46aa488b0ed8bf60a6.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://cdminix.me/tts-for-asr/archive/social.html" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@patrickmineault" />
+    <meta name="twitter:title" content="The Good Research Code Handbook" />
+    <meta name="twitter:description" content="This handbook is for grad students, postdocs and PIs who do a lot of programming as part of their research. It will teach you, in a practical manner, how to organize your code so that it is easy to understand and works reliably." />
+    <meta name="twitter:image" content="https://goodresearch.dev/_images/unicorn.png" />
+
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-3Q6LDVNS0X"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){ dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-3Q6LDVNS0X');
+    </script>
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      <img src="../_static/unicorn.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">TTS for ASR</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index.html">
+   TTS for Low-Resource ASR
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Fundmentals
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/other_fields.html">
+   Synthetic Data in Other Fields
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/low_resource_asr.html">
+   Low-Resource ASR
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/tts.html">
+   TTS
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  TTS for Low-Resource
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/cross_speaker.html">
+   Cross-Speaker Transfer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/cross_lingual.html">
+   Cross-Lingual Transfer
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Combining ASR &amp; TTS
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/augmentation.html">
+   Synthetic Speech as Data Augmentation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/speechchain.html">
+   Speech Chain / Backtransformation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/vc.html">
+   Voice Conversion
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  My Work
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/fastspeech2.html">
+   FastSpeech 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/priors.html">
+   Priors
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/snr.html">
+   SNR Variance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/german-to-english.html">
+   German-to-English Transfer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/future.html">
+   Future Work
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+<nav class="bd-links" id="nav-social">
+    <div class="bd-toc-item">
+        <p class="caption">
+            <span class="caption-text">Social</span>
+        </p>
+        <ul class="nav bd-sidenav" style="display:block">
+            <li class="toctree-l1"><a class="github-button" href="https://github.com/patrickmineault/codebook" data-icon="octicon-star" data-show-count="true" data-size="large" aria-label="Star patrickmineault/codebook on GitHub">Star on Github</a></li>
+            <li class="toctree-l1"><a href="http://eepurl.com/hHgNOH">Subscribe for updates</a></li>
+            <li class="toctree-l1"><a href="http://twitter.com/share?text=The+Good+Research+Code+Handbook.+Learn+to+write+readable%2C+maintainable+research+code+in+Python.&url=https://goodresearch.dev&user&via=patrickmineault" class="twitter-share-button" data-text="The Good Research Code Handbook. Learn to write readable, maintainable code in Python." data-via="patrickmineault" data-show-count="false">Tweet this handbook</a></li>
+        </ul>
+    </div>
+</nav>
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/archive/social.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cdminix/tts-for-asr"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cdminix/tts-for-asr/issues/new?title=Issue%20on%20page%20%2Farchive/social.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cdminix/tts-for-asr/edit/main/./archive/social.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pair-program">
+   Pair program
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#set-up-code-review-in-your-lab">
+   Set up code review in your lab
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#participate-in-open-source">
+   Participate in open source
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#find-your-community">
+   Find your community
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#discussion">
+   Discussion
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="make-it-social">
+<h1>Make it social<a class="headerlink" href="#make-it-social" title="Permalink to this headline">¶</a></h1>
+<blockquote class="epigraph">
+<div><p>Maybe the real <em>good research code</em> is the friends we made along the way.</p>
+<p class="attribution">—Patrick Mineault</p>
+</div></blockquote>
+<p>People think that programming is a solitary activity. Engineers, and software engineers in particular, are caricatured as socially inept basement-dwelling dweebs in popular culture. The reality is that programming is a highly social activity. At a place like Google, for instance, programmers are in constant contact with other programmers, through:</p>
+<ul class="simple">
+<li><p>readability reviews</p></li>
+<li><p>code reviews</p></li>
+<li><p>design reviews</p></li>
+<li><p>pair programming</p></li>
+<li><p>reading groups</p></li>
+<li><p>retreats</p></li>
+<li><p>performance reviews</p></li>
+</ul>
+<p>This is how you get better at programming: by programming with people who are better at programming than you.</p>
+<div class="section" id="pair-program">
+<h2>Pair program<a class="headerlink" href="#pair-program" title="Permalink to this headline">¶</a></h2>
+<p><em>Pair programming</em> is a very effective method of sharing knowledge through active practice. It’s commonly used in industry. Two programmers collaborate actively on a programming task. In the traditional driver-and-navigator style, two programmers are physically co-located. One of them - the <em>driver</em> or co-pilot - physically types the code into the terminal or code editor. They think about micro-issues in the code (tactics): what goes into the body of a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop, the syntax of the code, etc.</p>
+<p>The <em>navigator</em> or co-pilot assist the driver in telling them what to write. They typically focus on macro issues: what a function should accomplish, how the code is structured, etc. They can also perform other tasks on a second laptop, for example looking up documentation.</p>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>I wrote this book in part to become better at the skills I’m now teaching you. Teaching is a great way to learn.</p>
+</div>
+<p>Pair programming forces you to hone your communication skills. Nothing quite reveals your gaps in knowledge than trying to explain to someone what is going on with a piece of code. Sometimes, the people you’re pairing with can immediately fill your gap in knowledge; in other cases, you can both learn about a new subject at the same time. Pair programming is especially effective at transmitting knowledge about under-documented systems. You may have explained to a new student in your lab how to perform mysterious experimental procedure X. The best way to transmit that knowledge is to have the student attempt to perform the procedure in front of you: active practice enhances learning.</p>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>I learned about Ctrl+Shift+R (reverse search in bash) through pair programming.</p>
+</div>
+<p>Finally, pair programming can help you learn someone’s productivity shortcuts. Seeing somebody work comfortably in an unfamiliar environment is enlightening. I have seen programmers be productive in vim, and it is a sight to behold.</p>
+<p>To many, pair programming sounds like a nightmare. It’s certainly <em>uncomfortable</em>. Things might go too slow or too fast for you, and it can be mentally draining. It’s best to do it in short increments (e.g. one hour). In all cases, remember to turn your empathy up to 11, and be excellent to each other.</p>
+<p>Although pair programming was traditionally done by physically co-located programmers, many find remote pair programming more comfortable. Screen sharing in Zoom works but can feel intrusive - imagine accidentally showing your inbox or IMs. Instead, you can use an IDE where you can see the other person’s cursor. Some environments to do this:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://code.visualstudio.com/blogs/2017/11/15/live-share">VSCode Liveshare for in-IDE editing</a></p></li>
+<li><p><a class="reference external" href="https://deepnote.com/">DeepNote</a> and <a class="reference external" href="https://cocalc.com/">cocalc</a> for jupyter notebooks</p></li>
+<li><p><a class="reference external" href="https://replit.com/">Replit</a> for pure Python in the browser</p></li>
+</ul>
+</div>
+<div class="section" id="set-up-code-review-in-your-lab">
+<h2>Set up code review in your lab<a class="headerlink" href="#set-up-code-review-in-your-lab" title="Permalink to this headline">¶</a></h2>
+<p>Reading and critiquing other people’s code is a great way to learn. <em>Code review</em> is the practice of peer reviewing other people’s code. You can use <a class="reference external" href="https://docs.github.com/en/enterprise-server&#64;2.20/github/collaborating-with-issues-and-pull-requests/reviewing-proposed-changes-in-a-pull-request">Github pull requests to give and receive line-by-line feedback on code</a> asynchronously. Alternatively, you can set up a code review circle in your lab. It works like a lab meeting, but instead of doing presentations, you all read code and comment on it at once. Again, it’s uncomfortable and awkward, but you can learn a lot this way.</p>
+</div>
+<div class="section" id="participate-in-open-source">
+<h2>Participate in open source<a class="headerlink" href="#participate-in-open-source" title="Permalink to this headline">¶</a></h2>
+<p>Maybe your local environment isn’t ideal for you to become better at programming. Perhaps you’re the only person in your lab that programs. Becoming part of an open source project is a great way to find like-minded people you can learn from.</p>
+<p>Joining an open source project doesn’t have to be an all or none affair. You can dip your toe in by opening an issue on a software project that you use. Are people responsive? Are they nice? If yes, then you can increase your involvement by starting a pull request to add a feature to a project. Generally, it’s better to open an issue first to tell people about your plans; many larger projects are careful not to introduce new features, because it increases the amount of long-term maintenance people need to do.</p>
+<p>Sometimes, you can pick a moribund open source project and maintain it. And if something doesn’t exist yet, you can start your own open source project. You will do everything wrong, but you will learn a ton.</p>
+</div>
+<div class="section" id="find-your-community">
+<h2>Find your community<a class="headerlink" href="#find-your-community" title="Permalink to this headline">¶</a></h2>
+<p>In addition to projects, there are communities of programers that support each other. <a class="reference external" href="https://wiki.hackerspaces.org/w/index.php">Hacker spaces</a> promote self-reliance through learning technical skills, which include fabrication, woodworking, sewing and programming. Many meetups exist, focused on Python, data science, deep learning, or more. Some groups are designed as safe spaces for underrepresented people, for example <a class="reference external" href="https://www.pyladies.com/">PyLadies</a>.</p>
+<p>Finally, you can go on a programmer’s retreat to deep dive into a tech, for example through the <a class="reference external" href="https://www.recurse.com/">Recurse Center</a>. This will put you in contact with many other like-minded people who are in different places in their learning journey. Creating that deep web of connections will be invaluable to making you feel connected to the community at large.</p>
+</div>
+<div class="section" id="discussion">
+<h2>Discussion<a class="headerlink" href="#discussion" title="Permalink to this headline">¶</a></h2>
+<p>As we’ve seen throughout this book, there are many ways you can improve how you write code. However, one of the highest leverage actions you can take to improve your craft is to immerse yourself in a community of practice. Be excellent to each other, learn from each other and give back to the community 🌠🌈.</p>
+<div class="admonition-minute-exercise admonition">
+<p class="admonition-title">5-minute exercise</p>
+<p>Schedule a pair programming session with a lab mate.</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cdminix/tts-for-asr",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./archive"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By <a href='https://cdminix.me'>Christoph Minixhofer</a> <a href='https://twitter.com/cdminix'><img height='24' width='24' src='_images/twitter.svg' alt='Twitter' style='width:24px'></a><br/>
+        
+            &copy; Copyright 2021.<br/>
+          <div class="extra_footer">
+            Licensed under CC-BY 4.0 Template based on <a href='goodresearch.dev'>goodresearch.dev</a>].
+          </div>
+      </p>
+    </div>
+  </footer>
+  <!-- Place this tag in your head or just before your close body tag. -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

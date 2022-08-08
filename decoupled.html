@@ -119,7 +119,7 @@
         <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="index.html">
-   The Good Research Code Handbook
+   TTS for Low-Resource ASR
   </a>
  </li>
 </ul>
@@ -445,7 +445,7 @@
 </div>
 <div class="boxed figure align-default" id="id3">
 <a class="reference internal image-reference" href="_images/spaghetti-code.png"><img alt="_images/spaghetti-code.png" src="_images/spaghetti-code.png" style="width: 450px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 9 </span><span class="caption-text">Spaghetti code. From Brown et al. (1998), AntiPatterns. Notice the late 90’s clipart. Spaghetti code has been around for a long time</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 10 </span><span class="caption-text">Spaghetti code. From Brown et al. (1998), AntiPatterns. Notice the late 90’s clipart. Spaghetti code has been around for a long time</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="what-does-spaghetti-code-look-like">
@@ -547,8 +547,8 @@
 <p>This function has a side effect: it modifies its argument <code class="docutils literal notranslate"><span class="pre">arr</span></code>. In Python and many other languages, arguments of complex types like lists, dictionaries and objects are passed by reference, which means they can be modified by the function. That breaks the normal data flow - the arguments are also returns!</p>
 <p>In the base Python library, a function which modifies its argument returns <code class="docutils literal notranslate"><span class="pre">None</span></code>. For instance, the function <code class="docutils literal notranslate"><span class="pre">sort</span></code> sorts its input argument, modifies it in place, and returns <code class="docutils literal notranslate"><span class="pre">None</span></code>. This function has a side effect, but it’s obvious: if a function returns <code class="docutils literal notranslate"><span class="pre">None</span></code>, yet does useful work, it must have a side effect. When we both modify an argument and return it, we break this convention and confuse the Python reader. We can fix this by returning <code class="docutils literal notranslate"><span class="pre">None</span></code> in our function (good), or returning an entirely new list (better):</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="7e7a47aa-25d2-403f-8920-fffefc813cbf" name="ef7ad6a7-02f9-4647-9381-5987f8090dec" type="radio">
-</input><label class="tabbed-label" for="7e7a47aa-25d2-403f-8920-fffefc813cbf">
+<input checked="checked" id="cb3074cd-7efd-4557-918f-0937f612e6cf" name="9fc12865-89ff-45f7-8542-1be191401a77" type="radio">
+</input><label class="tabbed-label" for="cb3074cd-7efd-4557-918f-0937f612e6cf">
 good</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">reversi</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Reverses a list.&quot;&quot;&quot;</span>
@@ -558,8 +558,8 @@ good</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="69ca1724-bbe0-4167-b750-fb048cbe4f66" name="ef7ad6a7-02f9-4647-9381-5987f8090dec" type="radio">
-</input><label class="tabbed-label" for="69ca1724-bbe0-4167-b750-fb048cbe4f66">
+<input id="75ddb742-1881-49d5-b323-c0debb186c7c" name="9fc12865-89ff-45f7-8542-1be191401a77" type="radio">
+</input><label class="tabbed-label" for="75ddb742-1881-49d5-b323-c0debb186c7c">
 better</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">reversi</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Reverses a list.&quot;&quot;&quot;</span>
@@ -574,7 +574,7 @@ better</label><div class="tabbed-content docutils">
 <p>Functions with side effects can be hard to reason about: you often need to understand their internals and state in order to use them properly. They’re also harder to test. <strong>Not every function with side effects is problematic, however</strong>. My pragmatic advice is to first learn to spot and understand pure functions. Then organize your code so that many functions are pure, and those that are not are well-behaved.</p>
 <div class="boxed figure align-default" id="id4">
 <a class="reference internal image-reference" href="_images/pure-impure.svg"><img alt="_images/pure-impure.svg" src="_images/pure-impure.svg" width="500px" /></a>
-<p class="caption"><span class="caption-number">Fig. 10 </span><span class="caption-text">Shrinking the amount of impure functions in your code will make it easier to reason about. Graphic <a class="reference external" href="https://cicero.xyz/v3/remark/0.14.0/github.com/coderefinery/modular-code-development/master/talk.md/#10">inspired by CodeRefinery</a>.</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 11 </span><span class="caption-text">Shrinking the amount of impure functions in your code will make it easier to reason about. Graphic <a class="reference external" href="https://cicero.xyz/v3/remark/0.14.0/github.com/coderefinery/modular-code-development/master/talk.md/#10">inspired by CodeRefinery</a>.</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
 </div>
 <p>For instance:</p>
 <ul class="simple">
@@ -784,8 +784,8 @@ better</label><div class="tabbed-content docutils">
 <h3>Improving legibility<a class="headerlink" href="#improving-legibility" title="Permalink to this headline">¶</a></h3>
 <p>We can improve legibility further by using descriptive names and using f-strings. The finalized code can be compared with the old code side-by-side.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="5b81bb2a-096c-480a-bacb-911acbfeb447" name="ab60042e-a6c3-4551-8e26-b90ec7ad09ce" type="radio">
-</input><label class="tabbed-label" for="5b81bb2a-096c-480a-bacb-911acbfeb447">
+<input checked="checked" id="141c07a3-5ba5-4905-892f-37b64e19a403" name="e520d3d7-3cd5-413c-be11-7991de83d9b1" type="radio">
+</input><label class="tabbed-label" for="141c07a3-5ba5-4905-892f-37b64e19a403">
 Improved</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">collections</span>
 <span class="kn">import</span> <span class="nn">re</span>
@@ -808,8 +808,8 @@ Improved</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="265bd775-bc57-4de7-ae2e-222f3c2bb631" name="ab60042e-a6c3-4551-8e26-b90ec7ad09ce" type="radio">
-</input><label class="tabbed-label" for="265bd775-bc57-4de7-ae2e-222f3c2bb631">
+<input id="d1184da1-17cd-4dd3-80d1-b69d3089aafe" name="e520d3d7-3cd5-413c-be11-7991de83d9b1" type="radio">
+</input><label class="tabbed-label" for="d1184da1-17cd-4dd3-80d1-b69d3089aafe">
 Original</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">count_words_in_file</span><span class="p">(</span><span class="n">in_file</span><span class="p">,</span> <span class="n">out_file</span><span class="p">):</span>
     <span class="n">counts</span> <span class="o">=</span> <span class="p">{}</span>

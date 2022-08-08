@@ -119,7 +119,7 @@
         <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="index.html">
-   The Good Research Code Handbook
+   TTS for Low-Resource ASR
   </a>
  </li>
 </ul>
@@ -471,7 +471,7 @@
 <p>Since git is such a core tool to manage code-heavy projects, I recommend that you set it up immediately. The way I prefer to do this is by going to <a class="reference external" href="https://github.com">Github</a> and clicking the big green <strong>New</strong> button to create a new repository. I name the remote the same as my local folder and hit <strong>Create Repository</strong>.</p>
 <div class="figure align-default" id="id1">
 <a class="reference internal image-reference" href="_images/github-repo.png"><img alt="_images/github-repo.png" src="_images/github-repo.png" style="width: 313px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">The big green New button.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text">The big green New button.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
 </div>
 <p>I then follow Github’s instructions to initialize the repo. In <code class="docutils literal notranslate"><span class="pre">~/Documents/codebook</span></code>, I run:</p>
 <div class="margin sidebar">
@@ -501,7 +501,7 @@
 <p>If you don’t use git very often, you might not like the idea of committing to git daily or multiple times per day. The git command line can feel like a formidable adversary; GUIs can ease you into it. I used to use the git command line exclusively. These days, I tend to prefer <a class="reference internal" href="tools.html#vscode"><span class="std std-ref">the git panel in VSCode</span></a>.</p>
 <div class="figure align-default" id="id2">
 <a class="reference internal image-reference" href="_images/git-vscode.png"><img alt="_images/git-vscode.png" src="_images/git-vscode.png" style="width: 250px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text">The git panel in VSCode.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 6 </span><span class="caption-text">The git panel in VSCode.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="set-up-a-virtual-environment">
@@ -512,7 +512,7 @@
 </div></blockquote>
 <div class="figure align-default" id="id3">
 <a class="reference internal image-reference" href="_images/python_environment_2x.png"><img alt="_images/python_environment_2x.png" src="_images/python_environment_2x.png" style="width: 492px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 6 </span><span class="caption-text">Python environments can be a real pain. From <a class="reference external" href="https://xkcd.com/1987/">xkcd.com</a> by Randall Munroe.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 7 </span><span class="caption-text">Python environments can be a real pain. From <a class="reference external" href="https://xkcd.com/1987/">xkcd.com</a> by Randall Munroe.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
 </div>
 <p>Many novices starting out in Python use one big monolithic Python environment. Every package is installed in that one environment. The problem is that this environment is not documented anywhere. Hence, if they need to move to another computer, or they need to recreate the environment from scratch several months later, they’re in for several hours or days of frustration.</p>
 <p>The solution is to use a <em>virtual environment</em> to manage dependencies. Each virtual environment specifies which versions of software and packages a project uses. The specs can be different for different projects, and each virtual environment can be easily swapped, created, duplicated or destroyed. You can use software like <code class="docutils literal notranslate"><span class="pre">conda</span></code>, <code class="docutils literal notranslate"><span class="pre">pipenv</span></code>, <code class="docutils literal notranslate"><span class="pre">poetry</span></code>, <code class="docutils literal notranslate"><span class="pre">venv</span></code>, <code class="docutils literal notranslate"><span class="pre">virtualenv</span></code>, <code class="docutils literal notranslate"><span class="pre">asdf</span></code> or <code class="docutils literal notranslate"><span class="pre">docker</span></code> - among others - to manage dependencies. Which one you prefer is a matter of personal taste and <a class="reference external" href="https://twitter.com/patrickmineault/status/1429560804869873664?s=20">countless internet feuds</a>. Here I present the <code class="docutils literal notranslate"><span class="pre">conda</span></code> workflow, which is particularly popular among data scientists and researchers.</p>

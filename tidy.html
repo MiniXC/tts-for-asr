@@ -119,7 +119,7 @@
         <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="index.html">
-   The Good Research Code Handbook
+   TTS for Low-Resource ASR
   </a>
  </li>
 </ul>
@@ -384,7 +384,7 @@
 <h2>Delete dead code<a class="headerlink" href="#delete-dead-code" title="Permalink to this headline">¶</a></h2>
 <div class="figure align-default" id="id1">
 <a class="reference internal image-reference" href="_images/final.doc.gif"><img alt="_images/final.doc.gif" src="_images/final.doc.gif" style="width: 450px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 7 </span><span class="caption-text">Dead code is a liability. From “Piled Higher and Deeper” by Jorge Cham. <a class="reference external" href="https://www.phdcomics.com">www.phdcomics.com</a></span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 8 </span><span class="caption-text">Dead code is a liability. From “Piled Higher and Deeper” by Jorge Cham. <a class="reference external" href="https://www.phdcomics.com">www.phdcomics.com</a></span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
 </div>
 <p>Code that gets developed over time can accumulate lots of dead ends and odds and ends. After a while, the majority of the code in your project might be dead: code that never gets called. You know who hates dead code? You, in three months. Navigating a project that contains stale or incorrect code can waste a huge amount of time. Whenever you’re about to put aside a project for a long time - for instance, after submitting a manuscript - <em>clean up dead code</em>. Delete dead code from the main branch. With git and github, you have access to a time machine, so you can always revert if you mess up.</p>
 <p>If you’re not used to this workflow, you might be scared of messing something up. You can download an archive of the repo before the cleanup to reassure yourself. If you’ve been diligent about committing and pushing code to Github, however, deleting dead code is a safe process. <a class="reference external" href="https://github.com/jendrikseipp/vulture"><code class="docutils literal notranslate"><span class="pre">vulture</span></code> can help you find dead code in your codebase</a>. Unit tests can help you verify that your codebase will still run after you eliminate dead code – we will cover this in a later lesson.</p>
@@ -398,7 +398,7 @@
 <p>Jupyter notebooks present a special challenge to keep tidy because of their inherently nonlinear nature. It’s commonplace for long-running notebooks to accumulate lots of cruft: dead cells, out-of-date analyses, inaccurate commentary. Moreover, it takes a lot of discipline to put imports and functions at the start of notebooks. They don’t play well with source control, so it can be hard to track down what has changed from one version of a notebook to another.</p>
 <div class="figure align-default" id="id2">
 <a class="reference internal image-reference" href="_images/jupyter.svg"><img alt="_images/jupyter.svg" src="_images/jupyter.svg" width="500px" /></a>
-<p class="caption"><span class="caption-number">Fig. 8 </span><span class="caption-text">Jupyter notebooks are very good at literate programming - play to their strengths by focusing your jupyter notebooks on mixing explanations, text and graphics.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 9 </span><span class="caption-text">Jupyter notebooks are very good at literate programming - play to their strengths by focusing your jupyter notebooks on mixing explanations, text and graphics.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
 </div>
 <p>My <a class="reference external" href="https://news.ycombinator.com/item?id=18336202"><em>somewhat</em> controversial advice</a> is to keep IO, long-running pipelines, and functions and classes out of jupyter notebooks. Jupyter notebooks excel at literate programming - mixing code, textual explanations, and graphics. If you focus the scope of your jupyter notebooks to literate programming, you’ll reduce the amount of cruft that you will need to clean up. As a side benefit, you’ll be able to develop more software inside of an IDE - like VSCode or PyCharm - which has a deeper understanding of your code and supports powerful multi-file search - and you’ll be well on your way to develop testable code.</p>
 <div class="admonition tip">

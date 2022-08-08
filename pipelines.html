@@ -119,7 +119,7 @@
         <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="index.html">
-   The Good Research Code Handbook
+   TTS for Low-Resource ASR
   </a>
  </li>
 </ul>
@@ -454,7 +454,7 @@ python scripts/generate_plots.py --in_dir data/images --out_dir results/figures/
 <p>Scientific pipelines often take the shape of DAGs - directed acyclic graphs. This means, essentially, that programs flow from inputs to output in a directed fashion. The <code class="docutils literal notranslate"><span class="pre">train_net</span></code> pipeline above is a DAG with 4 steps. Other DAGs can be more elaborate, for example the 12-step DAG which generates figures shown in Van Vliet (2020) <a class="footnote-reference brackets" href="#vanvliet" id="id1">1</a>:</p>
 <div class="boxed figure align-default" id="id2">
 <img alt="_images/pcbi.1007358.g002.PNG_L.png" src="_images/pcbi.1007358.g002.PNG_L.png" />
-<p class="caption"><span class="caption-number">Fig. 11 </span><span class="caption-text">DAG from Van Vliet (2020). CC-BY 4.0</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 12 </span><span class="caption-text">DAG from Van Vliet (2020). CC-BY 4.0</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
 </div>
 <p>You can document how all the steps of the DAG fit together with a bash file. As your pipelines grow, it can be painful to restart a pipeline that fails in the middle. This could lead to a proliferation of bash files corresponding to different subparts of your pipeline, and pretty soon you’ll have a mess of shell scripts on your hands - basically recreating the commenting/uncommenting workflow we had in Python, this time in bash!</p>
 <p>You can use a more specialized build tool to build and document a pipeline. GNU <code class="docutils literal notranslate"><span class="pre">make</span></code> has been a standard tool for compiling code for several decades, and is becoming more adopted by the data science and research communities. A <code class="docutils literal notranslate"><span class="pre">Makefile</span></code> specifies both the inputs to each pipeline step and its outputs. To give you a flavor of what a <code class="docutils literal notranslate"><span class="pre">Makefile</span></code> looks like, this file implements the DAG to train a neural net and plot diagnostic plots:</p>
@@ -515,7 +515,7 @@ python scripts/generate_plots.py --in_dir data/images --out_dir results/figures/
 <p>A more full-featured way of doing this is to use a specialized tool to post results to a centralized database. Most of the offerings in this space are cloud-based commercial services. You post your results - whether scalars, whole tables, figures, etc. - to a centralized server through a bit of python code, and it takes care of versioning. In the screenshot below, I used <a class="reference external" href="https://wandb.ai/">wandb.ai</a> to record the outcome of a machine learning pipeline. The record tells me what command that was run, the git hash, meta-information about which computer was used to run the pipeline, as well as the outcome. There is no ambiguity about provenance.</p>
 <div class="boxed figure align-default" id="id3">
 <a class="reference internal image-reference" href="_images/wandb.png"><img alt="_images/wandb.png" src="_images/wandb.png" style="width: 600px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 12 </span><span class="caption-text">Record of one deep-learning run in wandb.ai</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 13 </span><span class="caption-text">Record of one deep-learning run in wandb.ai</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 </div>

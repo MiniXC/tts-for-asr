@@ -1,0 +1,922 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta property="og:title" content="Write decoupled code" />
+  
+<meta property="og:type" content="website" />
+  
+<meta property="og:url" content="cdminix.me/archive/decoupled.html" />
+  
+<meta property="og:description" content="Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it. Kernighan’s law [^..." />
+  
+<meta property="og:image" content="https://goodresearch.dev/_images/unicorn.png" />
+  
+<meta property="og:image:alt" content="Write decoupled code" />
+  
+    <title>Write decoupled code &#8212; TTS for ASR</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+  <!-- add `style` or `link` tags with your CSS `@font-face` declarations here -->
+  <!-- ... and optionally preload the `woff2` for snappier page loads -->
+  <link rel="preload" href="../_static/et-book/et-book-bold-line-figures/et-book-bold-line-figures.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="../_static/et-book/et-book-display-italic-old-style-figures/et-book-display-italic-old-style-figures.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="../_static/et-book/et-book-roman-line-figures/et-book-roman-line-figures.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="../_static/et-book/et-book-roman-old-style-figures/et-book-roman-old-style-figures.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="../_static/et-book/et-book-semi-bold-old-style-figures/et-book-semi-bold-old-style-figures.woff" as="font" type="font/woff" crossorigin>
+
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.59e7d1499aa759519747cb2a1a335dc4.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tufte.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.90c857b2bf8f3d46aa488b0ed8bf60a6.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://cdminix.me/tts-for-asr/archive/decoupled.html" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@patrickmineault" />
+    <meta name="twitter:title" content="The Good Research Code Handbook" />
+    <meta name="twitter:description" content="This handbook is for grad students, postdocs and PIs who do a lot of programming as part of their research. It will teach you, in a practical manner, how to organize your code so that it is easy to understand and works reliably." />
+    <meta name="twitter:image" content="https://goodresearch.dev/_images/unicorn.png" />
+
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-3Q6LDVNS0X"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){ dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-3Q6LDVNS0X');
+    </script>
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      <img src="../_static/unicorn.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">TTS for ASR</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index.html">
+   TTS for Low-Resource ASR
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Fundmentals
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/other_fields.html">
+   Synthetic Data in Other Fields
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/low_resource_asr.html">
+   Low-Resource ASR
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/tts.html">
+   TTS
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  TTS for Low-Resource
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/cross_speaker.html">
+   Cross-Speaker Transfer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/cross_lingual.html">
+   Cross-Lingual Transfer
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Combining ASR &amp; TTS
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/augmentation.html">
+   Synthetic Speech as Augmentation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/speechchain.html">
+   Speech Chain / Backtransformation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/vc.html">
+   Voice Conversion
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  My Work
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/fastspeech2.html">
+   FastSpeech 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/priors.html">
+   Priors
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/snr.html">
+   SNR Variance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/german-to-english.html">
+   German-to-English Transfer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/future.html">
+   Future Work
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+<nav class="bd-links" id="nav-social">
+    <div class="bd-toc-item">
+        <p class="caption">
+            <span class="caption-text">Social</span>
+        </p>
+        <ul class="nav bd-sidenav" style="display:block">
+            <li class="toctree-l1"><a class="github-button" href="https://github.com/patrickmineault/codebook" data-icon="octicon-star" data-show-count="true" data-size="large" aria-label="Star patrickmineault/codebook on GitHub">Star on Github</a></li>
+            <li class="toctree-l1"><a href="http://eepurl.com/hHgNOH">Subscribe for updates</a></li>
+            <li class="toctree-l1"><a href="http://twitter.com/share?text=The+Good+Research+Code+Handbook.+Learn+to+write+readable%2C+maintainable+research+code+in+Python.&url=https://goodresearch.dev&user&via=patrickmineault" class="twitter-share-button" data-text="The Good Research Code Handbook. Learn to write readable, maintainable code in Python." data-via="patrickmineault" data-show-count="false">Tweet this handbook</a></li>
+        </ul>
+    </div>
+</nav>
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="../_sources/archive/decoupled.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/archive/decoupled.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cdminix/tts-for-asr"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cdminix/tts-for-asr/issues/new?title=Issue%20on%20page%20%2Farchive/decoupled.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cdminix/tts-for-asr/edit/main/./archive/decoupled.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/cdminix/tts-for-asr/main?urlpath=tree/./archive/decoupled.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#code-smells-and-spaghetti-code">
+   Code smells and spaghetti code
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-does-spaghetti-code-look-like">
+   What does spaghetti code look like?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#making-code-better">
+   Making code better
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#separate-concerns">
+     Separate concerns
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#learn-to-identify-and-use-pure-functions">
+     Learn to identify and use pure functions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#avoid-side-effects">
+     Avoid side effects
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#make-your-code-more-pythonic">
+     Make your code more Pythonic
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#move-away-from-matlab-idioms">
+       Move away from Matlab idioms
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#put-it-all-together">
+   Put it all together
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#split-io-and-computation">
+     Split IO and computation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#decrease-the-amount-of-nesting">
+     Decrease the amount of nesting
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#improving-legibility">
+     Improving legibility
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#discussion">
+   Discussion
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="write-decoupled-code">
+<h1>Write decoupled code<a class="headerlink" href="#write-decoupled-code" title="Permalink to this headline">¶</a></h1>
+<blockquote class="epigraph">
+<div><p>Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.</p>
+<p class="attribution">—Kernighan’s law [^Kernighan]</p>
+</div></blockquote>
+<p>Code which does a little bit of everything at once is hard to work with. Reasoning about a function which reads inputs, does math, calls a remote server and writes outputs in a tightly coupled bundle can easily become overwhelming: there’s too many moving pieces to keep in your head. Here, I show how you can spot tightly coupled code and iteratively improve it.</p>
+<div class="section" id="code-smells-and-spaghetti-code">
+<h2>Code smells and spaghetti code<a class="headerlink" href="#code-smells-and-spaghetti-code" title="Permalink to this headline">¶</a></h2>
+<p>A code smell is an issue with the source code of a program that indicates there might be some larger underlying issue. For example <a class="footnote-reference brackets" href="#wikipedia" id="id1">1</a>:</p>
+<ul class="simple">
+<li><p><em>Mysterious names</em>: variables have names which don’t indicate their function</p></li>
+<li><p><em>Magic numbers</em>: unique values with unexplained meaning</p></li>
+<li><p><em>Duplicated code</em>: large portions of duplicated code with small tweaks</p></li>
+<li><p><em>Uncontrolled side effects and variable mutations</em>: code is written so that it’s unclear where and when variables are changed (more on this later)</p></li>
+<li><p><em>Large functions</em>: big, unwieldy functions that do a little bit of everything</p></li>
+<li><p><em>High cyclomatic complexity</em>: lots of nested ifs and for loops</p></li>
+<li><p><em>Globals</em>: Using globals for things that don’t strictly need to be global</p></li>
+<li><p><em>Embedded configuration</em>: paths and filenames are hardcoded in ways that the code is not portable to to another computer</p></li>
+</ul>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p><em>Cyclomatic complexity</em> is the number of linearly independent paths (e.g. branches of an if statement) in a function</p>
+</div>
+<p>When code has a lot of code smells, it can become brittle to the point of becoming hard or impossible to change. At that point, your productivity goes to zero. Such code is often deemed <em>spaghetti code</em>, code so tightly wound that when you pull on one strand, the entire thing unravels.</p>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>It is a sad fact that delicious, delicious carbs have such a negative connotation in programming circles.</p>
+</div>
+<div class="boxed figure align-default" id="id3">
+<a class="reference internal image-reference" href="archive/figures/spaghetti-code.png"><img alt="archive/figures/spaghetti-code.png" src="archive/figures/spaghetti-code.png" style="width: 450px;" /></a>
+<p class="caption"><span class="caption-text">Spaghetti code. From Brown et al. (1998), AntiPatterns. Notice the late 90’s clipart. Spaghetti code has been around for a long time</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="what-does-spaghetti-code-look-like">
+<h2>What does spaghetti code look like?<a class="headerlink" href="#what-does-spaghetti-code-look-like" title="Permalink to this headline">¶</a></h2>
+<p>I wanted to find an example of real-life spaghetti code, without being mean-spirited. <code class="docutils literal notranslate"><span class="pre">wave_clus</span></code> is a piece of software that runs in Matlab which is very useful to neuroscientists, and which I’ve personally used and appreciated. It’s used to tease out signals from different neurons. Here’s <a class="reference external" href="https://github.com/csn-le/wave_clus/blob/master/wave_clus.m#L964">an excerpt from real code from a function</a>:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="nf">isi_reject_button_Callback</span><span class="p">(</span>hObject, eventdata, handles,developer_mode<span class="p">)</span><span class="w"></span>
+<span class="nb">set</span><span class="p">(</span><span class="n">hObject</span><span class="p">,</span><span class="s">&#39;value&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+<span class="n">b_name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">get</span><span class="p">(</span><span class="nb">gcbo</span><span class="p">,</span><span class="s">&#39;Tag&#39;</span><span class="p">);</span><span class="w"></span>
+<span class="n">cn</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">str2double</span><span class="p">(</span><span class="nb">regexp</span><span class="p">(</span><span class="n">b_name</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;\d+&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;match&#39;</span><span class="p">));</span><span class="w"></span>
+
+<span class="nb">eval</span><span class="p">([</span><span class="s">&#39;set(handles.isi&#39;</span><span class="w"> </span><span class="nb">int2str</span><span class="p">(</span><span class="n">cn</span><span class="p">)</span><span class="w"> </span><span class="s">&#39;_accept_button,&#39;&#39;value&#39;&#39;,0);&#39;</span><span class="p">])</span><span class="w"></span>
+<span class="n">main_fig</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">findobj</span><span class="p">(</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;type&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;figure&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;tag&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;wave_clus_figure&#39;</span><span class="p">);</span><span class="w"></span>
+<span class="n">USER_DATA</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">get</span><span class="p">(</span><span class="n">main_fig</span><span class="p">,</span><span class="s">&#39;userdata&#39;</span><span class="p">);</span><span class="w"></span>
+<span class="n">classes</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">USER_DATA</span><span class="p">{</span><span class="mi">6</span><span class="p">};</span><span class="w"></span>
+<span class="k">if</span><span class="w"> </span><span class="n">cn</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">3</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nb">nnz</span><span class="p">(</span><span class="n">classes</span><span class="o">==</span><span class="mi">3</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="w"></span>
+<span class="w">        </span><span class="n">nlab</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">imread</span><span class="p">(</span><span class="s">&#39;filelist_wc.xlj&#39;</span><span class="p">,</span><span class="s">&#39;jpg&#39;</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="nb">figure</span><span class="p">(</span><span class="s">&#39;color&#39;</span><span class="p">,</span><span class="s">&#39;k&#39;</span><span class="p">);</span><span class="w"> </span><span class="nb">image</span><span class="p">(</span><span class="n">nlab</span><span class="p">);</span><span class="w"> </span><span class="n">axis</span><span class="w"> </span><span class="s">off</span><span class="p">;</span><span class="w"> </span><span class="nb">set</span><span class="p">(</span><span class="nb">gcf</span><span class="p">,</span><span class="s">&#39;NumberTitle&#39;</span><span class="p">,</span><span class="s">&#39;off&#39;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The fact that it’s Matlab code can help us to evaluate this code with a little bit of distance - a beginner’s mindset, if you will. We see many different code smells:</p>
+<ul class="simple">
+<li><p>Parsing a magic integer (<code class="docutils literal notranslate"><span class="pre">cn</span></code>) from the name of a component</p></li>
+<li><p>Using magic numbers (<code class="docutils literal notranslate"><span class="pre">USER_DATA{6}</span></code>, <code class="docutils literal notranslate"><span class="pre">classes==3</span></code>)</p></li>
+<li><p>Using globals (<code class="docutils literal notranslate"><span class="pre">USER_DATA</span></code>)</p></li>
+<li><p>Mixing input and output (<code class="docutils literal notranslate"><span class="pre">imread</span></code> and <code class="docutils literal notranslate"><span class="pre">figure</span></code>)</p></li>
+<li><p>A nested if statement which could be flattened out</p></li>
+<li><p>Using <code class="docutils literal notranslate"><span class="pre">eval</span></code></p></li>
+</ul>
+<p>The problem with spaghetti code is not that it doesn’t work, is that it’s <em>inscrutable</em> and <em>brittle</em>.</p>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Sometimes code is so brittle that it’s impossible to modify to run on a modern system. This is why every lab has a machine running ancient software in a backroom somewhere with a sticky note written DO NOT UPGRADE.</p>
+</div>
+</div>
+<div class="section" id="making-code-better">
+<h2>Making code better<a class="headerlink" href="#making-code-better" title="Permalink to this headline">¶</a></h2>
+<p>Now that we’ve seen real world bad code, let’s consider what makes good code.</p>
+<div class="section" id="separate-concerns">
+<h3>Separate concerns<a class="headerlink" href="#separate-concerns" title="Permalink to this headline">¶</a></h3>
+<p>Great code exhibits <em>separation of concerns</em>:</p>
+<ul class="simple">
+<li><p>a function does one thing</p></li>
+<li><p>a module assembles functions which all work towards the same goal</p></li>
+<li><p>a class mostly modifies its own members rather than other objects</p></li>
+</ul>
+<p>For instance, your data loading function should just load data, and your computation function should just compute. Each function should be small and should stand on its own. If a function is longer than a screen’s worth of code (80 columns, 40 lines), it’s usually a good sign it’s time to split it off into two. <strong>Make small functions</strong>.</p>
+</div>
+<div class="section" id="learn-to-identify-and-use-pure-functions">
+<h3>Learn to identify and use pure functions<a class="headerlink" href="#learn-to-identify-and-use-pure-functions" title="Permalink to this headline">¶</a></h3>
+<p>When novices are introduced to Python functions, they usually start with pure functions. Pure functions follow the <em>canonical data flow</em>:</p>
+<ul class="simple">
+<li><p>the inputs come from the arguments</p></li>
+<li><p>the outputs are returned with the <code class="docutils literal notranslate"><span class="pre">return</span></code> statement</p></li>
+</ul>
+<p>For instance, this function which adds two numbers together follows the canonical data flow:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">add_two_nums</span><span class="p">(</span><span class="n">num0</span><span class="p">,</span> <span class="n">num1</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">num0</span> <span class="o">+</span> <span class="n">num1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>A stateless function doesn’t have persistent state that carries over from call to call. A function which uses a global has state.</p>
+</div>
+<p>This function is also <em>deterministic</em>, and <em>stateless</em>. This is the computational analogue of a mathematical function. You can think of them as unchanging black boxes: you put stuff in, computation happens, you get a result out, and neither the input or the black box gets changed. Because of this, pure functions are easy to reason about - they are the best kind of function. <em>If something that you write makes sense as a pure function</em>, write it that way.</p>
+</div>
+<div class="section" id="avoid-side-effects">
+<h3>Avoid side effects<a class="headerlink" href="#avoid-side-effects" title="Permalink to this headline">¶</a></h3>
+<p>Some languages enforce using pure functions: they are functional programming languages. Python, however, is a multi-paradigm programming language: you can write functional code, object-oriented code, imperative code, and mix and match as desired. While this flexibility allows us to use the right tool for each job, it offers numerous possibilities to shoot yourself in the foot.</p>
+<p>Much Python code uses non-pure functions with <em>side effects</em>, which can be hard to reason about. A <em>side effect</em> is anything that happens outside the canonical data flow from arguments to return, including:</p>
+<ul class="simple">
+<li><p>modifying a global</p></li>
+<li><p>modifying a static local variable</p></li>
+<li><p>modifying an argument</p></li>
+<li><p>doing IO, including printing to the console, drawing on the screen or calling a remote server</p></li>
+</ul>
+<p>For instance, consider this function which reverses a list:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">reversi</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Reverses a list.&quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="n">arr</span><span class="p">[</span><span class="o">-</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">arr</span><span class="p">[</span><span class="o">-</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">arr</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>You can reverse a list directly with <code class="docutils literal notranslate"><span class="pre">arr[::-1]</span></code>, but we don’t use this primitive here for the sake of illustration.</p>
+</div>
+<p>This function has a side effect: it modifies its argument <code class="docutils literal notranslate"><span class="pre">arr</span></code>. In Python and many other languages, arguments of complex types like lists, dictionaries and objects are passed by reference, which means they can be modified by the function. That breaks the normal data flow - the arguments are also returns!</p>
+<p>In the base Python library, a function which modifies its argument returns <code class="docutils literal notranslate"><span class="pre">None</span></code>. For instance, the function <code class="docutils literal notranslate"><span class="pre">sort</span></code> sorts its input argument, modifies it in place, and returns <code class="docutils literal notranslate"><span class="pre">None</span></code>. This function has a side effect, but it’s obvious: if a function returns <code class="docutils literal notranslate"><span class="pre">None</span></code>, yet does useful work, it must have a side effect. When we both modify an argument and return it, we break this convention and confuse the Python reader. We can fix this by returning <code class="docutils literal notranslate"><span class="pre">None</span></code> in our function (good), or returning an entirely new list (better):</p>
+<div class="tabbed-set docutils">
+<input checked="checked" id="71521b68-c230-4d3f-8b41-ff98b9fbb8b9" name="c88b2605-3f95-4736-9397-d1c425a2c95f" type="radio">
+</input><label class="tabbed-label" for="71521b68-c230-4d3f-8b41-ff98b9fbb8b9">
+good</label><div class="tabbed-content docutils">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">reversi</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Reverses a list.&quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="n">arr</span><span class="p">[</span><span class="o">-</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">arr</span><span class="p">[</span><span class="o">-</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</div>
+<input id="430eefa3-763e-4ca0-a0d7-364eb6588d85" name="c88b2605-3f95-4736-9397-d1c425a2c95f" type="radio">
+</input><label class="tabbed-label" for="430eefa3-763e-4ca0-a0d7-364eb6588d85">
+better</label><div class="tabbed-content docutils">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">reversi</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Reverses a list.&quot;&quot;&quot;</span>
+    <span class="n">reved</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)):</span>
+        <span class="n">reved</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">i</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">reved</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Functions with side effects can be hard to reason about: you often need to understand their internals and state in order to use them properly. They’re also harder to test. <strong>Not every function with side effects is problematic, however</strong>. My pragmatic advice is to first learn to spot and understand pure functions. Then organize your code so that many functions are pure, and those that are not are well-behaved.</p>
+<div class="boxed figure align-default" id="id4">
+<a class="reference internal image-reference" href="archive/figures/pure-impure.svg"><img alt="archive/figures/pure-impure.svg" src="archive/figures/pure-impure.svg" width="500px" /></a>
+<p class="caption"><span class="caption-text">Shrinking the amount of impure functions in your code will make it easier to reason about. Graphic <a class="reference external" href="https://cicero.xyz/v3/remark/0.14.0/github.com/coderefinery/modular-code-development/master/talk.md/#10">inspired by CodeRefinery</a>.</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
+<p>For instance:</p>
+<ul class="simple">
+<li><p>Write functions which modify their arguments, or return values, but not both</p></li>
+<li><p>Concentrate your IO in their own functions rather than sprinkling them throughout the code</p></li>
+<li><p>Use classes to encapsulate state rather than using stateful functions and globals. Python classes use the convention that private variables, which shouldn’t be modified from outside, start with an <code class="docutils literal notranslate"><span class="pre">_</span></code>. For example, <code class="docutils literal notranslate"><span class="pre">self._x</span></code> denotes a class member <code class="docutils literal notranslate"><span class="pre">_x</span></code> which should be managed by the class itself <a class="footnote-reference brackets" href="#convention" id="id2">2</a>.</p></li>
+</ul>
+</div>
+<div class="section" id="make-your-code-more-pythonic">
+<h3>Make your code more Pythonic<a class="headerlink" href="#make-your-code-more-pythonic" title="Permalink to this headline">¶</a></h3>
+<blockquote class="epigraph">
+<div><p>If it ain’t broke, fix it till it is.</p>
+<p class="attribution">—<a class="reference external" href="https://www.youtube.com/channel/UCfOrKQtC1tDfGf_fFVb8pYw">Steve Porter</a></p>
+</div></blockquote>
+<p>Sometimes, code smells come from a lack of knowledge about the language. <em>Reading other people’s code</em>, <em>pair programming</em>, and <em>reading programming books</em> can help fine tune your knowledge of a programming language and get out of this local minimum.</p>
+<div class="section" id="move-away-from-matlab-idioms">
+<h4>Move away from Matlab idioms<a class="headerlink" href="#move-away-from-matlab-idioms" title="Permalink to this headline">¶</a></h4>
+<p>Some common issues are caused by using an idiom from another programming language in Python, where it doesn’t translate. Many people using the Python data science ecosystem either come from a Matlab background, or were trained by someone who came from a Matlab background. As a consequence, they’ll tend to write Matlab-like code, for example:</p>
+<p><em>Using magic columns numbers to index into a numpy array</em>. Matlab has a matrix type that it uses for many things. You might use the tenth column of a matrix to store a timestamp, which creates hard-to-read code. Dataframes are more appropriate to store parallel data. In 3 months from now, <code class="docutils literal notranslate"><span class="pre">A.timestamp</span></code> will be far clearer than <code class="docutils literal notranslate"><span class="pre">A[:,</span> <span class="pre">10]</span></code>. <a class="reference external" href="https://github.com/jvns/pandas-cookbook">You can learn the basics of <code class="docutils literal notranslate"><span class="pre">pandas</span></code> in a weekend</a>, and it’s a great time investment.</p>
+<p><em>Using unnamed dimensions in numpy</em>. Similarly, tensors with multiple dimensions can pose problems. If you have a mini-batch of images you’re preparing for a deep learning pipeline, did the dimensions go <code class="docutils literal notranslate"><span class="pre">batch_size</span> <span class="pre">x</span> <span class="pre">channels</span> <span class="pre">x</span> <span class="pre">height</span> <span class="pre">x</span> <span class="pre">width</span></code>, or <code class="docutils literal notranslate"><span class="pre">batch_size</span> <span class="pre">x</span> <span class="pre">width</span> <span class="pre">x</span> <span class="pre">height</span> <span class="pre">x</span> <span class="pre">channels</span></code>? <a class="reference external" href="http://xarray.pydata.org/en/stable/">xarray</a> and <a class="reference external" href="https://pytorch.org/docs/stable/named_tensor.html">named tensors in pytorch</a> give you named dimensions, which will reduce your confusion down the line.</p>
+<p><em>Using bespoke casting for string formatting</em>. Python has a great string formatting method since version 3.6: <a class="reference external" href="https://realpython.com/python-f-strings/">the f-string</a>. Generating a file name for a checkpoint with <code class="docutils literal notranslate"><span class="pre">f&quot;{model_name}_{iteration}.pkl&quot;</span></code> is more intuitive and readable than <code class="docutils literal notranslate"><span class="pre">model_name</span> <span class="pre">+</span> <span class="pre">'_'</span> <span class="pre">+</span> <span class="pre">str(iteration)</span> <span class="pre">+</span> <span class="pre">'.pkl'</span></code>.</p>
+<p><em>Avoiding for loops</em>. You may have been taught to avoid for loops as much as possible in Matlab by vectorizing everything. However, this often sacrifices readability. Tricky indexing may look clever, but can be next to impossible to debug. Because Python has a different performance profile than Matlab, some Matlab-specific optimizations won’t make your code faster. For instance, unlike Matlab vectors, Python lists are very cheap to grow. Appending to a list in a for loop and then turning that list into a numpy array in a single call has little performance overhead compared to preallocating.</p>
+<p>To be clear, modern Matlab doesn’t have to be written this way: for instance, Matlab has a capable dataframe class. But a lot of people that come from Matlab still use old Matlab idioms. I have three more tutorials for you if you come from a Matlab background to ease your transition <a class="reference external" href="https://xcorr.net/2020/02/21/transitioning-away-from-matlab/">[1]</a> <a class="reference external" href="https://xcorr.net/2020/02/29/orienting-yourself-through-python/">[2]</a> <a class="reference external" href="https://xcorr.net/2020/03/04/rewriting-matlab-code-in-python/">[3]</a>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="put-it-all-together">
+<h2>Put it all together<a class="headerlink" href="#put-it-all-together" title="Permalink to this headline">¶</a></h2>
+<p>Let’s introduce a small-scale example that we will make progressively better. We want to write a function which does three things:</p>
+<ul class="simple">
+<li><p>Loads a file</p></li>
+<li><p>Counts the words in the files</p></li>
+<li><p>Writes the counted words to an output file.</p></li>
+</ul>
+<p>We might code that as:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">count_words_in_file</span><span class="p">(</span><span class="n">in_file</span><span class="p">,</span> <span class="n">out_file</span><span class="p">):</span>
+    <span class="n">counts</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">in_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+            <span class="c1"># Split words on spaces.</span>
+            <span class="n">W</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">W</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">w</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">counts</span><span class="p">:</span>
+                        <span class="n">counts</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">counts</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">out_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">counts</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span> <span class="n">k</span> <span class="o">+</span> <span class="s2">&quot;,&quot;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">counts</span><span class="p">[</span><span class="n">k</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Can you spot the code smells in the previous code?</p>
+<details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+⚠️ Spoilers<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<p class="card-text">Here are some code smells in this example:</p>
+<ul class="simple">
+<li><p class="card-text">Using one-character variable names.</p></li>
+<li><p class="card-text">Using lots of nested for and if statements (6 levels of indent)</p></li>
+<li><p class="card-text">Using bespoke string formatting</p></li>
+<li><p class="card-text">Mixing IO and computation</p></li>
+</ul>
+</div>
+</details><div class="section" id="split-io-and-computation">
+<h3>Split IO and computation<a class="headerlink" href="#split-io-and-computation" title="Permalink to this headline">¶</a></h3>
+<p>Let’s start by splitting IO and computation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">count_words</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="c1"># Split words on spaces.</span>
+    <span class="n">counts</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">W</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">W</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">w</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">counts</span><span class="p">:</span>
+                <span class="n">counts</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">counts</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">return</span> <span class="n">counts</span>
+
+<span class="k">def</span> <span class="nf">count_words_in_file</span><span class="p">(</span><span class="n">in_file</span><span class="p">,</span> <span class="n">out_file</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">in_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">counts</span> <span class="o">=</span> <span class="n">count_words</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">out_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">counts</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span> <span class="n">k</span> <span class="o">+</span> <span class="s2">&quot;,&quot;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">counts</span><span class="p">[</span><span class="n">k</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">count_words</span></code> is now a pure function - it takes in a string and returns a dict, and it has no side effects. This isolation can make it a little easier to notice bugs in the function. Indeed, if we run the code on a few test strings, we notice that this function does not work as expected.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">count_words</span><span class="p">(</span><span class="s2">&quot;hello world&quot;</span><span class="p">)</span>
+<span class="go">{&#39;hello&#39;: 0, &#39;world&#39;: 0}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">count_words</span><span class="p">(</span><span class="s2">&quot;hello world</span><span class="se">\n\n</span><span class="s2">hello&quot;</span><span class="p">)</span>
+<span class="go">{&#39;hello&#39;: 0, &#39;world\n\nhello&#39;: 0}</span>
+</pre></div>
+</div>
+<p>We have an off-by-one error in counts, and we are also not correctly dealing with newline characters. Let’s fix this.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">count_words</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="c1"># Split words on spaces.</span>
+    <span class="n">counts</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">W</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">W</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">w</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">counts</span><span class="p">:</span>
+                <span class="n">counts</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">counts</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">counts</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now:</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">count_words</span><span class="p">(</span><span class="s2">&quot;hello world&quot;</span><span class="p">)</span>
+<span class="go">{&#39;hello&#39;: 1, &#39;world&#39;: 1}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">count_words</span><span class="p">(</span><span class="s2">&quot;hello world</span><span class="se">\n\n</span><span class="s2">hello&quot;</span><span class="p">)</span>
+<span class="go">{&#39;hello&#39;: 2, &#39;world&#39;: 1}</span>
+</pre></div>
+</div>
+<p>Not only have we improved the <em>legibility</em> of the code, we have improved its <em>correctness</em>.</p>
+</div>
+<div class="section" id="decrease-the-amount-of-nesting">
+<h3>Decrease the amount of nesting<a class="headerlink" href="#decrease-the-amount-of-nesting" title="Permalink to this headline">¶</a></h3>
+<p>Our code has too many levels of nesting. One underlying cause is that we have two branches for when a key of dictionary exists and when it doesn’t. Python has a collection in its standard library specifically built to deal with this: <code class="docutils literal notranslate"><span class="pre">collections.defaultdict</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">collections</span>
+
+<span class="k">def</span> <span class="nf">count_words</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="c1"># Split words on spaces.</span>
+    <span class="n">counts</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">W</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">W</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">w</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">counts</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">counts</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p><code class="docutils literal notranslate"><span class="pre">collections.defaultdict(int)</span></code> creates a dict with a default integer value of 0.</p>
+</div>
+<p>The other level of nesting is due to detecting empty words, <code class="docutils literal notranslate"><span class="pre">w</span> <span class="pre">!=</span> <span class="pre">''</span></code>. We can decrease the nesting of the counting code by skipping to the next iteration upon encountering an empty word:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">collections</span>
+
+<span class="k">def</span> <span class="nf">count_words</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="c1"># Split words on spaces.</span>
+    <span class="n">counts</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">W</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">W</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">w</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">counts</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">counts</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>However, the root of the problem is that there can be multiple space characters next to each other - this creates empty words. One solution is to replace multiple spaces with one space. With regular expressions, this can be done in one line:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">collections</span>
+<span class="kn">import</span> <span class="nn">re</span>
+
+<span class="k">def</span> <span class="nf">count_words</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="c1"># Split words on spaces.</span>
+    <span class="n">counts</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">W</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\s+&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">W</span><span class="p">:</span>
+        <span class="n">counts</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">counts</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">re.sub(r&quot;\s+&quot;,</span> <span class="pre">&quot;</span> <span class="pre">&quot;,</span> <span class="pre">...)</span></code> finds one or more instances of consecutive whitespace characters (including spaces, newlines and tabs), and replaces them with exactly one space. You could argue that this is less readable than the original version. Regular expressions can certainly be cryptic. However, from a feature perspective, this is an improvement because it deals with tabs and newlines properly.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">count_words</span><span class="p">(</span><span class="s2">&quot;hello   world</span><span class="se">\n\n\t</span><span class="s2">world&quot;</span><span class="p">)</span>
+<span class="go">defaultdict(int, {&#39;hello&#39;: 1, &#39;world&#39;: 2})</span>
+</pre></div>
+</div>
+<p>Improving code will require us to make many judgement calls like this. Should we prefer features over cleanliness of code? There’s no one true solution!</p>
+</div>
+<div class="section" id="improving-legibility">
+<h3>Improving legibility<a class="headerlink" href="#improving-legibility" title="Permalink to this headline">¶</a></h3>
+<p>We can improve legibility further by using descriptive names and using f-strings. The finalized code can be compared with the old code side-by-side.</p>
+<div class="tabbed-set docutils">
+<input checked="checked" id="a044d06a-e944-4655-ae39-0a30da62a292" name="c927e3da-ce97-44be-9d4f-28dc7dbc5fa9" type="radio">
+</input><label class="tabbed-label" for="a044d06a-e944-4655-ae39-0a30da62a292">
+Improved</label><div class="tabbed-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">collections</span>
+<span class="kn">import</span> <span class="nn">re</span>
+
+<span class="k">def</span> <span class="nf">count_words</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Split words on spaces.&quot;&quot;&quot;</span>
+    <span class="n">counts</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\s+&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+        <span class="n">counts</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">counts</span>
+
+<span class="k">def</span> <span class="nf">count_words_in_file</span><span class="p">(</span><span class="n">in_file</span><span class="p">,</span> <span class="n">out_file</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">in_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">counts</span> <span class="o">=</span> <span class="n">count_words</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">out_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">word</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="n">counts</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">word</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<input id="25ac9025-b190-461c-8b81-b18eeb12395a" name="c927e3da-ce97-44be-9d4f-28dc7dbc5fa9" type="radio">
+</input><label class="tabbed-label" for="25ac9025-b190-461c-8b81-b18eeb12395a">
+Original</label><div class="tabbed-content docutils">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">count_words_in_file</span><span class="p">(</span><span class="n">in_file</span><span class="p">,</span> <span class="n">out_file</span><span class="p">):</span>
+    <span class="n">counts</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">in_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+            <span class="c1"># Split words on spaces.</span>
+            <span class="n">W</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">W</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">w</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">counts</span><span class="p">:</span>
+                        <span class="n">counts</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">counts</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">out_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">counts</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span> <span class="n">k</span> <span class="o">+</span> <span class="s2">&quot;,&quot;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">counts</span><span class="p">[</span><span class="n">k</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>It’s not perfect, but it’s an improvement over the original in terms of legibility, correctness and feature set.</p>
+</div>
+</div>
+<div class="section" id="discussion">
+<h2>Discussion<a class="headerlink" href="#discussion" title="Permalink to this headline">¶</a></h2>
+<p>Decoupled code is something we all strive towards. Yet, code often has a natural tendency to become more and more tightly wound over time until it becomes an unmanageable mess. The strategies in this chapter will help you to identify code smells and correct them.</p>
+<p>Pure functions are easier to reason about, because they’re stateless - that saves your working memory when you’re reading code. Code that follows Python’s idioms is also easier on your working memory: when you see a line of code that is a familiar pattern, you can see the entire line as one chunk rather than multiple disparate bits. That takes one working memory slot rather than several.</p>
+<p>Changing existing code is not without its dangers, however. Perhaps we will make a mistake and introduce a bug in our code! How can we check that our improved code still does the correct thing? We’ll cover this in the next chapter on testing.</p>
+<div class="admonition-minute-exercise admonition">
+<p class="admonition-title">5-minute exercise</p>
+<p>Take a long function in a script you currently are working on, and split it in two. What challenges did you face?</p>
+</div>
+<hr class="footnotes docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="wikipedia"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Many of these and more are mentioned in the <a class="reference external" href="https://en.wikipedia.org/wiki/Code_smell">Wikipedia article on code smells</a>.</p>
+</dd>
+<dt class="label" id="convention"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd><p>Python doesn’t restrict outside access to private class variables; it’s just a convention to use <code class="docutils literal notranslate"><span class="pre">_</span></code> as a prefix.</p>
+</dd>
+</dl>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cdminix/tts-for-asr",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./archive"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By <a href='https://cdminix.me'>Christoph Minixhofer</a> <a href='https://twitter.com/cdminix'><img height='24' width='24' src='_images/twitter.svg' alt='Twitter' style='width:24px'></a><br/>
+        
+            &copy; Copyright 2021.<br/>
+          <div class="extra_footer">
+            Licensed under CC-BY 4.0 Template based on <a href='goodresearch.dev'>goodresearch.dev</a>].
+          </div>
+      </p>
+    </div>
+  </footer>
+  <!-- Place this tag in your head or just before your close body tag. -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

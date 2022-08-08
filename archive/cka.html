@@ -1,0 +1,740 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta property="og:title" content="Test numerical code: CKA" />
+  
+<meta property="og:type" content="website" />
+  
+<meta property="og:url" content="cdminix.me/archive/cka.html" />
+  
+<meta property="og:description" content="Let’s look at an extended example of testing numerical code. This example implements a computational method called CKA which was introduced in this paper. Importantly, CKA is not already implemente..." />
+  
+<meta property="og:image" content="https://goodresearch.dev/_images/unicorn.png" />
+  
+<meta property="og:image:alt" content="Test numerical code: CKA" />
+  
+    <title>Test numerical code: CKA &#8212; TTS for ASR</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+  <!-- add `style` or `link` tags with your CSS `@font-face` declarations here -->
+  <!-- ... and optionally preload the `woff2` for snappier page loads -->
+  <link rel="preload" href="../_static/et-book/et-book-bold-line-figures/et-book-bold-line-figures.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="../_static/et-book/et-book-display-italic-old-style-figures/et-book-display-italic-old-style-figures.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="../_static/et-book/et-book-roman-line-figures/et-book-roman-line-figures.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="../_static/et-book/et-book-roman-old-style-figures/et-book-roman-old-style-figures.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="../_static/et-book/et-book-semi-bold-old-style-figures/et-book-semi-bold-old-style-figures.woff" as="font" type="font/woff" crossorigin>
+
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.59e7d1499aa759519747cb2a1a335dc4.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tufte.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.90c857b2bf8f3d46aa488b0ed8bf60a6.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://cdminix.me/tts-for-asr/archive/cka.html" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@patrickmineault" />
+    <meta name="twitter:title" content="The Good Research Code Handbook" />
+    <meta name="twitter:description" content="This handbook is for grad students, postdocs and PIs who do a lot of programming as part of their research. It will teach you, in a practical manner, how to organize your code so that it is easy to understand and works reliably." />
+    <meta name="twitter:image" content="https://goodresearch.dev/_images/unicorn.png" />
+
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-3Q6LDVNS0X"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){ dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-3Q6LDVNS0X');
+    </script>
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      <img src="../_static/unicorn.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">TTS for ASR</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index.html">
+   TTS for Low-Resource ASR
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Fundmentals
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/other_fields.html">
+   Synthetic Data in Other Fields
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/low_resource_asr.html">
+   Low-Resource ASR
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/tts.html">
+   TTS
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  TTS for Low-Resource
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/cross_speaker.html">
+   Cross-Speaker Transfer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/cross_lingual.html">
+   Cross-Lingual Transfer
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Combining ASR &amp; TTS
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/augmentation.html">
+   Synthetic Speech as Data Augmentation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/speechchain.html">
+   Speech Chain / Backtransformation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/vc.html">
+   Voice Conversion
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  My Work
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/fastspeech2.html">
+   FastSpeech 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/priors.html">
+   Priors
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/snr.html">
+   SNR Variance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/german-to-english.html">
+   German-to-English Transfer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/future.html">
+   Future Work
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+<nav class="bd-links" id="nav-social">
+    <div class="bd-toc-item">
+        <p class="caption">
+            <span class="caption-text">Social</span>
+        </p>
+        <ul class="nav bd-sidenav" style="display:block">
+            <li class="toctree-l1"><a class="github-button" href="https://github.com/patrickmineault/codebook" data-icon="octicon-star" data-show-count="true" data-size="large" aria-label="Star patrickmineault/codebook on GitHub">Star on Github</a></li>
+            <li class="toctree-l1"><a href="http://eepurl.com/hHgNOH">Subscribe for updates</a></li>
+            <li class="toctree-l1"><a href="http://twitter.com/share?text=The+Good+Research+Code+Handbook.+Learn+to+write+readable%2C+maintainable+research+code+in+Python.&url=https://goodresearch.dev&user&via=patrickmineault" class="twitter-share-button" data-text="The Good Research Code Handbook. Learn to write readable, maintainable code in Python." data-via="patrickmineault" data-show-count="false">Tweet this handbook</a></li>
+        </ul>
+    </div>
+</nav>
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/archive/cka.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cdminix/tts-for-asr"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cdminix/tts-for-asr/issues/new?title=Issue%20on%20page%20%2Farchive/cka.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cdminix/tts-for-asr/edit/main/./archive/cka.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#background">
+   Background
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#comparing-deep-neural-nets-and-brains">
+     Comparing deep neural nets and brains
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#definition">
+     Definition
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#initial-implementation">
+   Initial implementation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#writing-our-first-test">
+   Writing our first test
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#checking-centering">
+   Checking centering
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#more-properties">
+   More properties
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dealing-with-wide-matrices">
+   Dealing with wide matrices
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#final-thoughts">
+   Final thoughts
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="test-numerical-code-cka">
+<h1>Test numerical code: CKA<a class="headerlink" href="#test-numerical-code-cka" title="Permalink to this headline">¶</a></h1>
+<p>Let’s look at an extended example of testing numerical code. This example implements a computational method called CKA which was introduced <a class="reference external" href="https://arxiv.org/abs/1905.00414">in this paper</a>. Importantly, CKA is not already implemented in scipy or sci-kit learn or in any other pip installable package: we’re flying solo <a class="footnote-reference brackets" href="#caveat" id="id1">1</a>.</p>
+<p>Does this make you nervous? It should! It’s easy to make a mistake in a computational pipeline and get the wrong results. With the structured approach that I’ve introduced in this handbook, you can work with far more confidence.</p>
+<div class="section" id="background">
+<h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
+<p>We’re going to implement centered kernel alignment (CKA) and apply it on test data. Because I wanted the method not to be implemented already in a major Python package, it had to be pretty obscure. I don’t expect anyone reading this to have already heard of CKA, so a quick intro is in order. In brief, <em>CKA is a way to compare two matrices, in the same way that Pearson’s correlation can compare two vectors</em>. It has applications to studying the brain and neural nets.</p>
+<div class="section" id="comparing-deep-neural-nets-and-brains">
+<h3>Comparing deep neural nets and brains<a class="headerlink" href="#comparing-deep-neural-nets-and-brains" title="Permalink to this headline">¶</a></h3>
+<p>Deep artificial neural nets perform fabulous feats, whether it’s detecting objects in images or translating speech to text. Neuroscientists often wonder whether or not these neural nets do their work in ways similar to the brain. To answer this question, they rely on methods that follow the same core recipe:</p>
+<ol class="simple">
+<li><p>pick a battery of stimuli</p></li>
+<li><p>measure the response of a brain to the battery of stimuli (in a MRI scanner, let’s say)</p></li>
+<li><p>measure the response of a deep neural net to the battery of stimuli.</p></li>
+<li><p>Compare the two sets of responses</p></li>
+</ol>
+<p>If the two sets of responses are similar, that means the brain and the deep neural net are aligned in some sense. We collect the responses into two matrices, <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> which are of size <em>N</em>x<em>K</em> and <em>N</em>x<em>L</em>, respectively; <em>N</em> is the number of stimuli. Then the game, in the final step, is to compare the two matrices <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>. CKA is a metric introduced in Kornblith et al. (2019) that can be used to compare two matrices which has some nice properties.</p>
+</div>
+<div class="section" id="definition">
+<h3>Definition<a class="headerlink" href="#definition" title="Permalink to this headline">¶</a></h3>
+<p>CKA is defined as:</p>
+<div class="math notranslate nohighlight">
+\[CKA(\mathbf X, \mathbf Y) = \frac{||\mathbf X^T \mathbf Y||_2^2}{||\mathbf X^T \mathbf X||_2 ||\mathbf Y^T \mathbf Y||_2}\]</div>
+<p>The columns <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are centered. <span class="math notranslate nohighlight">\(|| \mathbf{Z} ||_2 \equiv \sqrt{ \sum_{ij} Z_{ij}^2}\)</span> is the Frobenius norm, the root of the sum of squares of the entries.</p>
+<p>When the CKA is 0, the two representations are maximally different; when it is 1, the two representations are maximally similar. You might notice that the formula resembles Pearson’s correlation:</p>
+<div class="math notranslate nohighlight">
+\[r_{xy} =\frac{\sum ^n _{i=1}(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum ^n _{i=1}(x_i - \bar{x})^2} \sqrt{\sum ^n _{i=1}(y_i - \bar{y})^2}}\]</div>
+<p>In fact, CKA is the square of the Pearson’s correlation when <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are vectors. You can thus think of the CKA as a generalization of Pearson’s correlation for matrices.</p>
+</div>
+</div>
+<div class="section" id="initial-implementation">
+<h2>Initial implementation<a class="headerlink" href="#initial-implementation" title="Permalink to this headline">¶</a></h2>
+<p>Based off of the definition above, we can implement a working version of CKA with the following code. In <code class="docutils literal notranslate"><span class="pre">cka_step1.py</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="k">def</span> <span class="nf">cka</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">):</span>
+    <span class="c1"># Implements linear CKA as in Kornblith et al. (2019)</span>
+
+    <span class="c1"># Center X and Y</span>
+    <span class="n">X</span> <span class="o">-=</span> <span class="n">X</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">Y</span> <span class="o">-=</span> <span class="n">Y</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># Calculate CKA</span>
+    <span class="n">XTX</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    <span class="n">YTY</span> <span class="o">=</span> <span class="n">Y</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+    <span class="n">YTX</span> <span class="o">=</span> <span class="n">Y</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">YTX</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">XTX</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">*</span> <span class="p">(</span><span class="n">YTY</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>Now, is this function <em>correct</em>? In these ten lines of code, there’s a lot of trickiness going on:</p>
+<ul class="simple">
+<li><p>This function centers the columns of <span class="math notranslate nohighlight">\(X\)</span>… or does it? Should it remove <code class="docutils literal notranslate"><span class="pre">X.mean(axis=1)</span></code> instead?</p></li>
+<li><p>Is this function pure? Does it change its arguments <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>?</p></li>
+<li><p>In the last line: is this the correct definition of the Frobenius norm? Or are we off by a squaring factor?</p></li>
+</ul>
+<p>Indeed, a lot can go wrong in implementing this short function. Let’s write down some tests to reassure ourselves that this function does what it needs to do.</p>
+</div>
+<div class="section" id="writing-our-first-test">
+<h2>Writing our first test<a class="headerlink" href="#writing-our-first-test" title="Permalink to this headline">¶</a></h2>
+<p>The first test is the identity test: the CKA of a matrix with itself is 1, just like with Pearson’s correlation. Let’s write the identity test as part of a test suite.</p>
+<p>Let’s code CKA tests. We will turn properties of CKA listed in the paper into tests. In <code class="docutils literal notranslate"><span class="pre">cka_step1.py</span></code>, we write:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cka</span> <span class="kn">import</span> <span class="n">cka</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="k">def</span> <span class="nf">test_identity</span><span class="p">():</span>
+    <span class="c1"># Create a random matrix and check it is perfectly correlated with itself.</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">cka</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span> <span class="o">==</span> <span class="mf">1.0</span>
+</pre></div>
+</div>
+<p>Great! Now we can run our test suite with pytest:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(cb)</span> <span class="go">~/Documents/codebook_examples/cka$ pytest .</span>
+<span class="go">============================= test session starts ==============================</span>
+<span class="go">platform linux -- Python 3.8.11, pytest-6.2.5, py-1.10.0, pluggy-1.0.0</span>
+<span class="go">rootdir: /home/pmin/Documents/codebook_examples/cka</span>
+<span class="go">plugins: anyio-3.3.0</span>
+<span class="go">collected 1 item</span>
+
+<span class="go">test_cka.py F                                                            [100%]</span>
+
+<span class="go">=================================== FAILURES ===================================</span>
+<span class="go">________________________________ test_identity _________________________________</span>
+
+<span class="go">    def test_identity():</span>
+<span class="gp">        # </span>Create a random matrix and check it is perfectly correlated with itself.
+<span class="go">        X = np.random.randn(100, 2)</span>
+<span class="go">&gt;       assert cka(X, X) == 1.0</span>
+<span class="go">E       assert 0.9999999999999994 == 1.0</span>
+</pre></div>
+</div>
+<p>Here we’ve run into one of the tricky bits about writing numerical code - numerical instability. 1.0 is very close to 0.9999999999999994, but it’s not exactly equal. We can replace our test with a more lenient one. Numpy’s <code class="docutils literal notranslate"><span class="pre">np.testing.assert_allclose</span></code> can test that two arrays are close enough to each other entry-wise:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_identity_lenient</span><span class="p">():</span>
+    <span class="c1"># Create a random matrix and check it is perfectly correlated with itself.</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_allclose</span><span class="p">(</span><span class="n">cka_start</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">X</span><span class="p">),</span> <span class="mf">1.0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And now we find the tests pass. Let’s add one more test to the mix: a matrix and itself are perfectly correlated, <em>regardless of the order of their columns</em>. We can make a new test for that.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_column_swaps</span><span class="p">():</span>
+    <span class="c1"># Check that a matrix is perfectly correlated with itself even with column swaps.</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">cka_start</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span> <span class="n">X</span><span class="p">[:,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_allclose</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And now the tests pass:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp gp-VirtualEnv">(cb)</span> <span class="go">~/Documents/codebook_examples/cka$ pytest .</span>
+<span class="go">============================= test session starts ==============================</span>
+<span class="go">platform linux -- Python 3.8.11, pytest-6.2.5, py-1.10.0, pluggy-1.0.0</span>
+<span class="go">rootdir: /home/pmin/Documents/codebook_examples/cka</span>
+<span class="go">plugins: anyio-3.3.0</span>
+<span class="go">collected 2 items</span>
+
+<span class="go">test_cka_step1.py ..                                                     [100%]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="checking-centering">
+<h2>Checking centering<a class="headerlink" href="#checking-centering" title="Permalink to this headline">¶</a></h2>
+<p>Now let’s add more tests - namely that CKA that we’re doing centering correctly. It shouldn’t matter how columns are centered. Let’s add a test to this effect.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_centering</span><span class="p">():</span>
+    <span class="c1"># Check that a matrix is perfectly correlated with itself even with adding</span>
+    <span class="c1"># column offsets</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">Xp</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">Xp</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">1.0</span>
+
+    <span class="n">c</span> <span class="o">=</span> <span class="n">cka</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Xp</span><span class="p">)</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_allclose</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Run it in pytest - it works! That means we did the centering correctly. Indeed, we correctly removed <code class="docutils literal notranslate"><span class="pre">X.mean(axis=0)</span></code> from <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">Y.mean(axis=0)</span></code> from <code class="docutils literal notranslate"><span class="pre">Y</span></code>. But wait a minute - when we center in our function, do we change the original matrix? We can add a test to check that:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span>(cb) ~/Documents/codebook_examples/cka$ pytest .
+============================= test session starts ==============================
+platform linux -- Python 3.8.11, pytest-6.2.5, py-1.10.0, pluggy-1.0.0
+rootdir: /home/pmin/Documents/codebook_examples/cka
+plugins: anyio-3.3.0
+collected 4 items
+
+test_cka_step1.py ...F                                                   [100%]
+
+=================================== FAILURES ===================================
+__________________________________ test_pure ___________________________________
+
+    def test_pure():
+        # Check that a function doesn&#39;t change the original matrices
+        X = np.random.randn(100, 2)
+        Xp = X.copy()
+        Xp[:, 1] += 1.0
+
+        Xp_original = Xp.copy()
+        c = cka(X, Xp)
+&gt;       np.testing.assert_allclose(Xp_original[:, 1], Xp[:, 1])
+E       AssertionError:
+E       Not equal to tolerance rtol=1e-07, atol=0
+</pre></div>
+</div>
+<p>We see that this function modifies its argument. If you scroll back up to the <code class="docutils literal notranslate"><span class="pre">cka</span></code> definition, you can see that we used the <code class="docutils literal notranslate"><span class="pre">-=</span></code> in-place assignment operator - that caused the original matrix to change. If this tripped you up - don’t worry! I was very confused by this as well. This line changes the original array:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">-=</span> <span class="n">X</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>But this line returns a copy of the matrix:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">X</span> <span class="o">-</span> <span class="n">X</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Who knew! This kind of subtle semantic difference can really trip you up. We can clarify the intent of the code using <code class="docutils literal notranslate"><span class="pre">copy()</span></code> to identicate that we don’t want to change the original array: this way, the function’s intent is very clear. In <code class="docutils literal notranslate"><span class="pre">cka_step2.py</span></code>, we write the function a different way:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="k">def</span> <span class="nf">cka</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">):</span>
+    <span class="c1"># Implements linear CKA as in Kornblith et al. (2019)</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">Y</span> <span class="o">=</span> <span class="n">Y</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="c1"># Center X and Y</span>
+    <span class="n">X</span> <span class="o">-=</span> <span class="n">X</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">Y</span> <span class="o">-=</span> <span class="n">Y</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># Calculate CKA</span>
+    <span class="n">XTX</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    <span class="n">YTY</span> <span class="o">=</span> <span class="n">Y</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+    <span class="n">YTX</span> <span class="o">=</span> <span class="n">Y</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">YTX</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">XTX</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">*</span> <span class="p">(</span><span class="n">YTY</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>Now we copy our old tests into <code class="docutils literal notranslate"><span class="pre">test_cka_step2.py</span></code>, and the issue is fixed:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>(cb) ~/Documents/codebook_examples/cka$ pytest test_cka_step2.py
+============================= test session starts ==============================
+platform linux -- Python 3.8.11, pytest-6.2.5, py-1.10.0, pluggy-1.0.0
+rootdir: /home/pmin/Documents/codebook_examples/cka
+plugins: anyio-3.3.0
+collected 4 items
+
+test_cka_step2.py ....                                                   [100%]
+</pre></div>
+</div>
+</div>
+<div class="section" id="more-properties">
+<h2>More properties<a class="headerlink" href="#more-properties" title="Permalink to this headline">¶</a></h2>
+<p>CKA has several more properties which we can test. Many of these are listed in the CKA paper:</p>
+<ul class="simple">
+<li><p>the CKA is the square of the Pearson’s correlation when <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are vectors</p></li>
+<li><p>the CKA is insensitive to rotations</p></li>
+<li><p>the CKA is insensitive to scaling the entire matrix</p></li>
+<li><p>the CKA is sensitive to scaling different columns differently</p></li>
+</ul>
+<p>Here, it becomes useful to create a few helper functions to generate sample signals: matrices made of sinusoids of different frequencies in each column. We’ll remove our reliance on random data: it’s generally good practice to have <em>deterministic</em> tests. Non-deterministic tests that sometimes work and sometimes don’t are <em>flaky</em>, and they can be a pain. Let’s put it all together:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cka_step2</span> <span class="kn">import</span> <span class="n">cka</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pytest</span>
+
+<span class="k">def</span> <span class="nf">_get_one</span><span class="p">():</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mf">.1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="mf">.07</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span>
+
+<span class="k">def</span> <span class="nf">_get_multi</span><span class="p">():</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mf">.1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)))</span>
+    <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mf">.5</span> <span class="o">+</span> <span class="mf">.07</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">.7</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span>
+
+<span class="k">def</span> <span class="nf">test_identity_lenient</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Create a random matrix and check it is perfectly correlated with itself.&quot;&quot;&quot;</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">_get_multi</span><span class="p">()</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_allclose</span><span class="p">(</span><span class="n">cka</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">X</span><span class="p">),</span> <span class="mf">1.0</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">test_column_swaps</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Check that a matrix is perfectly correlated with itself even with column swaps.&quot;&quot;&quot;</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">_get_multi</span><span class="p">()</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">cka</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span> <span class="n">X</span><span class="p">[:,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_allclose</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">test_centering</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Check that a matrix is perfectly correlated with itself even with adding column offsets.&quot;&quot;&quot;</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">_get_multi</span><span class="p">()</span>
+    <span class="n">Xp</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">Xp</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">1.0</span>
+
+    <span class="n">c</span> <span class="o">=</span> <span class="n">cka</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Xp</span><span class="p">)</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_allclose</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">test_pure</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Check that a function doesn&#39;t change the original matrices.&quot;&quot;&quot;</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">_get_multi</span><span class="p">()</span>
+    <span class="n">Xp</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">Xp</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">1.0</span>
+
+    <span class="n">Xp_original</span> <span class="o">=</span> <span class="n">Xp</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">cka</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Xp</span><span class="p">)</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_allclose</span><span class="p">(</span><span class="n">Xp_original</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">Xp</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
+
+<span class="k">def</span> <span class="nf">test_corr</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;The CKA of two vectors is the square of the correlation coefficient&quot;&quot;&quot;</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">_get_one</span><span class="p">()</span>
+    <span class="n">c1</span> <span class="o">=</span> <span class="n">cka</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+    <span class="n">c2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(),</span> <span class="n">Y</span><span class="o">.</span><span class="n">squeeze</span><span class="p">())[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_allclose</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">test_isoscaling</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;CKA is insensitive to scaling by a scalar&quot;&quot;&quot;</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">_get_multi</span><span class="p">()</span>
+    <span class="n">c1</span> <span class="o">=</span> <span class="n">cka</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+    <span class="n">c2</span> <span class="o">=</span> <span class="n">cka</span><span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">X</span><span class="p">,</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">*</span> <span class="n">Y</span><span class="p">)</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_allclose</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">test_rotation</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;CKA is insensitive to rotations&quot;&quot;&quot;</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">_get_multi</span><span class="p">()</span>
+    <span class="n">X0</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">X0p</span> <span class="o">=</span> <span class="n">X0</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">c1</span> <span class="o">=</span> <span class="n">cka</span><span class="p">(</span><span class="n">X0</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+    <span class="n">c2</span> <span class="o">=</span> <span class="n">cka</span><span class="p">(</span><span class="n">X0p</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_allclose</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">test_no_iso</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;CKA is sensitive to column scaling&quot;&quot;&quot;</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">_get_multi</span><span class="p">()</span>
+    <span class="n">X0</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">X0p</span> <span class="o">=</span> <span class="n">X0</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+    <span class="n">c1</span> <span class="o">=</span> <span class="n">cka</span><span class="p">(</span><span class="n">X0</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+    <span class="n">c2</span> <span class="o">=</span> <span class="n">cka</span><span class="p">(</span><span class="n">X0p</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">c1</span> <span class="o">-</span> <span class="n">c2</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">.001</span>
+</pre></div>
+</div>
+<p>It’s starting to get quite long! For numeric code, it’s not unusual that the test code should be several times longer than the code it is testing. Indeed, when you introduce a new numerical method, you might spend days testing it on different inputs to check that it gives reasonable outputs. Testing takes this common practice and formalizes it. Now, you can rest assured that the code works as intended.</p>
+</div>
+<div class="section" id="dealing-with-wide-matrices">
+<h2>Dealing with wide matrices<a class="headerlink" href="#dealing-with-wide-matrices" title="Permalink to this headline">¶</a></h2>
+<p>Before we add more features to the code, it’s important to make sure that what is already there is correct. It’s all too easy to build in a vacuum, and we are left debugging a giant chunk of code.</p>
+<p>In our case, a nice feature we might want is the ability to deal with wide matrices. The implementation we have works well for tall, skinny matrices - but neural nets are generally over-parametrized and frequently have big intermediate representations. The paper introduces another method to compute the CKA with these wide matrices that is far more memory efficient. We can change our implementation to deal with these larger matrices efficiently - and of course, add more tests to make sure we didn’t mess up anything! Tests are what allow us to move with confidence. <a class="reference external" href="https://github.com/patrickmineault/codebook_examples/tree/main/cka">Take a look at the final version of the code</a> to see how we can test that the code works as expected.</p>
+</div>
+<div class="section" id="final-thoughts">
+<h2>Final thoughts<a class="headerlink" href="#final-thoughts" title="Permalink to this headline">¶</a></h2>
+<p>We’ve gone through a complex example of testing numerical code. We built infrastructure to test the code, found a gnarly bug, corrected it, and continued to build a large test suite. We were then able to expand our code to deal with new conditions. In the end, we could be confident that our code is correct.</p>
+<hr class="footnotes docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="caveat"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p><a class="reference external" href="https://colab.research.google.com/github/google-research/google-research/blob/master/representation_similarity/Demo.ipynb">There is an implementation in a notebook from the authors</a>.</p>
+</dd>
+</dl>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cdminix/tts-for-asr",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./archive"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By <a href='https://cdminix.me'>Christoph Minixhofer</a> <a href='https://twitter.com/cdminix'><img height='24' width='24' src='_images/twitter.svg' alt='Twitter' style='width:24px'></a><br/>
+        
+            &copy; Copyright 2021.<br/>
+          <div class="extra_footer">
+            Licensed under CC-BY 4.0 Template based on <a href='goodresearch.dev'>goodresearch.dev</a>].
+          </div>
+      </p>
+    </div>
+  </footer>
+  <!-- Place this tag in your head or just before your close body tag. -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
