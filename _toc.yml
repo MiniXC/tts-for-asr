@@ -18,7 +18,10 @@ parts:
 - caption: My Work
   chapters:
     - file: markdown/fastspeech2
-    - file: markdown/priors
+    - file: markdown/conditioning
     - file: markdown/snr
     - file: markdown/german-to-english
     - file: markdown/future
+- caption: References
+  chapters:
+  - file: markdown/references

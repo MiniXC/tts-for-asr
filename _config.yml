@@ -22,7 +22,7 @@ html:
   use_fullscreen_button: false
   comments:
     hypothesis: false
-  extra_footer: "Licensed under CC-BY 4.0 Template based on <a href='goodresearch.dev'>goodresearch.dev</a>]."
+  extra_footer: "Licensed under CC-BY 4.0, Template based on <a href='goodresearch.dev'>goodresearch.dev</a>."
 
 launch_buttons:
   thebe             : true
