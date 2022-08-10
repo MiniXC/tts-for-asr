@@ -5,17 +5,19 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta property="og:title" content="Synthetic Data in Other Fields" />
+<meta property="og:title" content="Synthetic Data" />
   
 <meta property="og:type" content="website" />
   
 <meta property="og:url" content="cdminix.me/markdown/other_fields.html" />
   
+<meta property="og:description" content="Synthetic data was first used in computer vision, and to this day synthetic data is most commonly used in this domain. For example, 3D scenes are rendered as static images to train models for image..." />
+  
 <meta property="og:image" content="https://goodresearch.dev/_images/unicorn.png" />
   
-<meta property="og:image:alt" content="Synthetic Data in Other Fields" />
+<meta property="og:image:alt" content="Synthetic Data" />
   
-    <title>Synthetic Data in Other Fields &#8212; TTS for ASR</title>
+    <title>Synthetic Data &#8212; TTS for ASR</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -129,7 +131,7 @@
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Synthetic Data in Other Fields
+   Synthetic Data
   </a>
  </li>
  <li class="toctree-l1">
@@ -168,7 +170,7 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="augmentation.html">
-   Synthetic Speech as Data Augmentation
+   Synthetic Speech as Augmentation
   </a>
  </li>
  <li class="toctree-l1">
@@ -194,8 +196,8 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="priors.html">
-   Priors
+  <a class="reference internal" href="conditioning.html">
+   Conditioning
   </a>
  </li>
  <li class="toctree-l1">
@@ -211,6 +213,18 @@
  <li class="toctree-l1">
   <a class="reference internal" href="future.html">
    Future Work
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  References
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="references.html">
+   References
   </a>
  </li>
 </ul>
@@ -309,6 +323,24 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#generative-models-with-conditioning">
+   Generative Models with Conditioning
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#for-speech-recognition">
+   For Speech Recognition
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -317,8 +349,27 @@
         
               <div>
                 
-  <div class="section" id="synthetic-data-in-other-fields">
-<h1>Synthetic Data in Other Fields<a class="headerlink" href="#synthetic-data-in-other-fields" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="synthetic-data">
+<h1>Synthetic Data<a class="headerlink" href="#synthetic-data" title="Permalink to this headline">¶</a></h1>
+<p>Synthetic data was first used in computer vision, and to this day synthetic data is most commonly used in this domain. For example, 3D scenes are rendered as static images to train models for image segmenatation or for creating depth maps, or entire enviroments are simulated for autonomous driving. But there are also fields outside of computer vision using synthetic data, such as generating network logs for intrusion detection, or candidate molecules in bioinformatics <a class="reference external" href="references.html#nikolenko2021synthetic">(Nikolenko, 2021, p. 217-222)</a>.</p>
+<p>The main reasons synthetic data is used in these fields are the following:</p>
+<ul class="simple">
+<li><p>there simply isn’t enough real data</p></li>
+<li><p>the real data there is has labels that aren’t granular enough</p></li>
+</ul>
+<p>Usually, synthetic data still isn’t quite the same as the real data, which makes domain transfer a core issue, which can be solved by either adapting models or the data itself. But the best approach is to generate synthetic data that is as close to the real data as possible. For example, in the field of face-related machine-learning tasks, using synthetic data with a small <em>domain gap</em> alone has lead to results comparable to using real data <a class="reference external" href="references.html#wood2021face">(Wood et al., 2021)</a>.</p>
+<p>What all the domains I listed so far have in common is that we understand the processes behind these data (for example light transport in computer vision, or molecule structures in bioinformatics) sufficiently well to generate synthetic data programmatically, without the use of the real data we want to emulate. But what if that isn’t the case?</p>
+<div class="section" id="generative-models-with-conditioning">
+<h2>Generative Models with Conditioning<a class="headerlink" href="#generative-models-with-conditioning" title="Permalink to this headline">¶</a></h2>
+<p>We could just train a generative model on real data to get an infinite supply of synthetic data - but the model will merely approximate the real data (and often lead to a drop in quality), and as far as I know, this approach alone has never led to better performance than just training on the original (real) data. But using generative models in combination with one or several <em>conditions</em> has yielded promising results. For example, <a class="reference external" href="references.html#kuznichov2019leaf">Kuznichov et al. (2019)</a> generate synthetic images of leaves using a GAN <em>conditioned</em> on segmentation masks of said leaves. <a class="reference external" href="references.html#fogel2020scrabblegan">Fogel et al. (2020)</a> train a model to generate handwriting <em>conditioned</em> on text, and manage to improve handwritten text recognition results by augmenting the real training data with data generate by their model.</p>
+<div class="boxed figure align-default" id="id1">
+<img alt="../_images/simulated_vs_generated.svg" src="../_images/simulated_vs_generated.svg" /><p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text"><em>Simulated</em> compared to <em>Conditionally Generated</em> Synthetic Data.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="for-speech-recognition">
+<h2>For Speech Recognition<a class="headerlink" href="#for-speech-recognition" title="Permalink to this headline">¶</a></h2>
+<p>Generating synthetic speech for training ASR systems was first attempted by <a class="reference external" href="references.html#gales2009svm">Gales et al. (2009)</a> to recognize words not in the training data and later by <a class="reference external" href="references.html#rygaard2015lowresource">Rygaard (2015)</a> to show that web-scraped text could be used to improve performance. Both systems used HTS, an HMM-based speech synthesis system <a class="reference external" href="references.html#zen2007hts">(Zen et al., 2007)</a>.</p>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -381,7 +432,7 @@
         
             &copy; Copyright 2021.<br/>
           <div class="extra_footer">
-            Licensed under CC-BY 4.0 Template based on <a href='goodresearch.dev'>goodresearch.dev</a>].
+            Licensed under CC-BY 4.0, Template based on <a href='goodresearch.dev'>goodresearch.dev</a>.
           </div>
       </p>
     </div>
