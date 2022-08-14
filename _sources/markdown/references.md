@@ -6,9 +6,15 @@
 
 <a name="hu2022synt"></a>Hu, T.-Y., Armandpour, M., Shrivastava, A., Chang, J.-H. R., Koppula, H., & Tuzel, O. (2022). SYNT++: Utilizing Imperfect Synthetic Data to Improve Speech Recognition. ICASSP 2022.
 
+<a name="jaitly2013vtlp"></a>Jaitly, N., & Hinton, G. E. (n.d.). Vocal Tract Length Perturbation (VTLP) improves speech recognition. ICML 2013.
+
 <a name="kuznichov2019leaf"></a>Kuznichov, D., Zvirin, A., Honen, Y., & Kimmel, R. (2019). Data Augmentation for Leaf Segmentation and Counting Tasks in Rosette Plants. CVF 2019.
 
 <a name="nikolenko2021synthetic"></a>Nikolenko, S. I. (2021). Synthetic Data for Deep Learning (Vol. 174). Springer International Publishing.
+
+<a name="park2019specaugment"></a>Park, D. S., Chan, W., Zhang, Y., Chiu, C.-C., Zoph, B., Cubuk, E. D., & Le, Q. V. (2019). SpecAugment: A Simple Data Augmentation Method for Automatic Speech Recognition. Interspeech 2019.
+
+<a name="povey2006fmllr"></a>Povey, D., & Saon, G. (2006). Feature and model space speaker adaptation with full covariance Gaussians. Interspeech 2006.
 
 <a name="rygaard2015lowresource"></a>Rygaard, L. V. (2015). Using synthesized speech to improve speech recognition for lowresource languages.
 
