@@ -10,11 +10,11 @@ parts:
   chapters:
     - file: markdown/cross_speaker
     - file: markdown/cross_lingual
+    - file: markdown/speechchain
 - caption: Combining ASR & TTS
   chapters:
     - file: markdown/augmentation
-    - file: markdown/speechchain
-    - file: markdown/vc
+    - file: markdown/transfer
 - caption: My Work
   chapters:
     - file: markdown/fastspeech2

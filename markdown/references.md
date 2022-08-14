@@ -10,6 +10,8 @@
 
 <a name="rygaard2015lowresource"></a>Rygaard, L. V. (2015). Using synthesized speech to improve speech recognition for lowresource languages.
 
+<a name="stone2020articulatory"></a>Stone, S., Azgin, A., Mänz, S., & Birkholz, P. (2020). Prospects of articulatory text-to-speech synthesis. ISSP 2020.
+
 <a name="wood2021face"></a>Wood, E., Baltrušaitis, T., Hewitt, C., Dziadzio, S., Johnson, M., Estellers, V., Cashman, T. J., & Shotton, J. (2021). Fake It Till You Make It: Face analysis in the wild using synthetic data alone. CVF 2021.
 
 <a name="zen2007hts"></a>Zen, H., Nose, T., Yamagishi, J., Sako, S., Masuko, T., Black, A. W., & Tokuda, K. (2007). The HMM-based Speech Synthesis System (HTS) Version 2.0. SSW6 2007.

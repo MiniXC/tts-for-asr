@@ -2,7 +2,7 @@
 title: "TTS for ASR"
 author: "<a href='https://cdminix.me'>Christoph Minixhofer</a> <a href='https://twitter.com/cdminix'><img height='24' width='24' src='_images/twitter.svg' alt='Twitter' style='width:24px'></a>"
 copyright: "2021"
-logo: figures/unicorn.png
+logo: figures/one.png
 
 execute:
   execute_notebooks: "auto"

@@ -4,7 +4,7 @@ This is a summary of my efforts to generate synthetic speech [^TTS] to improve s
 
 Yes, but only if we have nothing new to add -- and there are many things we can add, for example new speakers, new lexical content, or even new variances (such as the pitch or duration of the speech). And we can also do this across languages and domains, making a model trained on English speakers produce Swahili speech or a make model trained on audiobooks read medical transcripts!
 
-More data is always better, and the closer the data is to the target domain, the better as well. This means that synthetic data is most useful when there isn't plenty of high-quality data in the target domain available. ASR, in this case, is often described as **low-resource**. A lot of work has been done in this area, with varying definitions of what low-resource means (more on this in [Low-Resource ASR](todo)). I will give an overview of how synthetic data has been used to improve low-resource ASR, and present my own findings as well. In figure below, you can see all the major areas covered in this report and how they are related to each other.
+More data is always better, and the closer the data is to the target domain, the better as well. This means that synthetic data is most useful when there isn't plenty of high-quality data in the target domain available. ASR, in this case, is often described as **low-resource**. A lot of work has been done in this area, with varying definitions of what low-resource means (more on this in [Low-Resource ASR](markdown/low_resource_asr)). I will give an overview of how synthetic data has been used to improve low-resource ASR, and present my own findings as well. In figure below, you can see all the major areas covered in this report and how they are related to each other.
 
 ```{figure} figures/roadmap.svg
 ---
@@ -13,7 +13,7 @@ figclass: boxed
 The main concepts I cover in this report.
 ```
 
-There is also a more formal version of this report I had to submit to the University, which you can download [here](todo).
+There is also a more formal version of this report I had to submit to the University, which you can download here.
 
 
 [^TTS]: Using a TTS (Text-to-Speech) model.
