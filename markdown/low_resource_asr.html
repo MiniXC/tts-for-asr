@@ -11,6 +11,8 @@
   
 <meta property="og:url" content="cdminix.me/markdown/low_resource_asr.html" />
   
+<meta property="og:description" content="As I have mentioned before, synthetic data is most useful in the case of little data being available in the target domain. ASR for low-resource languages is one of those cases, and the one I have f..." />
+  
 <meta property="og:image" content="https://goodresearch.dev/_images/unicorn.png" />
   
 <meta property="og:image:alt" content="Low-Resource ASR" />
@@ -70,7 +72,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="TTS" href="tts.html" />
-    <link rel="prev" title="Synthetic Data in Other Fields" href="other_fields.html" />
+    <link rel="prev" title="Synthetic Data" href="other_fields.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -103,7 +105,7 @@
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
-      <img src="../_static/unicorn.png" class="logo" alt="logo">
+      <img src="../_static/one.png" class="logo" alt="logo">
       
       
       <h1 class="site-logo" id="site-title">TTS for ASR</h1>
@@ -129,7 +131,7 @@
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="other_fields.html">
-   Synthetic Data in Other Fields
+   Synthetic Data
   </a>
  </li>
  <li class="toctree-l1 current active">
@@ -159,6 +161,11 @@
    Cross-Lingual Transfer
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="speechchain.html">
+   Speech Chain / Backtransformation
+  </a>
+ </li>
 </ul>
 <p class="caption">
  <span class="caption-text">
@@ -168,17 +175,12 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="augmentation.html">
-   Synthetic Speech as Augmentation
+   Augmentation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="speechchain.html">
-   Speech Chain / Backtransformation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="vc.html">
-   Voice Conversion
+  <a class="reference internal" href="transfer.html">
+   Domain Transfer
   </a>
  </li>
 </ul>
@@ -194,8 +196,8 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="priors.html">
-   Priors
+  <a class="reference internal" href="conditioning.html">
+   Conditioning
   </a>
  </li>
  <li class="toctree-l1">
@@ -214,6 +216,11 @@
   </a>
  </li>
 </ul>
+<p class="caption">
+ <span class="caption-text">
+  References
+ </span>
+</p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="references.html">
@@ -316,6 +323,24 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#synthetic-speech-data-augmentation">
+   Synthetic Speech ≠ Data Augmentation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tts-voice-conversion">
+   TTS &amp; Voice Conversion
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -326,6 +351,26 @@
                 
   <div class="section" id="low-resource-asr">
 <h1>Low-Resource ASR<a class="headerlink" href="#low-resource-asr" title="Permalink to this headline">¶</a></h1>
+<p>As I have mentioned before, synthetic data is most useful in the case of little data being available in the target domain. ASR for low-resource languages is one of those cases, and the one I have focused my own work on so far. Beyond making ASR models themselves more robust to overfitting, there are two main areas of research in low-resource ASR as described by <span class="xref myst">Yu et al. (2020)</span>: <strong>Data Augmentation</strong> and <strong>Knowledge Transfer</strong>. <strong>Data augmentation</strong> encompasses various techniques which usually add perturbed versions of training samples to the data to increase diversity and make the ASR model more robust. While data augmentation expands the space of the data, <strong>knowledge transfer</strong> is about expanding the space of tasks a model has to perform:</p>
+<ul class="simple">
+<li><p><em>Multitask learning</em> simply adds more tasks (for example, each additional language can be seen as an additional task). When the tasks are closely related, a model trained on many tasks often outperforms a model trained on a single task. One of the reasons for this is that the model learns more robust hidden representations.</p></li>
+<li><p><em>Transfer learning</em> aims to transfer model knowledge from a high-resource source task to the low-resource target task, usually using a pre-training/finetuning approach.</p></li>
+<li><p><em>Meta learning</em> means to learn from previous a learning task (also called “learning to learn”) to adapt to a new task using meta-data from said intial task.</p></li>
+</ul>
+<p>Fig. 3 shows an overview of these different approaches for low-resource ASR.</p>
+<div class="boxed figure align-default" id="id1">
+<img alt="../_images/low-resource.svg" src="../_images/low-resource.svg" /><p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text">Techniques used for low-resource speech recognition.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+<div class="section" id="synthetic-speech-data-augmentation">
+<h2>Synthetic Speech ≠ Data Augmentation<a class="headerlink" href="#synthetic-speech-data-augmentation" title="Permalink to this headline">¶</a></h2>
+<p>While synthetic speech data is usually referred to as a data augmentation technique, I agree with <a class="reference external" href="references.html#nikolenko2021synthetic">Nikolenko (2021, p. 12)</a> that while the line between data augmentation and synthetic data can be blurry, it is helpful to distuinguish between the two. To illustrate this, let’s assume the most extreme case: <em>training a model using synthetic data alone</em> - there is no original data being augmented, so I would hesitate to call this data augmentation.</p>
+<p>When viewing synthetic speech as a technique outside of data augmentation, it’s also easy to see that many techniques used for <strong>knowledge transfer</strong> in low-resource ASR have been applied to the generation of synthetic speech, making many works in this field a combination of <strong>knowledge transfer</strong> and <strong>data augmentation</strong>.</p>
+</div>
+<div class="section" id="tts-voice-conversion">
+<h2>TTS &amp; Voice Conversion<a class="headerlink" href="#tts-voice-conversion" title="Permalink to this headline">¶</a></h2>
+<p>I further divide synthetic speech for ASR approaches into <strong>TTS</strong> and <strong>Voice Conversion</strong> approaches.
+In both cases the data is <em>conditinally generated</em>, as I outlined in the <span class="xref myst">Synthetic Data chapter</span>. The difference between the two is the condition: for <strong>Text</strong>-to-Speech, the main condition is obviously text (although there can be additional conditions), while for <strong>Voice Conversion</strong>, the conditions are an utterance and a desired style, and the result will be an utterance in a different style. While <strong>Voice Conversion</strong> is less popular than <strong>TTS</strong> approaches, and is not the area I’m focusing on in my work, it has been successfully used for low-resource ASR by <span class="xref myst">Thai et al. (2019)</span>, and there is some work that combines the two by utilising “Style Equalization” to train a <strong>TTS</strong> model to produce styles based on reference audio without requiring style labels <span class="xref myst">(Hu et al., 2021)</span>.</p>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -362,7 +407,7 @@
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">Synthetic Data in Other Fields</p>
+                <p class="prevnext-title">Synthetic Data</p>
             </div>
         </a>
     </div>

@@ -4,11 +4,13 @@
 
 <a name="gales2009svm"></a>Gales, M. J. F., Ragni, A., AlDamarki, H., & Gautier, C. (2009). Support vector machines for noise robust ASR. ASRU 2009.
 
-<a name="kuznichov2019leaf"></a>Kuznichov, D., Zvirin, A., Honen, Y., & Kimmel, R. (2019). Data Augmentation for Leaf Segmentation and Counting Tasks in Rosette Plants. [arXiv](http://arxiv.org/abs/1903.08583).
+<a name="kuznichov2019leaf"></a>Kuznichov, D., Zvirin, A., Honen, Y., & Kimmel, R. (2019). Data Augmentation for Leaf Segmentation and Counting Tasks in Rosette Plants. CVF 2019.
 
 <a name="nikolenko2021synthetic"></a>Nikolenko, S. I. (2021). Synthetic Data for Deep Learning (Vol. 174). Springer International Publishing.
 
 <a name="rygaard2015lowresource"></a>Rygaard, L. V. (2015). Using synthesized speech to improve speech recognition for lowresource languages.
+
+<a name="stone2020articulatory"></a>Stone, S., Azgin, A., Mänz, S., & Birkholz, P. (2020). Prospects of articulatory text-to-speech synthesis. ISSP 2020.
 
 <a name="wood2021face"></a>Wood, E., Baltrušaitis, T., Hewitt, C., Dziadzio, S., Johnson, M., Estellers, V., Cashman, T. J., & Shotton, J. (2021). Fake It Till You Make It: Face analysis in the wild using synthetic data alone. CVF 2021.
 

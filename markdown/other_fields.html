@@ -105,7 +105,7 @@
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
-      <img src="../_static/unicorn.png" class="logo" alt="logo">
+      <img src="../_static/one.png" class="logo" alt="logo">
       
       
       <h1 class="site-logo" id="site-title">TTS for ASR</h1>
@@ -161,6 +161,11 @@
    Cross-Lingual Transfer
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="speechchain.html">
+   Speech Chain / Backtransformation
+  </a>
+ </li>
 </ul>
 <p class="caption">
  <span class="caption-text">
@@ -170,17 +175,12 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="augmentation.html">
-   Synthetic Speech as Augmentation
+   Augmentation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="speechchain.html">
-   Speech Chain / Backtransformation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="vc.html">
-   Voice Conversion
+  <a class="reference internal" href="transfer.html">
+   Domain Transfer
   </a>
  </li>
 </ul>
@@ -329,6 +329,16 @@
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reasons-to-use-synthetic-data">
+   Reasons to use Synthetic Data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-domain-gap">
+   The Domain Gap
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#generative-models-with-conditioning">
    Generative Models with Conditioning
   </a>
@@ -352,15 +362,22 @@
   <div class="section" id="synthetic-data">
 <h1>Synthetic Data<a class="headerlink" href="#synthetic-data" title="Permalink to this headline">¶</a></h1>
 <p>Synthetic data was first used in computer vision, and to this day synthetic data is most commonly used in this domain. For example, 3D scenes are rendered as static images to train models for image segmenatation or for creating depth maps, or entire enviroments are simulated for autonomous driving. But there are also fields outside of computer vision using synthetic data, such as generating network logs for intrusion detection, or candidate molecules in bioinformatics <a class="reference external" href="references.html#nikolenko2021synthetic">(Nikolenko, 2021, p. 217-222)</a>.</p>
+<div class="section" id="reasons-to-use-synthetic-data">
+<h2>Reasons to use Synthetic Data<a class="headerlink" href="#reasons-to-use-synthetic-data" title="Permalink to this headline">¶</a></h2>
 <p>The main reasons synthetic data is used in these fields are the following:</p>
-<ul class="simple">
+<ol class="simple">
 <li><p>there simply isn’t enough real data</p></li>
-<li><p>the real data there is has labels that aren’t granular enough</p></li>
-</ul>
-<p>Usually, synthetic data still isn’t quite the same as the real data, which makes domain transfer a core issue, which can be solved by either adapting models or the data itself. But the best approach is to generate synthetic data that is as close to the real data as possible. For example, in the field of face-related machine-learning tasks, using synthetic data with a small <em>domain gap</em> alone has lead to results comparable to using real data <a class="reference external" href="references.html#wood2021face">(Wood et al., 2021)</a>.</p>
-<p>What all the domains I listed so far have in common is that we understand the processes behind these data (for example light transport in computer vision, or molecule structures in bioinformatics) sufficiently well to generate synthetic data programmatically, without the use of the real data we want to emulate. But what if that isn’t the case?</p>
+<li><p>the labels that come with the synthetic data are preferred</p></li>
+</ol>
+<p>While the 1) is easy enough to understand, 2) is a bit trickier, and best explained with an example: When labeling the landmarks (eyes, nose, etc.) in human faces, human anotators can only be so accurate, while we can extract perfect masks when 3D rendering a synthetic human face <a class="reference external" href="references.html#wood2021face">(Wood et al., 2021)</a>.</p>
+</div>
+<div class="section" id="the-domain-gap">
+<h2>The Domain Gap<a class="headerlink" href="#the-domain-gap" title="Permalink to this headline">¶</a></h2>
+<p>Usually, synthetic data still isn’t quite the same as the real data, which makes domain transfer a core issue, which can be solved by either adapting models or the data itself. But the best approach is to generate synthetic data that is as close to the real data as possible. To stick to the previous example, in the field of face-related machine-learning tasks, using synthetic data with a reduced <em>domain gap</em> due to high-quality assets and simulation alone has lead to results comparable to using real data <a class="reference external" href="references.html#wood2021face">(Wood et al., 2021)</a>.</p>
+</div>
 <div class="section" id="generative-models-with-conditioning">
 <h2>Generative Models with Conditioning<a class="headerlink" href="#generative-models-with-conditioning" title="Permalink to this headline">¶</a></h2>
+<p>What all the domains I listed so far have in common is that we understand the processes behind these data (for example light transport in computer vision, or molecule structures in bioinformatics) sufficiently well to generate synthetic data programmatically, without the use of the real data we want to emulate. But what if that isn’t the case?</p>
 <p>We could just train a generative model on real data to get an infinite supply of synthetic data - but the model will merely approximate the real data (and often lead to a drop in quality), and as far as I know, this approach alone has never led to better performance than just training on the original (real) data. But using generative models in combination with one or several <em>conditions</em> has yielded promising results. For example, <a class="reference external" href="references.html#kuznichov2019leaf">Kuznichov et al. (2019)</a> generate synthetic images of leaves using a GAN <em>conditioned</em> on segmentation masks of said leaves. <a class="reference external" href="references.html#fogel2020scrabblegan">Fogel et al. (2020)</a> train a model to generate handwriting <em>conditioned</em> on text, and manage to improve handwritten text recognition results by augmenting the real training data with data generate by their model.</p>
 <div class="boxed figure align-default" id="id1">
 <img alt="../_images/simulated_vs_generated.svg" src="../_images/simulated_vs_generated.svg" /><p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text"><em>Simulated</em> compared to <em>Conditionally Generated</em> Synthetic Data.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
@@ -368,7 +385,10 @@
 </div>
 <div class="section" id="for-speech-recognition">
 <h2>For Speech Recognition<a class="headerlink" href="#for-speech-recognition" title="Permalink to this headline">¶</a></h2>
-<p>Generating synthetic speech for training ASR systems was first attempted by <a class="reference external" href="references.html#gales2009svm">Gales et al. (2009)</a> to recognize words not in the training data and later by <a class="reference external" href="references.html#rygaard2015lowresource">Rygaard (2015)</a> to show that web-scraped text could be used to improve performance. Both systems used HTS, an HMM-based speech synthesis system <a class="reference external" href="references.html#zen2007hts">(Zen et al., 2007)</a>.</p>
+<p>The equivalent for what we call “simulated synthetic data” in speech would be <em>articulatory speech synthesis</em> which simulates an entire vocal tract to generate speech <a class="reference external" href="references.html#stone2020articulatory">(Stone et al., 2020)</a>. The results are promising, especially because the parameters of the vocal tract are known, which usually isn’t the case for real data. These parameters could potentially be used as labels superior to graphemes or phonemes for speech recognition. However, as far as I know, none of the work in this field has been successfully used to train ASR models, probably because the domain gap is still to large between this type of synthesis and real speech.</p>
+<p>Creating “conditionally generated synthetic data” for training ASR systems was first attempted by <a class="reference external" href="references.html#gales2009svm">Gales et al. (2009)</a> to recognize words not in the training data (with the external condition being said words) and later by <a class="reference external" href="references.html#rygaard2015lowresource">Rygaard (2015)</a> to show that web-scraped text could be used to improve performance. Both systems used HTS, an HMM-based speech synthesis system <a class="reference external" href="references.html#zen2007hts">(Zen et al., 2007)</a>, and focused on English.</p>
+<p>With the widespread use of end-to-end TTS and ASR models, interest in the topic of conditionally generated synthetic speech for ASR has increased, with two families of tasks emerging, which I call <strong>augmentation</strong>  and <strong>domain transfer</strong> tasks. <strong>Augmentation</strong>-based approaches train TTS models on data very similar to existing ASR data, and add synthesised data to the original data, most commonly to increase lexical diversity, but sometimes to increase prosodic or speaker diversity as well. <strong>Domain transfer</strong>-based ones use a dataset in a particular domain (usually with plenty of data) for TTS training and then attempt to synthesise speech in another domain (usually with little data), attempting to <em>transfer</em> the diversity in the original dataset to the domain with little data.</p>
+<p>Both approaches are also frequently applied to ASR for low-resource languages, which I explore in <a class="reference internal" href="low_resource_asr.html"><span class="doc std std-doc">the next chapter</span></a>. For this, <strong>augmentation</strong> usually is used to increase lexical diversity in the low resource langauge using externally sourced text. At the same time <strong>domain transfer</strong> has been mainly used to transfer diversity from a high-resource to a low-resource language. I go into detail on those two techniques in (you guessed it) the <a class="reference internal" href="augmentation.html"><span class="doc std std-doc">augmentation</span></a> and <a class="reference internal" href="transfer.html"><span class="doc std std-doc">domain transfer</span></a> chapters.</p>
 </div>
 </div>
 

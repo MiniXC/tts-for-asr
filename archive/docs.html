@@ -103,7 +103,7 @@
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
-      <img src="../_static/unicorn.png" class="logo" alt="logo">
+      <img src="../_static/one.png" class="logo" alt="logo">
       
       
       <h1 class="site-logo" id="site-title">TTS for ASR</h1>
@@ -129,7 +129,7 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../markdown/other_fields.html">
-   Synthetic Data in Other Fields
+   Synthetic Data
   </a>
  </li>
  <li class="toctree-l1">
@@ -159,6 +159,11 @@
    Cross-Lingual Transfer
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/speechchain.html">
+   Speech Chain / Backtransformation
+  </a>
+ </li>
 </ul>
 <p class="caption">
  <span class="caption-text">
@@ -168,17 +173,12 @@
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../markdown/augmentation.html">
-   Synthetic Speech as Augmentation
+   Augmentation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/speechchain.html">
-   Speech Chain / Backtransformation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/vc.html">
-   Voice Conversion
+  <a class="reference internal" href="../markdown/transfer.html">
+   Domain Transfer
   </a>
  </li>
 </ul>
@@ -194,8 +194,8 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/priors.html">
-   Priors
+  <a class="reference internal" href="../markdown/conditioning.html">
+   Conditioning
   </a>
  </li>
  <li class="toctree-l1">
@@ -214,6 +214,11 @@
   </a>
  </li>
 </ul>
+<p class="caption">
+ <span class="caption-text">
+  References
+ </span>
+</p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../markdown/references.html">
@@ -498,8 +503,8 @@
 </ul>
 <p>reST is more prevalent because it’s the default in Sphinx, but I think the Google style is easier to read for humans and I prefer it. Here’s how you would document a function which counts the number of occurrences of a line:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="99df89eb-b036-4eb0-a538-e8262e02e334" name="4d8a417e-e520-46fc-beba-ee1085455b35" type="radio">
-</input><label class="tabbed-label" for="99df89eb-b036-4eb0-a538-e8262e02e334">
+<input checked="checked" id="7f53980b-7713-4ac3-96af-60f7e814927c" name="60108874-beb1-4aac-9a9d-b4ebbbf56a63" type="radio">
+</input><label class="tabbed-label" for="7f53980b-7713-4ac3-96af-60f7e814927c">
 Google-style</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">count_line</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -521,8 +526,8 @@ Google-style</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="e784c1a1-31b0-4d65-9483-c5c1b8439fcb" name="4d8a417e-e520-46fc-beba-ee1085455b35" type="radio">
-</input><label class="tabbed-label" for="e784c1a1-31b0-4d65-9483-c5c1b8439fcb">
+<input id="de2c96d4-d5be-411c-8567-077a707695de" name="60108874-beb1-4aac-9a9d-b4ebbbf56a63" type="radio">
+</input><label class="tabbed-label" for="de2c96d4-d5be-411c-8567-077a707695de">
 Numpy-style</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">count_line</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -549,8 +554,8 @@ Numpy-style</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="598b84b0-80bf-4047-8b66-da43732cff76" name="4d8a417e-e520-46fc-beba-ee1085455b35" type="radio">
-</input><label class="tabbed-label" for="598b84b0-80bf-4047-8b66-da43732cff76">
+<input id="e29a7ef9-99cb-48ef-a6d9-d856cedd88c8" name="60108874-beb1-4aac-9a9d-b4ebbbf56a63" type="radio">
+</input><label class="tabbed-label" for="e29a7ef9-99cb-48ef-a6d9-d856cedd88c8">
 reST</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">count_word</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
