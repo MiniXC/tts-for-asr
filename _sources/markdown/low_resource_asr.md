@@ -17,7 +17,7 @@ Techniques used for low-resource speech recognition.
 ## Synthetic Speech ≠ Data Augmentation
 While synthetic speech data is usually referred to as a data augmentation technique, I agree with [Nikolenko (2021, p. 12)](references.html#nikolenko2021synthetic) that while the line between data augmentation and synthetic data can be blurry, it is helpful to distuinguish between the two. To illustrate this, let's assume the most extreme case: *training a model using synthetic data alone* - there is no original data being augmented, so I would hesitate to call this data augmentation.
 
-When viewing synthetic speech as a technique outside of data augmentation, it's also easy to see that many techniques used for **knowledge transfer** in low-resource ASR have been applied to the generation of synthetic speech, making many works in this field a combination of **knowledge transfer** and **data augmentation**.
+When viewing synthetic speech as a technique outside of data augmentation, it's also easy to see that many techniques used for **knowledge transfer** in low-resource ASR have been applied to the generation of synthetic speech, making many works in this field a combination of **knowledge transfer** and **data augmentation**. I discuss these in more detail in the [Knowledge Transfer](transfer.html) and [Data Augmentation](augmentation.html) chapters.
 
 ## TTS & Voice Conversion
 
