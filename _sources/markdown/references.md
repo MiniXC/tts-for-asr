@@ -20,6 +20,8 @@
 
 <a name="stone2020articulatory"></a>Stone, S., Azgin, A., Mänz, S., & Birkholz, P. (2020). Prospects of articulatory text-to-speech synthesis. ISSP 2020.
 
+<a name="tan2021survey"></a>Tan, X., Qin, T., Soong, F., & Liu, T.-Y. (2021). A Survey on Neural Speech Synthesis. [arXiv:2106.15561](https://arxiv.org/abs/2106.15561).
+
 <a name="thai2019improvinglowresource"></a>Thai, B., Jimerson, R., Arcoraci, D., Prud’hommeaux, E., & Ptucha, R. (2019). Synthetic Data Augmentation for Improving Low-Resource ASR. WNYISPW 2019.
 
 <a name="wood2021face"></a>Wood, E., Baltrušaitis, T., Hewitt, C., Dziadzio, S., Johnson, M., Estellers, V., Cashman, T. J., & Shotton, J. (2021). Fake It Till You Make It: Face analysis in the wild using synthetic data alone. CVF 2021.
