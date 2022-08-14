@@ -564,8 +564,8 @@
 <p>This function has a side effect: it modifies its argument <code class="docutils literal notranslate"><span class="pre">arr</span></code>. In Python and many other languages, arguments of complex types like lists, dictionaries and objects are passed by reference, which means they can be modified by the function. That breaks the normal data flow - the arguments are also returns!</p>
 <p>In the base Python library, a function which modifies its argument returns <code class="docutils literal notranslate"><span class="pre">None</span></code>. For instance, the function <code class="docutils literal notranslate"><span class="pre">sort</span></code> sorts its input argument, modifies it in place, and returns <code class="docutils literal notranslate"><span class="pre">None</span></code>. This function has a side effect, but it’s obvious: if a function returns <code class="docutils literal notranslate"><span class="pre">None</span></code>, yet does useful work, it must have a side effect. When we both modify an argument and return it, we break this convention and confuse the Python reader. We can fix this by returning <code class="docutils literal notranslate"><span class="pre">None</span></code> in our function (good), or returning an entirely new list (better):</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="dd28f22d-8e4d-4cc9-84ce-c6487ad9ec1d" name="50e95af4-349c-4a00-bc4c-cc46a4ffe83f" type="radio">
-</input><label class="tabbed-label" for="dd28f22d-8e4d-4cc9-84ce-c6487ad9ec1d">
+<input checked="checked" id="848dc3cb-2900-4b82-b6bd-20c993098103" name="c7243749-ac5d-4413-87a0-66cb54a39eb8" type="radio">
+</input><label class="tabbed-label" for="848dc3cb-2900-4b82-b6bd-20c993098103">
 good</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">reversi</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Reverses a list.&quot;&quot;&quot;</span>
@@ -575,8 +575,8 @@ good</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="c543e665-7aa1-4309-b907-a9a90f998e87" name="50e95af4-349c-4a00-bc4c-cc46a4ffe83f" type="radio">
-</input><label class="tabbed-label" for="c543e665-7aa1-4309-b907-a9a90f998e87">
+<input id="617a9781-5fb8-42d5-b1a0-d78bb04abb22" name="c7243749-ac5d-4413-87a0-66cb54a39eb8" type="radio">
+</input><label class="tabbed-label" for="617a9781-5fb8-42d5-b1a0-d78bb04abb22">
 better</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">reversi</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Reverses a list.&quot;&quot;&quot;</span>
@@ -801,8 +801,8 @@ better</label><div class="tabbed-content docutils">
 <h3>Improving legibility<a class="headerlink" href="#improving-legibility" title="Permalink to this headline">¶</a></h3>
 <p>We can improve legibility further by using descriptive names and using f-strings. The finalized code can be compared with the old code side-by-side.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="08ad9a4a-5e0d-4550-a105-9f15928746f3" name="b2029081-f8f3-4436-a6dc-1fd1cad20f98" type="radio">
-</input><label class="tabbed-label" for="08ad9a4a-5e0d-4550-a105-9f15928746f3">
+<input checked="checked" id="480d8723-1236-411d-8fa8-bdd1a0873673" name="39c23c8a-2d94-49dc-9291-ec6846fc1279" type="radio">
+</input><label class="tabbed-label" for="480d8723-1236-411d-8fa8-bdd1a0873673">
 Improved</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">collections</span>
 <span class="kn">import</span> <span class="nn">re</span>
@@ -825,8 +825,8 @@ Improved</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="473a1829-afef-48ae-ab12-a3086485e88e" name="b2029081-f8f3-4436-a6dc-1fd1cad20f98" type="radio">
-</input><label class="tabbed-label" for="473a1829-afef-48ae-ab12-a3086485e88e">
+<input id="af322eb2-06ae-4cad-90b1-e9c839ac9f98" name="39c23c8a-2d94-49dc-9291-ec6846fc1279" type="radio">
+</input><label class="tabbed-label" for="af322eb2-06ae-4cad-90b1-e9c839ac9f98">
 Original</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">count_words_in_file</span><span class="p">(</span><span class="n">in_file</span><span class="p">,</span> <span class="n">out_file</span><span class="p">):</span>
     <span class="n">counts</span> <span class="o">=</span> <span class="p">{}</span>
