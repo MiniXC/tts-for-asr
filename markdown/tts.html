@@ -333,6 +333,11 @@
    Autoregressive Models
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#non-autoregressive-models">
+   Non-Autoregressive Models
+  </a>
+ </li>
 </ul>
 
             </nav>
@@ -351,9 +356,28 @@ While there seems to be a general trend toward non-autoregressive models in TTS,
 <div class="section" id="autoregressive-models">
 <h2>Autoregressive Models<a class="headerlink" href="#autoregressive-models" title="Permalink to this headline">¶</a></h2>
 <p>WaveNet <a class="reference external" href="references.html#oord2016wavenet">(Oord et al., 2016)</a> is “regarded as the first modern neural TTS model” <a class="reference external" href="references.html#tan2021survey">(Tan et al., 2021)</a> and is an autoregressive CNN which directly predicts waveforms. The next big leap in synthesis quality came with Tacotron 2 <a class="reference external" href="references.html#shen2018tacotron2">(Shen et al., 2018)</a>, which first predicts Mel-spectrograms using an encoder-decoder RNN, and predicts waveforms using the Mel-spectrograms with an additional WaveNet, rather than using an algorithmic approach like Griffin-Lim <a class="reference external" href="references.html#grffinlim1984">(Griffin &amp; Lim, 1984)</a>. One problem later works derived from Tacotron 2 tackle is making the speech more controllable by using latent variables. For <strong>TTS-for-ASR</strong>, VAEs (Variational Autoencoders) such as the work by <a class="reference external" href="references.html#hsu2018vae">Hsu et al. (2018)</a> are the most common way to control style for these types of models.</p>
+</div>
+<div class="section" id="non-autoregressive-models">
+<h2>Non-Autoregressive Models<a class="headerlink" href="#non-autoregressive-models" title="Permalink to this headline">¶</a></h2>
+<!-- 
+SCL - speaker consistency loss
+VAE - variational autoencoder
+GST - global style tokens
+SDP - stochastic duration predictor
+LE - language embeddings
+ASC - adversarial speaker classification
+DTM - direct-to-mel
+SA - speaker adaptation
+DTH - direct-to-hidden
+SC - speaker classification
+
+-->
 <div class="boxed figure align-default" id="id1">
+<img alt="../_images/tts-table.svg" src="../_images/tts-table.svg" /><p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">The different base TTS models and their modifications for <strong>TTS-for-ASR</strong>.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+<div class="boxed figure align-default" id="id2">
 <img alt="../_images/tan2021survey.png" src="../_images/tan2021survey.png" />
-<p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">The evolution of neural TTS models according to <a class="reference external" href="references.html#tan2021survey">Tan et al. (2021)</a></span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text">The evolution of neural TTS models according to <a class="reference external" href="references.html#tan2021survey">Tan et al. (2021)</a></span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 </div>

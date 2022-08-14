@@ -7,6 +7,29 @@ While there seems to be a general trend toward non-autoregressive models in TTS,
 
 WaveNet [(Oord et al., 2016)](references.html#oord2016wavenet) is "regarded as the first modern neural TTS model" [(Tan et al., 2021)](references.html#tan2021survey) and is an autoregressive CNN which directly predicts waveforms. The next big leap in synthesis quality came with Tacotron 2 [(Shen et al., 2018)](references.html#shen2018tacotron2), which first predicts Mel-spectrograms using an encoder-decoder RNN, and predicts waveforms using the Mel-spectrograms with an additional WaveNet, rather than using an algorithmic approach like Griffin-Lim [(Griffin & Lim, 1984)](references.html#grffinlim1984). One problem later works derived from Tacotron 2 tackle is making the speech more controllable by using latent variables. For **TTS-for-ASR**, VAEs (Variational Autoencoders) such as the work by [Hsu et al. (2018)](references.html#hsu2018vae) are the most common way to control style for these types of models.
 
+## Non-Autoregressive Models
+
+<!-- 
+SCL - speaker consistency loss
+VAE - variational autoencoder
+GST - global style tokens
+SDP - stochastic duration predictor
+LE - language embeddings
+ASC - adversarial speaker classification
+DTM - direct-to-mel
+SA - speaker adaptation
+DTH - direct-to-hidden
+SC - speaker classification
+
+-->
+
+```{figure} ../figures/tts-table.svg
+---
+figclass: boxed
+---
+The different base TTS models and their modifications for **TTS-for-ASR**.
+```
+
 ```{figure} ../figures/tan2021survey.png
 ---
 figclass: boxed
