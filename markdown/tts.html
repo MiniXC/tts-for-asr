@@ -338,6 +338,43 @@
    Non-Autoregressive Models
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-adaptations">
+   Model Adaptations
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#controllability">
+     Controllability
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#multiple-speakers">
+     Multiple Speakers
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#duration-modeling">
+     Duration Modeling
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#multiple-languages">
+     Multiple Languages
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#differing-target-representations">
+     Differing Target Representations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sampling-techniques">
+     Sampling Techniques
+    </a>
+   </li>
+  </ul>
+ </li>
 </ul>
 
             </nav>
@@ -351,14 +388,15 @@
                 
   <div class="section" id="tts">
 <h1>TTS<a class="headerlink" href="#tts" title="Permalink to this headline">¶</a></h1>
-<p>As I discussed previously, TTS is a way to <em>conditionally generate</em> synthetic speech, with the main condition being text. Here I will give an overview of the different model architectures used for TTS, and how they have been used for <strong>low-resource ASR</strong> specifically. As in many other machine learning fields, deep neural networks are currently the best-performing systems for TTS. They can be roughly divided into <strong>autoregressive</strong> and <strong>non-autoregressive</strong> models. <strong>Autoregressive</strong> models access the previous output at inference time, while <strong>Non-autoregressive</strong> models do not. The advantages of <strong>non-autoregressive</strong> models are faster inference time and a reduced training-inference mismatch (as autoregressive models effectively use teacher-forcing) <a class="reference external" href="references.html#tan2021survey">(Tan et al., 2021)</a>.
-While there seems to be a general trend toward non-autoregressive models in TTS, I will give examples of both, and especially focus on architectures that have been used for <strong>TTS-for-ASR</strong>.</p>
+<p>As I discussed previously, TTS is a way to <em>conditionally generate</em> synthetic speech, with the main condition being text. Here I will give an overview of the different model architectures used for TTS, and how they have been used for <strong>low-resource ASR</strong> specifically. As in many other machine learning fields, deep neural networks are currently the best-performing systems for TTS. They can be roughly divided into <strong>autoregressive</strong> and <strong>non-autoregressive</strong> models. <strong>Autoregressive</strong> models require the previous output at inference time, while <strong>Non-autoregressive</strong> models do not. The advantages of <strong>non-autoregressive</strong> models are faster inference time and a reduced training-inference mismatch (as autoregressive models effectively use teacher-forcing) <a class="reference external" href="references.html#tan2021survey">(Tan et al., 2021)</a>.
+I do not give a complete overview of TTS here, but mostly focus on architectures that have been used for <strong>TTS-for-ASR</strong>.</p>
 <div class="section" id="autoregressive-models">
 <h2>Autoregressive Models<a class="headerlink" href="#autoregressive-models" title="Permalink to this headline">¶</a></h2>
-<p>WaveNet <a class="reference external" href="references.html#oord2016wavenet">(Oord et al., 2016)</a> is “regarded as the first modern neural TTS model” <a class="reference external" href="references.html#tan2021survey">(Tan et al., 2021)</a> and is an autoregressive CNN which directly predicts waveforms. The next big leap in synthesis quality came with Tacotron 2 <a class="reference external" href="references.html#shen2018tacotron2">(Shen et al., 2018)</a>, which first predicts Mel-spectrograms using an encoder-decoder RNN, and predicts waveforms using the Mel-spectrograms with an additional WaveNet, rather than using an algorithmic approach like Griffin-Lim <a class="reference external" href="references.html#grffinlim1984">(Griffin &amp; Lim, 1984)</a>. One problem later works derived from Tacotron 2 tackle is making the speech more controllable by using latent variables. For <strong>TTS-for-ASR</strong>, VAEs (Variational Autoencoders) such as the work by <a class="reference external" href="references.html#hsu2018vae">Hsu et al. (2018)</a> are the most common way to control style for these types of models.</p>
+<p>WaveNet <a class="reference external" href="references.html#oord2016wavenet">(Oord et al., 2016)</a> is “regarded as the first modern neural TTS model” <a class="reference external" href="references.html#tan2021survey">(Tan et al., 2021)</a> and is an autoregressive CNN which directly predicts waveforms. The next big leap in synthesis quality came with Tacotron 2 <a class="reference external" href="references.html#shen2018tacotron2">(Shen et al., 2018)</a>, which first predicts Mel-spectrograms using an encoder-decoder RNN, and predicts waveforms using the Mel-spectrograms as inputs to an additional WaveNet, rather than using an algorithmic approach like the Griffin-Lim algorithm <a class="reference external" href="references.html#grffinlim1984">(Griffin &amp; Lim, 1984)</a>. TransformerTTS <a class="reference external" href="references.html#li2019transformertts">(Li et al., 2019)</a> was the first work to bring the transformer encoder-decoder architecture very popular in NLP to TTS. While many recent works focus on non-autoregressive speech synthesis, Style Equalisation <a class="reference external" href="references.html#chang2022styleeq">(Chang et al., 2022)</a>, which uses LSTM encoder and decoder networks, is a notable exception.</p>
 </div>
 <div class="section" id="non-autoregressive-models">
 <h2>Non-Autoregressive Models<a class="headerlink" href="#non-autoregressive-models" title="Permalink to this headline">¶</a></h2>
+<p>While non-autoregressive models have become quite popular for TTS, they haven’t been used for <strong>TTS-for-ASR</strong> extensively. As far as I know (as of August 2022), only the VITS <a class="reference external" href="references.html#kim2021vits">(Kim et al., 2021)</a> architecture, which generates speech using normalising flows and adversarial training, has been used. In my own work, I have been using FastSpeech 2 <a class="reference external" href="references.html#ren2021fastspeech2">(Ren et al., 2021)</a>, since it has been successfully used for extremely low-resource cases, producing comparable quality with 1 hour of data compared to Tacotron 2 with 10 hours of data <a class="reference external" href="references.html#pine2022lowresourcefastspeech">(Pine et al., 2022)</a>. I explain this architecture in detail in the <a class="reference internal" href="fastspeech2.html"><span class="doc std std-doc">FastSpeech 2 chapter</span></a>.</p>
 <!-- 
 SCL - speaker consistency loss
 VAE - variational autoencoder
@@ -372,13 +410,38 @@ DTH - direct-to-hidden
 SC - speaker classification
 
 -->
+</div>
+<div class="section" id="model-adaptations">
+<h2>Model Adaptations<a class="headerlink" href="#model-adaptations" title="Permalink to this headline">¶</a></h2>
 <div class="boxed figure align-default" id="id1">
 <img alt="../_images/tts-table.svg" src="../_images/tts-table.svg" /><p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">The different base TTS models and their modifications for <strong>TTS-for-ASR</strong>.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
 </div>
-<div class="boxed figure align-default" id="id2">
-<img alt="../_images/tan2021survey.png" src="../_images/tan2021survey.png" />
-<p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text">The evolution of neural TTS models according to <a class="reference external" href="references.html#tan2021survey">Tan et al. (2021)</a></span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+<div class="section" id="controllability">
+<h3>Controllability<a class="headerlink" href="#controllability" title="Permalink to this headline">¶</a></h3>
 </div>
+<div class="section" id="multiple-speakers">
+<h3>Multiple Speakers<a class="headerlink" href="#multiple-speakers" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="duration-modeling">
+<h3>Duration Modeling<a class="headerlink" href="#duration-modeling" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="multiple-languages">
+<h3>Multiple Languages<a class="headerlink" href="#multiple-languages" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="differing-target-representations">
+<h3>Differing Target Representations<a class="headerlink" href="#differing-target-representations" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="sampling-techniques">
+<h3>Sampling Techniques<a class="headerlink" href="#sampling-techniques" title="Permalink to this headline">¶</a></h3>
+<p>One problem later works derived from Tacotron 2 tackle is making the speech more controllable by using latent variables. For <strong>TTS-for-ASR</strong>, VAEs (Variational Autoencoders) such as the work by <a class="reference external" href="references.html#hsu2018vae">Hsu et al. (2018)</a> are the most common way to control style for these types of models.</p>
+<!-- 
+```{figure} ../figures/tan2021survey.png
+---
+figclass: boxed
+---
+The evolution of neural TTS models according to [Tan et al. (2021)](references.html#tan2021survey)
+``` 
+--></div>
 </div>
 </div>
 
