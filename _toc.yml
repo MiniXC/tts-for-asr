@@ -11,6 +11,7 @@ parts:
     - file: markdown/cross_speaker
     - file: markdown/cross_lingual
     - file: markdown/speechchain
+    - file: markdown/controllable
 - caption: Combining ASR & TTS
   chapters:
     - file: markdown/augmentation
