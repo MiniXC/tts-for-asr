@@ -11,6 +11,8 @@
   
 <meta property="og:url" content="cdminix.me/markdown/cross_speaker.html" />
   
+<meta property="og:description" content="Cross-speaker transfer refers to Sampling: Luong et al. (2019) found simply combining all speakers, even if imbalanced, improved performance. Yang & He (2020) introduce a sampling strategy that ens..." />
+  
 <meta property="og:image" content="https://goodresearch.dev/_images/unicorn.png" />
   
 <meta property="og:image:alt" content="Cross-Speaker Transfer" />
@@ -58,6 +60,8 @@
     <script src="../_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.90c857b2bf8f3d46aa488b0ed8bf60a6.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe,.cell"
@@ -321,6 +325,44 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sampling">
+   Sampling
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#speaker-verification">
+   Speaker Verification
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#voice-conversion">
+   Voice Conversion
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#zero-shot-and-few-shot-speaker-adaptation">
+   Zero-Shot and Few-Shot Speaker Adaptation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#speaker-generation">
+   Speaker Generation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tts-for-asr">
+   TTS-for-ASR
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -331,6 +373,36 @@
                 
   <div class="section" id="cross-speaker-transfer">
 <h1>Cross-Speaker Transfer<a class="headerlink" href="#cross-speaker-transfer" title="Permalink to this headline">¶</a></h1>
+<p>Cross-speaker transfer refers to</p>
+<div class="section" id="sampling">
+<h2>Sampling<a class="headerlink" href="#sampling" title="Permalink to this headline">¶</a></h2>
+<p>Luong et al. (2019) found simply combining all speakers, even if imbalanced, improved performance.</p>
+<p>Yang &amp; He (2020) introduce a sampling strategy that ensures that the probability to draw a specific speaker (or language) (<span class="math notranslate nohighlight">\(c_i\)</span>) from the training data is <span class="math notranslate nohighlight">\(c_i^\alpha\)</span>, where alpha can range from 1 (which will have no effect) to 0 (which will lead to uniform sampling from speakers). They found <span class="math notranslate nohighlight">\(\alpha=0.2\)</span> to work well.</p>
+<p>Cooper et al. (2020) found that creating gender-specific TTS models improved performance.</p>
+</div>
+<div class="section" id="speaker-verification">
+<h2>Speaker Verification<a class="headerlink" href="#speaker-verification" title="Permalink to this headline">¶</a></h2>
+<p>The approach to pre-train an independent speaker-verification network on thousands of speakers and using the hidden representation of such a network to condition a TTS system was popularized by Jia et al. (2018). Since then, many multi-speaker TTS systems use these pre-trained representations, although in different way:</p>
+<ul class="simple">
+<li><p><em>Conditioning</em> is the most straightforward approach, where the representation is simply added to the input. Cooper et al. (2020) found that adding this information at different locations of the network (e.g. in the encoder, prenet and postnet) yielded the best results.</p></li>
+<li><p><em>Speaker Consistency Loss</em> is used by Wang et al. (2020) to enforce d-vectors to be consistent in synthetic and real speech. The idea of a consistency loss comes from a different framework which combines TTS and ASR training, which I discuss in the <a class="reference internal" href="speechchain.html"><span class="doc std std-doc">speech chain chapter</span></a>.</p></li>
+<li><p><em>Adversarial Speaker Classification</em> is introduced by Chen et al. (2021) and aims to make the encoder and VAE component of their network speaker-agnostic to more easily adapt to new speakers.</p></li>
+</ul>
+</div>
+<div class="section" id="voice-conversion">
+<h2>Voice Conversion<a class="headerlink" href="#voice-conversion" title="Permalink to this headline">¶</a></h2>
+<p>Huybrechts et al. (2021) successfully used VC (voice conversion) to add synthetic data for speakers with little data to balance the dataset.</p>
+</div>
+<div class="section" id="zero-shot-and-few-shot-speaker-adaptation">
+<h2>Zero-Shot and Few-Shot Speaker Adaptation<a class="headerlink" href="#zero-shot-and-few-shot-speaker-adaptation" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="speaker-generation">
+<h2>Speaker Generation<a class="headerlink" href="#speaker-generation" title="Permalink to this headline">¶</a></h2>
+<p>Stanton et al. (2022) identified a new task which they call speaker generation.</p>
+</div>
+<div class="section" id="tts-for-asr">
+<h2>TTS-for-ASR<a class="headerlink" href="#tts-for-asr" title="Permalink to this headline">¶</a></h2>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
