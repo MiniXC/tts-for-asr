@@ -133,35 +133,18 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/tts.html">
+   Synthetic Speech
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../markdown/low_resource_asr.html">
    Low-Resource ASR
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/tts.html">
-   TTS
-  </a>
- </li>
-</ul>
-<p class="caption">
- <span class="caption-text">
-  TTS for Low-Resource
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/cross_speaker.html">
-   Cross-Speaker Transfer
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/cross_lingual.html">
-   Cross-Lingual Transfer
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown/speechchain.html">
-   Speech Chain / Backtransformation
+  <a class="reference internal" href="../markdown/lr-tts-overview.html">
+   Low-Resource TTS
   </a>
  </li>
 </ul>
@@ -564,8 +547,8 @@
 <p>This function has a side effect: it modifies its argument <code class="docutils literal notranslate"><span class="pre">arr</span></code>. In Python and many other languages, arguments of complex types like lists, dictionaries and objects are passed by reference, which means they can be modified by the function. That breaks the normal data flow - the arguments are also returns!</p>
 <p>In the base Python library, a function which modifies its argument returns <code class="docutils literal notranslate"><span class="pre">None</span></code>. For instance, the function <code class="docutils literal notranslate"><span class="pre">sort</span></code> sorts its input argument, modifies it in place, and returns <code class="docutils literal notranslate"><span class="pre">None</span></code>. This function has a side effect, but it’s obvious: if a function returns <code class="docutils literal notranslate"><span class="pre">None</span></code>, yet does useful work, it must have a side effect. When we both modify an argument and return it, we break this convention and confuse the Python reader. We can fix this by returning <code class="docutils literal notranslate"><span class="pre">None</span></code> in our function (good), or returning an entirely new list (better):</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="07300306-4f2b-40a0-81d9-f833fe557d60" name="d45bdd3b-fcf8-45d3-8806-0bfd729204c7" type="radio">
-</input><label class="tabbed-label" for="07300306-4f2b-40a0-81d9-f833fe557d60">
+<input checked="checked" id="0914b6ef-a017-4a0a-9552-64b25d93c096" name="e65085ae-21fe-402d-a794-c535730f36d4" type="radio">
+</input><label class="tabbed-label" for="0914b6ef-a017-4a0a-9552-64b25d93c096">
 good</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">reversi</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Reverses a list.&quot;&quot;&quot;</span>
@@ -575,8 +558,8 @@ good</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="96a22488-0665-4c9d-882d-773e761e8046" name="d45bdd3b-fcf8-45d3-8806-0bfd729204c7" type="radio">
-</input><label class="tabbed-label" for="96a22488-0665-4c9d-882d-773e761e8046">
+<input id="3bd5e90d-88e2-4eb0-837e-38e29a7dc5d3" name="e65085ae-21fe-402d-a794-c535730f36d4" type="radio">
+</input><label class="tabbed-label" for="3bd5e90d-88e2-4eb0-837e-38e29a7dc5d3">
 better</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">reversi</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Reverses a list.&quot;&quot;&quot;</span>
@@ -801,8 +784,8 @@ better</label><div class="tabbed-content docutils">
 <h3>Improving legibility<a class="headerlink" href="#improving-legibility" title="Permalink to this headline">¶</a></h3>
 <p>We can improve legibility further by using descriptive names and using f-strings. The finalized code can be compared with the old code side-by-side.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="3e2b1dd6-2776-48e2-9373-ef69242e0184" name="d86dc4a9-44d1-42dc-92ec-1a5e52a657a6" type="radio">
-</input><label class="tabbed-label" for="3e2b1dd6-2776-48e2-9373-ef69242e0184">
+<input checked="checked" id="68c0ca98-5275-443b-b624-34e8e6672fc6" name="4275eaef-3df6-410a-86f1-b8e880c373c3" type="radio">
+</input><label class="tabbed-label" for="68c0ca98-5275-443b-b624-34e8e6672fc6">
 Improved</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">collections</span>
 <span class="kn">import</span> <span class="nn">re</span>
@@ -825,8 +808,8 @@ Improved</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="faaeb666-43b6-41cc-84f7-d526829b263d" name="d86dc4a9-44d1-42dc-92ec-1a5e52a657a6" type="radio">
-</input><label class="tabbed-label" for="faaeb666-43b6-41cc-84f7-d526829b263d">
+<input id="cc31dcd1-7918-4d04-9902-55fbaea805ce" name="4275eaef-3df6-410a-86f1-b8e880c373c3" type="radio">
+</input><label class="tabbed-label" for="cc31dcd1-7918-4d04-9902-55fbaea805ce">
 Original</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">count_words_in_file</span><span class="p">(</span><span class="n">in_file</span><span class="p">,</span> <span class="n">out_file</span><span class="p">):</span>
     <span class="n">counts</span> <span class="o">=</span> <span class="p">{}</span>

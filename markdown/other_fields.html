@@ -71,7 +71,7 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Low-Resource ASR" href="low_resource_asr.html" />
+    <link rel="next" title="Synthetic Speech" href="tts.html" />
     <link rel="prev" title="TTS for Low-Resource ASR" href="../index.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -135,35 +135,18 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="tts.html">
+   Synthetic Speech
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="low_resource_asr.html">
    Low-Resource ASR
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="tts.html">
-   TTS
-  </a>
- </li>
-</ul>
-<p class="caption">
- <span class="caption-text">
-  TTS for Low-Resource
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="cross_speaker.html">
-   Cross-Speaker Transfer
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="cross_lingual.html">
-   Cross-Lingual Transfer
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="speechchain.html">
-   Speech Chain / Backtransformation
+  <a class="reference internal" href="lr-tts-overview.html">
+   Low-Resource TTS
   </a>
  </li>
 </ul>
@@ -361,7 +344,7 @@
                 
   <div class="section" id="synthetic-data">
 <h1>Synthetic Data<a class="headerlink" href="#synthetic-data" title="Permalink to this headline">¶</a></h1>
-<p>Synthetic data was first used in computer vision, and to this day synthetic data is most commonly used in this domain. For example, 3D scenes are rendered as static images to train models for image segmenatation or for creating depth maps, or entire enviroments are simulated for autonomous driving. But there are also fields outside of computer vision using synthetic data, such as generating network logs for intrusion detection, or candidate molecules in bioinformatics <a class="reference external" href="references.html#nikolenko2021synthetic">(Nikolenko, 2021, p. 217-222)</a>.</p>
+<p>Synthetic data was first used in computer vision, and to this day synthetic data is most commonly used in this domain. For example, 3D scenes are rendered as static images to train models for image segmentation or for creating depth maps, or entire environments are simulated for autonomous driving. But there are also fields outside of computer vision using synthetic data, such as generating network logs for intrusion detection, or candidate molecules in bioinformatics <a class="reference external" href="references.html#nikolenko2021synthetic">(Nikolenko, 2021, p. 217-222)</a>.</p>
 <div class="section" id="reasons-to-use-synthetic-data">
 <h2>Reasons to use Synthetic Data<a class="headerlink" href="#reasons-to-use-synthetic-data" title="Permalink to this headline">¶</a></h2>
 <p>The main reasons synthetic data is used in these fields are the following:</p>
@@ -369,7 +352,7 @@
 <li><p>there simply isn’t enough real data</p></li>
 <li><p>the labels that come with the synthetic data are preferred</p></li>
 </ol>
-<p>While the 1) is easy enough to understand, 2) is a bit trickier, and best explained with an example: When labeling the landmarks (eyes, nose, etc.) in human faces, human anotators can only be so accurate, while we can extract perfect masks when 3D rendering a synthetic human face <a class="reference external" href="references.html#wood2021face">(Wood et al., 2021)</a>.</p>
+<p>While the 1) is easy enough to understand, 2) is a bit trickier, and best explained with an example: When labeling the landmarks (eyes, nose, etc.) in human faces, human annotators can only be so accurate, while we can extract perfect masks when 3D rendering a synthetic human face <a class="reference external" href="references.html#wood2021face">(Wood et al., 2021)</a>.</p>
 </div>
 <div class="section" id="the-domain-gap">
 <h2>The Domain Gap<a class="headerlink" href="#the-domain-gap" title="Permalink to this headline">¶</a></h2>
@@ -387,8 +370,8 @@
 <h2>For Speech Recognition<a class="headerlink" href="#for-speech-recognition" title="Permalink to this headline">¶</a></h2>
 <p>The equivalent for what we call “simulated synthetic data” in speech would be <em>articulatory speech synthesis</em> which simulates an entire vocal tract to generate speech <a class="reference external" href="references.html#stone2020articulatory">(Stone et al., 2020)</a>. The results are promising, especially because the parameters of the vocal tract are known, which usually isn’t the case for real data. These parameters could potentially be used as labels superior to graphemes or phonemes for speech recognition. However, as far as I know, none of the work in this field has been successfully used to train ASR models, probably because the domain gap is still to large between this type of synthesis and real speech.</p>
 <p>Creating “conditionally generated synthetic data” for training ASR systems was first attempted by <a class="reference external" href="references.html#gales2009svm">Gales et al. (2009)</a> to recognize words not in the training data (with the external condition being said words) and later by <a class="reference external" href="references.html#rygaard2015lowresource">Rygaard (2015)</a> to show that web-scraped text could be used to improve performance. Both systems used HTS, an HMM-based speech synthesis system <a class="reference external" href="references.html#zen2007hts">(Zen et al., 2007)</a>, and focused on English.</p>
-<p>With the widespread use of end-to-end TTS and ASR models, interest in the topic of conditionally generated synthetic speech for ASR has increased, with two families of tasks emerging, which I call <strong>augmentation</strong>  and <strong>domain transfer</strong> tasks. <strong>Augmentation</strong>-based approaches train TTS models on data very similar to existing ASR data, and add synthesised data to the original data, most commonly to increase lexical diversity, but sometimes to increase prosodic or speaker diversity as well. <strong>Domain transfer</strong>-based ones use a dataset in a particular domain (usually with plenty of data) for TTS training and then attempt to synthesise speech in another domain (usually with little data), attempting to <em>transfer</em> the diversity in the original dataset to the domain with little data.</p>
-<p>Both approaches are also frequently applied to ASR for low-resource languages, which I explore in <a class="reference internal" href="low_resource_asr.html"><span class="doc std std-doc">the next chapter</span></a>. For this, <strong>augmentation</strong> usually is used to increase lexical diversity in the low resource langauge using externally sourced text. At the same time <strong>domain transfer</strong> has been mainly used to transfer diversity from a high-resource to a low-resource language. I go into detail on those two techniques in (you guessed it) the <a class="reference internal" href="augmentation.html"><span class="doc std std-doc">augmentation</span></a> and <a class="reference internal" href="transfer.html"><span class="doc std std-doc">domain transfer</span></a> chapters.</p>
+<p>With the widespread use of end-to-end TTS and ASR models, interest in the topic of conditionally generated synthetic speech for ASR has increased, with two families of tasks emerging, which I call <strong>augmentation</strong>  and <strong>domain transfer</strong> tasks. <strong>Augmentation</strong>-based approaches train TTS models on data very similar to existing ASR data, and add synthesized data to the original data, most commonly to increase lexical diversity, but sometimes to increase prosodic or speaker diversity as well. <strong>Domain transfer</strong>-based ones use a dataset in a particular domain (usually with plenty of data) for TTS training and then attempt to synthesize speech in another domain (usually with little data), attempting to <em>transfer</em> the diversity in the original dataset to the domain with little data.</p>
+<p>Both approaches are also frequently applied to ASR for low-resource languages, which I explore in the <a class="reference internal" href="low_resource_asr.html"><span class="doc std std-doc">low-resource ASR chapter</span></a>. For this, <strong>augmentation</strong> usually is used to increase lexical diversity in the low resource language using externally sourced text. At the same time <strong>domain transfer</strong> has been mainly used to transfer diversity from a high-resource to a low-resource language. I go into detail on those two techniques in (you guessed it) the <a class="reference internal" href="augmentation.html"><span class="doc std std-doc">augmentation</span></a> and <a class="reference internal" href="transfer.html"><span class="doc std std-doc">domain transfer</span></a> chapters.</p>
 </div>
 </div>
 
@@ -431,10 +414,10 @@
         </a>
     </div>
      <div id="next">
-        <a class="right-next" href="low_resource_asr.html" title="next page">
+        <a class="right-next" href="tts.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Low-Resource ASR</p>
+                <p class="prevnext-title">Synthetic Speech</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>
