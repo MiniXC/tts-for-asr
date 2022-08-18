@@ -1,4 +1,4 @@
-# TTS
+# Synthetic Speech
 
 As I discussed previously, TTS is a way to *conditionally generate* synthetic speech, with the main condition being text. Here I will give an overview of the different model architectures used for TTS, and how they have been used for **low-resource ASR** specifically. As in many other machine learning fields, deep neural networks are currently the best-performing systems for TTS. They can be roughly divided into **autoregressive** and **non-autoregressive** models. **Autoregressive** models require the previous output at inference time, while **Non-autoregressive** models do not. The advantages of **non-autoregressive** models are faster inference time and a reduced training-inference mismatch (as autoregressive models effectively use teacher-forcing) [(Tan et al., 2021)](references.html#tan2021survey).
 I do not give a complete overview of TTS here, but mostly focus on architectures that have been used for **TTS-for-ASR**.
@@ -11,20 +11,6 @@ WaveNet [(Oord et al., 2016)](references.html#oord2016wavenet) is "regarded as t
 
 While non-autoregressive models have become quite popular for TTS, they haven't been used for **TTS-for-ASR** extensively. As far as I know (as of August 2022), the VITS [(Kim et al., 2021)](references.html#kim2021vits) architecture, which generates speech using a variational autoencoder with normalising flows and adversarial training, has been used. One previous work (Ueno et al., 2021) uses FastSpeech 2. In my own work, I have been using FastSpeech 2 [(Ren et al., 2021)](references.html#ren2021fastspeech2) as well, since it has been successfully used for extremely low-resource cases, producing comparable quality with 1 hour of data compared to Tacotron 2 with 10 hours of data [(Pine et al., 2022)](references.html#pine2022lowresourcefastspeech). I explain this architecture in detail in the [FastSpeech 2 chapter](fastspeech2).
 
-<!-- 
-SCL - speaker consistency loss
-VAE - variational autoencoder
-GST - global style tokens
-SDP - stochastic duration predictor
-LE - language embeddings
-ASC - adversarial speaker classification
-DTM - direct-to-mel
-SA - speaker adaptation
-DTH - direct-to-hidden
-SC - speaker classification
-
--->
-
 ## Architecture Adaptations
 
 The model architectures I have summarised above have been modified to better account for different factors suitable for **TTS-for-ASR**.
@@ -32,6 +18,7 @@ The model architectures I have summarised above have been modified to better acc
 ```{figure} ../figures/tts-table.svg
 ---
 figclass: boxed
+name: ttstable
 ---
 The different base TTS models and their modifications for **TTS-for-ASR**.
 ```
@@ -44,12 +31,17 @@ Controllable (also called expressive) TTS aims at better solving the one-to-many
 - *Prosody, style and emotion* are seen as the key for controllable TTS [(Tan et al., 2021)](references.html#tan2021survey). This includes, pitch, duration, energy, etc.
 - *Environmental information* captures factors about the recording environment, such as reverberation or the amount and type of background noise or microphone characteristics. Work in this area often focuses on disentangling speaker information from their environment, which isn't easy since both are usually correlated [(Hsu et al., 2019)](references.html#hsu2019noise)
 
-Controllability can be achieved *implicitly* by using methods which learn a latent space (which is ideally independent of the text content) to model the style of the speech. The methods that have been used for **TTS-for-ASR** are shown in the "Controllability" column in Fig. 4, and are:
+Controllability can be achieved *implicitly* by using methods which learn a latent space (which is ideally independent of the text content) to model the style of the speech. The methods that have been used for **TTS-for-ASR** are shown in the "Controllability" column in {numref}`ttstable`, and are:
 - *GST* (Global Style Tokens) by [Wang et al. (2018)](references.html#wang2018styletokens) use an autoencoder trained with reconstruction loss which learns to represent reference speech samples as a set of 10 quantized style tokens, which can be used for inference to control the style of the output. For **TTS-for-ASR** this technique has been used by [Li et al. (2018)](references.html#li2018ttsasr) and [Rossenbach et al. (2020)](references.html#rossenbach2020ttsasr).
 - *VAE* (Variational Autoencoder) [(Kingma & Welling, 2014)](references.html#kingmawelling2014vae) are the most common solution for controllability in **TTS-for-ASR** [^VAE]. Opposed to a regular autoencoder, VAEs are trained using ELBO (Evidence lower bound), which regularizes the latent space by encoding reference samples as a distribution (which is later sampled from), rather than a single point. VQ-VAE [(Oord et al., 2017)](references.html#oord2017vqvae) extends VAEs by quantizing the latent space using codebook vectors.
 - *SE* (Style Equalization) [(Chang et al., 2022)](references.html#chang2022styleeq) is a new technique which learns a style transformation function which transforms a latent representation of a reference sample into the style of the target training sample. The model learns to disentangle style and content and at inference time, the style transformation is simply not performed.
 
-*Explicit* controllability can be achieved by computing certain statistics of the data and making this information available to the training process. For example, in FastSpeech 2 [(Ren et al., 2021)](references.html#ren2021fastspeech2), pitch, energy and duration are extracted from the original data, and subsequently predicted by the model and added to the hidden sequence. Since these predicted values are called "Variances" in FastSpeech 2, I abbreviate this approach as "VAR" in Fig. 4. While this can lead to faster convergence and is robust to low-resource data conditions and is more interpretable than a "black box" latent space, there is a fundamental mismatch between training and inference variances when using this approach. I believe this approach is well-suited for low-resource **TTS-for-ASR**, and use it in my own work, which you can read more about in the [conditioning chapter](conditioning).
+*Explicit* controllability can be achieved by computing certain statistics of the data and making this information available to the training process. For example, in FastSpeech 2 [(Ren et al., 2021)](references.html#ren2021fastspeech2), pitch, energy and duration are extracted from the original data, and subsequently predicted by the model and added to the hidden sequence. Since these predicted values are called "Variances" in FastSpeech 2, I abbreviate this approach as "VAR" in {numref}`ttstable`. While this can lead to faster convergence and is robust to low-resource data conditions and is more interpretable than a "black box" latent space, there is a fundamental mismatch between training and inference variances when using this approach. 
+
+`````{admonition} Opinion
+:class: tip
+I believe explicit controllability is well-suited for low-resource **TTS-for-ASR**, and use it in my own work, which you can read more about in the [conditioning chapter](conditioning).
+`````
 
 <!-- TODO: add figure showing the difference between explicit and implicit controllable TTS -->
 
@@ -76,10 +68,10 @@ Another way to adapt TTS architectures for ASR is to predict a target representa
 
 ### Sampling Techniques
 
-Since it's essentially free to generate more data once a model is trained, data can be overgenerated and a subset more suitable for **TTS-to-ASR** can be sampled. Hu et al. (2022) use RS (rejection sampling), where they use the score of an external discriminator to reject samples least likely to be classified as real speech. In my own work, I artificially increase diversity (ID in Fig. 4) by sampling with more extreme variation information than in the original data. I explain this in detail in the [conditioning chapter](conditioning).
+Since it's essentially free to generate more data once a model is trained, data can be overgenerated and a subset more suitable for **TTS-to-ASR** can be sampled. Hu et al. (2022) use RS (rejection sampling), where they use the score of an external discriminator to reject samples least likely to be classified as real speech. In my own work, I artificially increase diversity (ID in {numref}`ttstable`) by sampling with more extreme variation information than in the original data. I explain this in detail in the [conditioning chapter](conditioning).
 
 <!-- TODO: add speaker oversampling (artificial speakers) -->
 
-[^VAE]: As you can see in Fig. 4, they are used by Rosenberg et al. (2019), Laptev et al. (2020), Sun et al. (2020), Du & Yu (2020), Chen al. (2021) and Casanova et al. (2022).
+[^VAE]: As you can see in {numref}`ttstable`, they are used by Rosenberg et al. (2019), Laptev et al. (2020), Sun et al. (2020), Du & Yu (2020), Chen al. (2021) and Casanova et al. (2022).
 
 <!-- TODO: add citations -->

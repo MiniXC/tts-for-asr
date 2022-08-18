@@ -4,14 +4,9 @@ parts:
 - caption: Fundmentals
   chapters:
     - file: markdown/other_fields
-    - file: markdown/low_resource_asr
     - file: markdown/tts
-- caption: TTS for Low-Resource
-  chapters:
-    - file: markdown/cross_speaker
-    - file: markdown/cross_lingual
-    - file: markdown/speechchain
-    - file: markdown/controllable
+    - file: markdown/low_resource_asr
+    - file: markdown/lr-tts-overview
 - caption: Combining ASR & TTS
   chapters:
     - file: markdown/augmentation
