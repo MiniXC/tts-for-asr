@@ -3,21 +3,21 @@ root: index
 parts:
 - caption: Fundmentals
   chapters:
-    - file: markdown/other_fields
-    - file: markdown/tts
-    - file: markdown/low_resource_asr
-    - file: markdown/lr-tts-overview
+    - file: markdown/01_other_fields
+    - file: markdown/02_tts
+    - file: markdown/03_low_resource_asr
+    - file: markdown/04_low_resource_tts
 - caption: Combining ASR & TTS
   chapters:
-    - file: markdown/augmentation
-    - file: markdown/transfer
+    - file: markdown/05_augmentation
+    - file: markdown/06_transfer
 - caption: My Work
   chapters:
-    - file: markdown/fastspeech2
-    - file: markdown/conditioning
-    - file: markdown/snr
-    - file: markdown/german-to-english
-    - file: markdown/future
+    - file: markdown/08_fastspeech2
+    - file: markdown/09_conditioning
+    - file: markdown/10_snr
+    - file: markdown/11_german-to-english
+    - file: markdown/12_future
 - caption: References
   chapters:
   - file: markdown/references
