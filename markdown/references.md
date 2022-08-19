@@ -28,6 +28,8 @@
 
 <a name="fang2019pretrained"></a>Fang, W., Chung, Y.-A., & Glass, J. (2019). Towards Transfer Learning for End-to-End Speech Synthesis from Deep Pre-Trained Language Models [arXiv:1906.07307](https://arxiv.org/abs/1906.07307).
 
+<a name="fazel2021medical"></a>Fazel, A., Yang, W., Liu, Y., Barra-Chicote, R., Meng, Y., Maas, R., & Droppo, J. (2021). SynthASR: Unlocking Synthetic Data for Speech Recognition. Interspeech 2021.
+
 <a name="fogel2020scrabblegan"></a>Fogel, S., Averbuch-Elor, H., Cohen, S., Mazor, S., & Litman, R. (2020). ScrabbleGAN: Semi-Supervised Varying Length Handwritten Text Generation. CVPR 2020.
 
 <a name="gales2009svm"></a>Gales, M. J. F., Ragni, A., AlDamarki, H., & Gautier, C. (2009). Support vector machines for noise robust ASR. ASRU 2009.
@@ -140,6 +142,8 @@
 <a name="wood2021face"></a>Wood, E., Baltrušaitis, T., Hewitt, C., Dziadzio, S., Johnson, M., Estellers, V., Cashman, T. J., & Shotton, J. (2021). Fake It Till You Make It: Face analysis in the wild using synthetic data alone. CVF 2021.
 
 <a name="wu2022srvc"></a>Wu, J., Polyak, A., Taigman, Y., Fong, J., Agrawal, P., & He, Q. (2022). Multilingual Text-To-Speech Training Using Cross Language Voice Conversion And Self-Supervised Learning Of Speech Representations. ICASSP 2022.
+
+<a name="xin2021scl"></a>Xin, D., Saito, Y., Takamichi, S., Koriyama, T., & Saruwatari, H. (2021). Cross-Lingual Speaker Adaptation Using Domain Adaptation and Speaker Consistency Loss for Text-To-Speech Synthesis. Interspeech 2021.
 
 <a name="yang2020universal"></a>Yang, J., & He, L. (2020). Towards Universal Text-to-Speech. Interspeech 2020.
 

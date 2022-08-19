@@ -16,7 +16,7 @@ SR (speech representations) derived from external models can be used for both TT
 
 ## Across Languages
 
-Another area of research is **Cross-Lingual Transfer**, which focuses on knowledge transfer from high-to-low-resource languages. The most naive way to do this is to pre-train on high-resource and fine-tune on low-resource. However, when the input space are language-specific characters or phonemes, the shared features between both languages might have to be relearned. To solve this issue, several approaches have been explored. [Chen et al. (2019)](references.html#chen2021mixmatch) train an ASR model on the source (high-resource) language, and freeze said model. They then gather the output symbols the model produces for the target (low-resource) language data, and train a PTN (Phonetic Transformation Network) to convert said symbols to target language symbols. This learned mapping can then be used to train the TTS model on an embedding space shared between source and target language.
+Another area of research is **Cross-Lingual Transfer**, which focuses on domain transfer from high-to-low-resource languages. The most naive way to do this is to pre-train on high-resource and fine-tune on low-resource. However, when the input space are language-specific characters or phonemes, the shared features between both languages might have to be relearned. To solve this issue, several approaches have been explored. [Chen et al. (2019)](references.html#chen2021mixmatch) train an ASR model on the source (high-resource) language, and freeze said model. They then gather the output symbols the model produces for the target (low-resource) language data, and train a PTN (Phonetic Transformation Network) to convert said symbols to target language symbols. This learned mapping can then be used to train the TTS model on an embedding space shared between source and target language.
 
 [de Korte et al. (2020)](references.html#dekorte2020encoder) use a separate encoder for each language. [Yang & He (2020)](references.html#yang2020universal) do so as well, while also balancing the data. They do so by modifying the probability to draw a specific language ($c_i$) to $c_i^\alpha$, where alpha can range from 1 (which will have no effect) to 0 (which will lead to uniform sampling from all languages). They found $\alpha=0.2$ to work well. [He et al. (2021)](references.html#he2021byte) also present an alternative to language-specific encoders by using UTF-8-derived bytes as inputs, which covers the majority of scripts used by low-resource languages. To achieve stable training for their multi-lingual model, they use the balancing method I mentioned above. They also add co-training, training with a mixture of source and target language.
 
@@ -30,7 +30,7 @@ Similarly to using external speech or text representations for TTS, using extern
 - *Speaker Consistency Loss* is used by [Wang et al. (2020)](references.html#wang2020scl) to enforce d-vectors to be consistent in synthetic and real speech. The idea of a consistency loss comes from a different framework which combines TTS and ASR training, SpeechChain [(Tjandra et al., 2017)](references.html#tjandra2017speechchain).
 - *Adversarial Speaker Classification* is introduced by [Chen et al. (2021)](references.html#chen2021mixmatch) and aims to make the encoder and VAE component of their network speaker-agnostic to more easily adapt to new speakers.
 
-[Huybrechts et al. (2021)](references.html#huybrechts2021vc) use VC (voice conversion) to add synthetic data for speakers with little data to balance their dataset. [Wu et al. (2022)](references.html#wu2022srvc) take this one step further by using VC to augment the monolingual speakers in the training data to make them multilingual in a task called **Cross-Lingual Voice Conversion**. A different approach by [Yang & He (2022)](references.html#yang2022multiling) is to add a speaker and language classifier for multi-task learning to achieve this knowledge transfer.
+[Huybrechts et al. (2021)](references.html#huybrechts2021vc) use VC (voice conversion) to add synthetic data for speakers with little data to balance their dataset. [Wu et al. (2022)](references.html#wu2022srvc) take this one step further by using VC to augment the monolingual speakers in the training data to make them multilingual in a task called **Cross-Lingual Voice Conversion**. A different approach by [Yang & He (2022)](references.html#yang2022multiling) is to add a speaker and language classifier for multi-task learning to achieve this domain transfer.
 
 Some work has also successfully generated entirely new speakers by learning to generate speaker embeddings from speaker metadata [(Stanton et al., 2021)](references.html#stanton2022speakergen) using a GMM (Gaussian Mixture Model) in what they call **Speaker Generation**.
 
@@ -41,9 +41,9 @@ Some work has also successfully generated entirely new speakers by learning to g
 figclass: boxed
 name: speakers
 ---
-The different knowledge transfer techniques regarding speakers for low-resource ASR.
+The different domain transfer techniques regarding speakers for low-resource ASR.
 ```
 
-Since this chapter and the [previous chapter](03_low_resource_asr) have covered the details of low-resource TTS and ASR respectively, the next two chapters cover how they can be combined: Using [Data Augmentation](05_augmentation) and [Knowledge Transfer](06_transfer).
+Since this chapter and the [previous chapter](03_low_resource_asr) have covered the details of low-resource TTS and ASR respectively, the next two chapters cover how they can be combined: Using [data augmentation](05_augmentation) and [domain transfer](06_transfer).
 
 <!-- ## Speechchain - not that important, only do this one if there's time -->
