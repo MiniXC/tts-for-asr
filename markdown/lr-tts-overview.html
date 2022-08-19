@@ -60,6 +60,8 @@
     <script src="../_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.90c857b2bf8f3d46aa488b0ed8bf60a6.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe,.cell"
@@ -164,6 +166,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="transfer.html">
    Knowledge Transfer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="speechchain.html">
+   Speech Chain / Backtransformation
   </a>
  </li>
 </ul>
@@ -317,8 +324,13 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#cross-lingual-transfer">
-   Cross-Lingual Transfer
+  <a class="reference internal nav-link" href="#across-languages">
+   Across Languages
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#across-speakers">
+   Across Speakers
   </a>
  </li>
 </ul>
@@ -337,15 +349,33 @@
 <p>While low-resource TTS and <strong>TTS-for-ASR</strong> are related and the work in the area overlaps, I think it’s beneficial to give an overview of low-resource TTS on it’s own before diving into the latter in more detail. The considerations for low-resource TTS are similar to the ones for low-resource ASR, we want models and techniques that converge well even when little data is available.</p>
 <div class="section" id="self-supervised-training">
 <h2>Self-supervised Training<a class="headerlink" href="#self-supervised-training" title="Permalink to this headline">¶</a></h2>
-<p>Self-supervised training for TTS is conceptually different to ASR or NLP, since the popular masking objective can only be used if we pre-train the encoder on text and the decoder on audio features. The two only come together during fine-tuning with paired data (Chung et al., 2018). However, as far as I know, this separate pre-training of encoder and decoder has not taken off. The more popular approach seems to be utilizing representations extracted from external self-supervised models. Pre-trained language models and prior to them, word embeddings, have been around for longer than pre-trained speech representation models. Because of this, it is natural that more work in TTS has focused on these models such as the Word-Embedding-BLSTM-RNN by Wang et al. (2015), BERT-Tacotron-2 by Fang et al. (2019), and PnG BERT by Jia et al. (2021). But very recently the first works using SRs (speech representations) as inputs have started to emerge. What these approaches have in common is that have to convert either phonemes or text to SR, using either a sequence-to-sequence model or phone mapping. Wav2Vec 2.0 () representations were first used for TTS by Lim et al. (2021). Huang et al. compared fine-tuned HuBERT (), Wav2Vec 2.0 () and XLSR-53 () for Japanese and German and found that last-layer HuBERT representations worked particularly well. Interestingly, the SRs have also been used as targets rather than inputs. Since it is trivial to convert audio to SRs, a model that generates realistic SR sequences is sufficient for <strong>TTS-for-ASR</strong>. As far as I know, this has only been explored by Ueno et al. (2021) so far. I show the relation of SRs in TTS and <strong>TTS-for-ASR</strong> in <a class="reference internal" href="#sstts"><span class="std std-numref">Fig. 6</span></a>.</p>
+<p>Self-supervised training for TTS is conceptually different to ASR or NLP, since the popular masking objective can only be used if we pre-train the encoder on text and the decoder on audio features. The two only come together during fine-tuning with paired data <a class="reference external" href="references.html#chung2019semisuptts">(Chung et al., 2019)</a>. However, as far as I know, this separate pre-training of encoder and decoder has not taken off. The more popular approach seems to be utilizing representations extracted from external self-supervised models. Pre-trained language models and prior to them, word embeddings, have been around for longer than pre-trained speech representation models. Because of this, it is natural that more work in TTS has focused on these models such as the Word-Embedding-BLSTM-RNN by <a class="reference external" href="references.html#wang2015wordvec">Wang et al. (2015)</a>, BERT-Tacotron-2 by <a class="reference external" href="references.html#fang2019pretrained">Fang et al. (2019)</a>, and PnG-BERT by <span class="xref myst">Jia et al. (2021)</span>. But very recently the first works using SRs (speech representations) as inputs have started to emerge. What these approaches have in common is that have to convert either phonemes or text to SR, using either a sequence-to-sequence model or phone mapping. Wav2Vec 2.0 <a class="reference external" href="references.html#baevski2020wav2vec2">(Baevski et al., 2020)</a> representations were first used for TTS by <a class="reference external" href="references.html#lim2021w2v2tts">Lim et al. (2021)</a>. <a class="reference external" href="references.html#huang2022dth">Huang et al. (2022)</a> compared fine-tuned HuBERT <a class="reference external" href="references.html#hsu2021hubert">(Hsu et al., 2021)</a>, Wav2Vec 2.0 <a class="reference external" href="references.html#baevski2020wav2vec2">(Baevski et al., 2020)</a> and XLSR-53 <a class="reference external" href="references.html#conneau2020xlsr53">(Conneau et al., 2020)</a> for Japanese and German and found that last-layer HuBERT representations worked particularly well. Interestingly, the SRs have also been used as targets rather than inputs. Since it is trivial to convert audio to SRs, a model that generates realistic SR sequences is sufficient for <strong>TTS-for-ASR</strong>. As far as I know, this has only been explored by <a class="reference external" href="references.html#ueno2021dth">Ueno et al. (2021)</a> so far. I show the relation of SRs in TTS and <strong>TTS-for-ASR</strong> in <a class="reference internal" href="#sstts"><span class="std std-numref">Fig. 6</span></a>.</p>
 <div class="boxed figure align-default" id="sstts">
 <img alt="../_images/self-supervised-tts.svg" src="../_images/self-supervised-tts.svg" /><p class="caption"><span class="caption-number">Fig. 6 </span><span class="caption-text">SR (speech representations) derived from external models can be used for both TTS and <strong>TTS-for-ASR</strong>.</span><a class="headerlink" href="#sstts" title="Permalink to this image">¶</a></p>
 </div>
 </div>
-<div class="section" id="cross-lingual-transfer">
-<h2>Cross-Lingual Transfer<a class="headerlink" href="#cross-lingual-transfer" title="Permalink to this headline">¶</a></h2>
-<p>Another area of research is <strong>Cross-Lingual Transfer</strong>, which focuses on knowledge transfer from high-to-low-resource languages. The most naive way to do this is to pre-train on high-resource and fine-tune on low-resource</p>
+<div class="section" id="across-languages">
+<h2>Across Languages<a class="headerlink" href="#across-languages" title="Permalink to this headline">¶</a></h2>
+<p>Another area of research is <strong>Cross-Lingual Transfer</strong>, which focuses on knowledge transfer from high-to-low-resource languages. The most naive way to do this is to pre-train on high-resource and fine-tune on low-resource. However, when the input space are language-specific characters or phonemes, the shared features between both languages might have to be relearned. To solve this issue, several approaches have been explored. <a class="reference external" href="references.html#chen2021mixmatch">Chen et al. (2019)</a> train an ASR model on the source (high-resource) language, and freeze said model. They then gather the output symbols the model produces for the target (low-resource) language data, and train a PTN (Phonetic Transformation Network) to convert said symbols to target language symbols. This learned mapping can then be used to train the TTS model on an embedding space shared between source and target language.</p>
+<p><a class="reference external" href="references.html#dekorte2020encoder">de Korte et al. (2020)</a> use a separate encoder for each language. <a class="reference external" href="references.html#yang2020universal">Yang &amp; He (2020)</a> do so as well, while also balancing the data. They do so by modifying the probability to draw a specific language (<span class="math notranslate nohighlight">\(c_i\)</span>) to <span class="math notranslate nohighlight">\(c_i^\alpha\)</span>, where alpha can range from 1 (which will have no effect) to 0 (which will lead to uniform sampling from all languages). They found <span class="math notranslate nohighlight">\(\alpha=0.2\)</span> to work well. <a class="reference external" href="references.html#he2021byte">He et al. (2021)</a> also present an alternative to language-specific encoders by using UTF-8-derived bytes as inputs, which covers the majority of scripts used by low-resource languages. To achieve stable training for their multi-lingual model, they use the balancing method I mentioned above. They also add co-training, training with a mixture of source and target language.</p>
+<p><a class="reference external" href="references.html#prajwaljawahar2021tts">Prajwal &amp; Jawahar (2021)</a> found that for closely related Indic languages, training a model with all languages at once (identified using a speaker embedding) outperformed the standard pre-training/fine-tuning approach while using less data overall.</p>
 </div>
+<div class="section" id="across-speakers">
+<h2>Across Speakers<a class="headerlink" href="#across-speakers" title="Permalink to this headline">¶</a></h2>
+<p>The task of learning to synthesize speech for speakers with little data using data from other speakers is called <strong>Cross-Speaker Transfer</strong>.
+Similarly to using external speech or text representations for TTS, using external speaker representations to capture commonalities between speakers is widespread. The most frequently used approach is to pre-train an independent speaker-verification network on hundreds or thousands of speakers and using a hidden representation derived from such a network to condition a TTS system. This was popularized by <a class="reference external" href="references.html#jia2018dvecs">Jia et al. (2018)</a>. Since then, many multi-speaker TTS systems use these pre-trained representations, although in different ways:</p>
+<ul class="simple">
+<li><p><em>Conditioning</em> is the most straightforward approach, where the representation is simply added to the input. <a class="reference external" href="references.html#cooper2020zeroshot">Cooper et al. (2020)</a> found that adding this information at different locations of the network (e.g. in the encoder, prenet and postnet) yielded the best results.</p></li>
+<li><p><em>Speaker Consistency Loss</em> is used by <a class="reference external" href="references.html#wang2020scl">Wang et al. (2020)</a> to enforce d-vectors to be consistent in synthetic and real speech. The idea of a consistency loss comes from a different framework which combines TTS and ASR training, which I discuss in the <a class="reference internal" href="speechchain.html"><span class="doc std std-doc">speech chain chapter</span></a>.</p></li>
+<li><p><em>Adversarial Speaker Classification</em> is introduced by <a class="reference external" href="references.html#chen2021mixmatch">Chen et al. (2021)</a> and aims to make the encoder and VAE component of their network speaker-agnostic to more easily adapt to new speakers.</p></li>
+</ul>
+<p><a class="reference external" href="references.html#huybrechts2021vc">Huybrechts et al. (2021)</a> use VC (voice conversion) to add synthetic data for speakers with little data to balance their dataset. <a class="reference external" href="references.html#wu2022srvc">Wu et al. (2022)</a> take this one step further by using VC to augment the monolingual speakers in the training data to make them multilingual in a task called <strong>Cross-Lingual Voice Conversion</strong>. A different approach by <a class="reference external" href="references.html#yang2022multiling">Yang &amp; He (2022)</a> is to add a speaker and language classifier for multi-task learning to achieve this knowledge transfer.</p>
+<p>Some work has also successfully generated entirely new speakers by learning to generate speaker embeddings from speaker metadata <a class="reference external" href="references.html#stanton2022speakergen">(Stanton et al., 2021)</a> using a GMM (Gaussian Mixture Model) in what they call <strong>Speaker Generation</strong>.</p>
+<p><a class="reference internal" href="#speakers"><span class="std std-numref">Fig. 7</span></a> shows what the approaches above would look like in a latent speech representation space.</p>
+<div class="boxed figure align-default" id="speakers">
+<img alt="../_images/speakers.svg" src="../_images/speakers.svg" /><p class="caption"><span class="caption-number">Fig. 7 </span><span class="caption-text">The different knowledge transfer techniques regarding speakers for low-resource ASR.</span><a class="headerlink" href="#speakers" title="Permalink to this image">¶</a></p>
+</div>
+<!-- ## Speechchain - not that important, only do this one if there's time --></div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -406,7 +436,7 @@
         
           By <a href='https://cdminix.me'>Christoph Minixhofer</a> <a href='https://twitter.com/cdminix'><img height='24' width='24' src='_images/twitter.svg' alt='Twitter' style='width:24px'></a><br/>
         
-            &copy; Copyright 2021.<br/>
+            &copy; Copyright 2022.<br/>
           <div class="extra_footer">
             Licensed under CC-BY 4.0, Template based on <a href='https://goodresearch.dev'>goodresearch.dev</a>.
           </div>

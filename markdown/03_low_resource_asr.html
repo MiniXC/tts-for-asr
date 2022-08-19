@@ -1,0 +1,485 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta property="og:title" content="Low-Resource ASR" />
+  
+<meta property="og:type" content="website" />
+  
+<meta property="og:url" content="cdminix.me/markdown/03_low_resource_asr.html" />
+  
+<meta property="og:description" content="As I have mentioned before, synthetic data is most useful in the case of little data being available in the target domain. ASR for low-resource languages is one of those cases, and the one I have f..." />
+  
+<meta property="og:image" content="https://goodresearch.dev/_images/unicorn.png" />
+  
+<meta property="og:image:alt" content="Low-Resource ASR" />
+  
+    <title>Low-Resource ASR &#8212; TTS for ASR</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+  <!-- add `style` or `link` tags with your CSS `@font-face` declarations here -->
+  <!-- ... and optionally preload the `woff2` for snappier page loads -->
+  <link rel="preload" href="../_static/et-book/et-book-bold-line-figures/et-book-bold-line-figures.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="../_static/et-book/et-book-display-italic-old-style-figures/et-book-display-italic-old-style-figures.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="../_static/et-book/et-book-roman-line-figures/et-book-roman-line-figures.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="../_static/et-book/et-book-roman-old-style-figures/et-book-roman-old-style-figures.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="../_static/et-book/et-book-semi-bold-old-style-figures/et-book-semi-bold-old-style-figures.woff" as="font" type="font/woff" crossorigin>
+
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.59e7d1499aa759519747cb2a1a335dc4.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tufte.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.90c857b2bf8f3d46aa488b0ed8bf60a6.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://cdminix.me/tts-for-asr/markdown/03_low_resource_asr.html" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Low-Resource TTS" href="04_low_resource_tts.html" />
+    <link rel="prev" title="Synthetic Speech" href="02_tts.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@patrickmineault" />
+    <meta name="twitter:title" content="The Good Research Code Handbook" />
+    <meta name="twitter:description" content="This handbook is for grad students, postdocs and PIs who do a lot of programming as part of their research. It will teach you, in a practical manner, how to organize your code so that it is easy to understand and works reliably." />
+    <meta name="twitter:image" content="https://goodresearch.dev/_images/unicorn.png" />
+
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-3Q6LDVNS0X"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){ dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-3Q6LDVNS0X');
+    </script>
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      <img src="../_static/one.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">TTS for ASR</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index.html">
+   TTS for Low-Resource ASR
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Fundmentals
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_other_fields.html">
+   Synthetic Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_tts.html">
+   Synthetic Speech
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Low-Resource ASR
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_low_resource_tts.html">
+   Low-Resource TTS
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Combining ASR &amp; TTS
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_augmentation.html">
+   Data Augmentation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06_transfer.html">
+   Knowledge Transfer
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  My Work
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="08_fastspeech2.html">
+   FastSpeech 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09_conditioning.html">
+   Conditioning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="10_snr.html">
+   SNR Variance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11_german-to-english.html">
+   German-to-English Transfer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="12_future.html">
+   Future Work
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  References
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="references.html">
+   References
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+<nav class="bd-links" id="nav-social">
+    <div class="bd-toc-item">
+        <p class="caption">
+            <span class="caption-text">Social</span>
+        </p>
+        <ul class="nav bd-sidenav" style="display:block">
+            <li class="toctree-l1"><a class="github-button" href="https://github.com/patrickmineault/codebook" data-icon="octicon-star" data-show-count="true" data-size="large" aria-label="Star patrickmineault/codebook on GitHub">Star on Github</a></li>
+            <li class="toctree-l1"><a href="http://eepurl.com/hHgNOH">Subscribe for updates</a></li>
+            <li class="toctree-l1"><a href="http://twitter.com/share?text=The+Good+Research+Code+Handbook.+Learn+to+write+readable%2C+maintainable+research+code+in+Python.&url=https://goodresearch.dev&user&via=patrickmineault" class="twitter-share-button" data-text="The Good Research Code Handbook. Learn to write readable, maintainable code in Python." data-via="patrickmineault" data-show-count="false">Tweet this handbook</a></li>
+        </ul>
+    </div>
+</nav>
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/markdown/03_low_resource_asr.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cdminix/tts-for-asr"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cdminix/tts-for-asr/issues/new?title=Issue%20on%20page%20%2Fmarkdown/03_low_resource_asr.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cdminix/tts-for-asr/edit/main/./markdown/03_low_resource_asr.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#synthetic-speech-data-augmentation">
+   Synthetic Speech ≠ Data Augmentation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tts-voice-conversion">
+   TTS &amp; Voice Conversion
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-is-low-resource">
+   What is Low-Resource?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#which-asr-architectures-are-best-for-low-resource">
+   Which ASR architectures are best for Low-Resource?
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="low-resource-asr">
+<h1>Low-Resource ASR<a class="headerlink" href="#low-resource-asr" title="Permalink to this headline">¶</a></h1>
+<p>As I have mentioned before, synthetic data is most useful in the case of little data being available in the target domain. ASR for low-resource languages is one of those cases, and the one I have focused my own work on so far. Beyond making ASR models themselves more robust to overfitting, there are two main areas of research in low-resource ASR as described by <a class="reference external" href="references.html#yu2020lowresourceoverview">Yu et al. (2020)</a>: <strong>Data Augmentation</strong> and <strong>Knowledge Transfer</strong>. <strong>Data augmentation</strong> encompasses various techniques which usually add perturbed versions of training samples to the data to increase diversity and make the ASR model more robust. While data augmentation expands the space of the data, <strong>knowledge transfer</strong> is about expanding the space of tasks a model has to perform:</p>
+<ul class="simple">
+<li><p><em>Multitask learning</em> simply adds more tasks (for example, each additional language can be seen as an additional task). When the tasks are closely related, a model trained on many tasks often outperforms a model trained on a single task. One of the reasons for this is that the model learns more robust hidden representations.</p></li>
+<li><p><em>Transfer learning</em> aims to transfer model knowledge from a high-resource source task to the low-resource target task, usually using a pre-training/fine-tuning approach.</p></li>
+<li><p><em>Meta learning</em> means to learn from previous a learning task (also called “learning to learn”) to adapt to a new task using meta-data from said initial task.</p></li>
+</ul>
+<p><a class="reference internal" href="#lowresource"><span class="std std-numref">Fig. 4</span></a> shows an overview of these different approaches for low-resource ASR.</p>
+<div class="boxed figure align-default" id="lowresource">
+<img alt="../_images/low-resource.svg" src="../_images/low-resource.svg" /><p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">Techniques used for low-resource speech recognition.</span><a class="headerlink" href="#lowresource" title="Permalink to this image">¶</a></p>
+</div>
+<div class="section" id="synthetic-speech-data-augmentation">
+<h2>Synthetic Speech ≠ Data Augmentation<a class="headerlink" href="#synthetic-speech-data-augmentation" title="Permalink to this headline">¶</a></h2>
+<p>While synthetic speech data is usually referred to as a data augmentation technique, I agree with <a class="reference external" href="references.html#nikolenko2021synthetic">Nikolenko (2021, p. 12)</a> that while the line between data augmentation and synthetic data can be blurry, it is helpful to distinguish between the two. To illustrate this, let’s assume the most extreme case: <em>training a model using synthetic data alone</em> - there is no original data being augmented, so I would hesitate to call this data augmentation.</p>
+<p>When viewing synthetic speech as a technique outside of data augmentation, it’s also easy to see that many techniques used for <strong>knowledge transfer</strong> in low-resource ASR have been applied to the generation of synthetic speech, making many works in this field a combination of <strong>knowledge transfer</strong> and <strong>data augmentation</strong>. I discuss these in more detail in the <a class="reference internal" href="06_transfer.html"><span class="doc std std-doc">Knowledge Transfer</span></a> and <a class="reference internal" href="05_augmentation.html"><span class="doc std std-doc">Data Augmentation</span></a> chapters.</p>
+</div>
+<div class="section" id="tts-voice-conversion">
+<h2>TTS &amp; Voice Conversion<a class="headerlink" href="#tts-voice-conversion" title="Permalink to this headline">¶</a></h2>
+<p>I further divide synthetic speech for ASR approaches into <strong>TTS</strong> and <strong>Voice Conversion</strong> approaches.
+In both cases the data is <em>conditionally generated</em>, as I outlined in the <a class="reference internal" href="01_other_fields.html"><span class="doc std std-doc">Synthetic Data chapter</span></a>. The difference between the two is the condition: for <strong>Text</strong>-to-Speech, the main condition is obviously text (although there can be additional conditions), while for <strong>Voice Conversion</strong>, the conditions are an utterance and a desired style, and the result will be an utterance in a different style. While <strong>Voice Conversion</strong> is less popular than <strong>TTS</strong> approaches, it has been successfully used for low-resource ASR by <a class="reference external" href="references.html#thai2019improvinglowresource">Thai et al. (2019)</a>, and there is some work that combines the two by utilizing “Style Equalization” to train a <strong>TTS</strong> model to produce styles based on reference audio without requiring style labels <a class="reference external" href="references.html#hu2022synt">(Hu et al., 2021)</a>.</p>
+<div class="tip admonition note">
+<p class="admonition-title">Note</p>
+<p>Since I haven’t focused on voice conversion so far in my work, I only gave an overview over TTS in the <a class="reference internal" href="02_tts.html"><span class="doc std std-doc">Synthetic Speech chapter</span></a>.</p>
+</div>
+</div>
+<div class="section" id="what-is-low-resource">
+<h2>What is Low-Resource?<a class="headerlink" href="#what-is-low-resource" title="Permalink to this headline">¶</a></h2>
+<p>There is no single definition for what is or isn’t a low-resource setting for ASR. Further, some works refer to terms like “Moderate Low-Resource” or “Extreme Low-Resource” or “Zero-Resource” (for an example, see <a class="reference internal" href="#lrspeech-fig"><span class="std std-numref">Fig. 5</span></a>). There is no consensus on how many hours of supervised data can be considered low-resource. But it’s important to highlight that this isn’t just about the number of hours of paired data, but also about auxillary data such as a <em>pronunciation lexicon or model</em>, <em>unpaired speech</em>, <em>unpaired text</em> or simply <em>low-quality paired speech</em>. For example, a model capable of G2P for 100 languages, many of them considered low-resource, has recently been released by <a class="reference external" href="references.html#zhu2022byt5g2p">Zhu et al. (2022)</a>. It is not obvious to me if a case with paired speech data of just several minutes while having access to a large pronunciation lexicon and unpaired text is less or more of a “low-resource” case than one where an hour of paired speech is available with no unpaired text or pronunciations whatsoever.</p>
+<div class="tip admonition">
+<p class="admonition-title">Opinion</p>
+<p>While it can be helpful to have labels for how “low-resource” a certain setup is, it is not useful to see this as a purely linear scale from “Rich/High” resource all the way to “Zero” resource.</p>
+</div>
+<div class="boxed figure align-default" id="lrspeech-fig">
+<img alt="../_images/lrspeech-table.png" src="../_images/lrspeech-table.png" />
+<p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text">Xu et al. (2020) classify both ASR and TTS into “Rich Resource”, “Low Resource”, “Extremely Low Resource” and “Unsupervised”.</span><a class="headerlink" href="#lrspeech-fig" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="which-asr-architectures-are-best-for-low-resource">
+<h2>Which ASR architectures are best for Low-Resource?<a class="headerlink" href="#which-asr-architectures-are-best-for-low-resource" title="Permalink to this headline">¶</a></h2>
+<p>There are two main approaches in recent work for low-resource ASR:</p>
+<ul class="simple">
+<li><p><em>Hybrid HMM-DNN systems</em> trained using LF-MMI (lattice-free maximum mutual information) <a class="reference external" href="references.html#hadian2018lfmmi">(Hadian et al., 2018)</a>. This is usually achieved using the Kaldi framework <a class="footnote-reference brackets" href="#kaldi" id="id1">1</a>, and the DNN portion of the system is most commonly a variant of a TDNN (Time-Delay Neural Network) <a class="reference external" href="references.html#waibel1989tdnn">(Waibel et al., 1989)</a>.</p></li>
+<li><p><em>Large end-to-end models</em> , which are usually pre-trained on unlabeled data self-supervised learning, and fine-tuned for ASR using CTC (Connectionist Temporal Classification) <a class="reference external" href="references.html#graves2006ctc">(Graves et al., 2006)</a>. To some extent, this has been made possible by the efficiency of training Transformers <a class="reference external" href="references.html#vaswani2017attention">(Vaswani et al., 2017)</a> and Conformers, which are more suitable for speech <a class="reference external" href="references.html#guo2021conformer">(Guo et al., 2021)</a>.</p></li>
+</ul>
+<p>Despite the dominance of the latter for high-resource ASR and other speech-related tasks<a class="footnote-reference brackets" href="#e2e" id="id2">2</a>, they are relatively unproven for low-resource ASR – <a class="reference external" href="references.html#alumaekong2021hybrid">Alumäe &amp; Kong (2021)</a> found a hybrid CNN-TDNNF model to compare competitively with a fine-tuned XLSR-53 <a class="reference external" href="references.html#conneau2020xlsr53">(Conneau et al., 2020)</a> without the need for any pre-training. They also found (unsurprisingly) that a Conformer model without pre-training performed extremely poorly. <a class="reference external" href="references.html#perero2022hybrid">Perero-Codosero et al. (2022)</a> found that when not doing any pre-training, hybrid models still outperform end-to-end models, even in a relatively high-resource scenario (600 hours of data). Specific to synthetic data augmentation, <a class="reference external" href="references.html#rossenbach2021hybrid">Rossenbach et al. (2021)</a>, found that hybrid models did not benefit from the synthetic data, while Transformer models did. In the field of <strong>TTS-for-ASR</strong>, even recent work utilizing features derived from pre-trained end-to-end models <a class="reference external" href="references.html#ueno2021dth">(Ueno et al., 2021)</a> do not fine-tune said models, perhaps due to the large amount of resources required for fine-tuning.</p>
+<div class="tip admonition">
+<p class="admonition-title">Opinion</p>
+<p>While hybrid models certainly perform well in low-resource settings, pre-trained end-to-end models are currently underutilized in <strong>TTS-for-ASR</strong>.</p>
+</div>
+<p>In the <a class="reference internal" href="04_low_resource_tts.html"><span class="doc std std-doc">next chapter</span></a>, I explain the techniques used when little TTS training data is available.</p>
+<!-- TODO: add citations! --><hr class="footnotes docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="kaldi"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p><a class="reference external" href="https://kaldi-asr.org/">kaldi.org</a></p>
+</dd>
+<dt class="label" id="e2e"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd><p>As of August 2022, WavLM (Chen et al., 2022), data2vec (Baevski et al., 2022), HuBERT (Hsu et al., 2021), wav2vec 2.0 (Baevski et al., 2020) and other large pre-trained end-to-end models dominate the <a class="reference external" href="https://superbbenchmark.org/leaderboard">SUPERB benchmark leaderboard</a>.</p>
+</dd>
+</dl>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cdminix/tts-for-asr",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./markdown"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="02_tts.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Synthetic Speech</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="04_low_resource_tts.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Low-Resource TTS</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By <a href='https://cdminix.me'>Christoph Minixhofer</a> <a href='https://twitter.com/cdminix'><img height='24' width='24' src='_images/twitter.svg' alt='Twitter' style='width:24px'></a><br/>
+        
+            &copy; Copyright 2022.<br/>
+          <div class="extra_footer">
+            Licensed under CC-BY 4.0, Template based on <a href='https://goodresearch.dev'>goodresearch.dev</a>.
+          </div>
+      </p>
+    </div>
+  </footer>
+  <!-- Place this tag in your head or just before your close body tag. -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

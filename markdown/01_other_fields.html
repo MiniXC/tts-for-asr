@@ -1,0 +1,455 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta property="og:title" content="Synthetic Data" />
+  
+<meta property="og:type" content="website" />
+  
+<meta property="og:url" content="cdminix.me/markdown/01_other_fields.html" />
+  
+<meta property="og:description" content="Synthetic data was first used in computer vision, and to this day synthetic data is most commonly used in this domain. For example, 3D scenes are rendered as static images to train models for image..." />
+  
+<meta property="og:image" content="https://goodresearch.dev/_images/unicorn.png" />
+  
+<meta property="og:image:alt" content="Synthetic Data" />
+  
+    <title>Synthetic Data &#8212; TTS for ASR</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+  <!-- add `style` or `link` tags with your CSS `@font-face` declarations here -->
+  <!-- ... and optionally preload the `woff2` for snappier page loads -->
+  <link rel="preload" href="../_static/et-book/et-book-bold-line-figures/et-book-bold-line-figures.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="../_static/et-book/et-book-display-italic-old-style-figures/et-book-display-italic-old-style-figures.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="../_static/et-book/et-book-roman-line-figures/et-book-roman-line-figures.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="../_static/et-book/et-book-roman-old-style-figures/et-book-roman-old-style-figures.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="../_static/et-book/et-book-semi-bold-old-style-figures/et-book-semi-bold-old-style-figures.woff" as="font" type="font/woff" crossorigin>
+
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.59e7d1499aa759519747cb2a1a335dc4.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tufte.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.90c857b2bf8f3d46aa488b0ed8bf60a6.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://cdminix.me/tts-for-asr/markdown/01_other_fields.html" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Synthetic Speech" href="02_tts.html" />
+    <link rel="prev" title="TTS for Low-Resource ASR" href="../index.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@patrickmineault" />
+    <meta name="twitter:title" content="The Good Research Code Handbook" />
+    <meta name="twitter:description" content="This handbook is for grad students, postdocs and PIs who do a lot of programming as part of their research. It will teach you, in a practical manner, how to organize your code so that it is easy to understand and works reliably." />
+    <meta name="twitter:image" content="https://goodresearch.dev/_images/unicorn.png" />
+
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-3Q6LDVNS0X"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){ dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-3Q6LDVNS0X');
+    </script>
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      <img src="../_static/one.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">TTS for ASR</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index.html">
+   TTS for Low-Resource ASR
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Fundmentals
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Synthetic Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_tts.html">
+   Synthetic Speech
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_low_resource_asr.html">
+   Low-Resource ASR
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_low_resource_tts.html">
+   Low-Resource TTS
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Combining ASR &amp; TTS
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_augmentation.html">
+   Data Augmentation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06_transfer.html">
+   Knowledge Transfer
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  My Work
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="08_fastspeech2.html">
+   FastSpeech 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09_conditioning.html">
+   Conditioning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="10_snr.html">
+   SNR Variance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11_german-to-english.html">
+   German-to-English Transfer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="12_future.html">
+   Future Work
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  References
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="references.html">
+   References
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+<nav class="bd-links" id="nav-social">
+    <div class="bd-toc-item">
+        <p class="caption">
+            <span class="caption-text">Social</span>
+        </p>
+        <ul class="nav bd-sidenav" style="display:block">
+            <li class="toctree-l1"><a class="github-button" href="https://github.com/patrickmineault/codebook" data-icon="octicon-star" data-show-count="true" data-size="large" aria-label="Star patrickmineault/codebook on GitHub">Star on Github</a></li>
+            <li class="toctree-l1"><a href="http://eepurl.com/hHgNOH">Subscribe for updates</a></li>
+            <li class="toctree-l1"><a href="http://twitter.com/share?text=The+Good+Research+Code+Handbook.+Learn+to+write+readable%2C+maintainable+research+code+in+Python.&url=https://goodresearch.dev&user&via=patrickmineault" class="twitter-share-button" data-text="The Good Research Code Handbook. Learn to write readable, maintainable code in Python." data-via="patrickmineault" data-show-count="false">Tweet this handbook</a></li>
+        </ul>
+    </div>
+</nav>
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/markdown/01_other_fields.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cdminix/tts-for-asr"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cdminix/tts-for-asr/issues/new?title=Issue%20on%20page%20%2Fmarkdown/01_other_fields.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cdminix/tts-for-asr/edit/main/./markdown/01_other_fields.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reasons-to-use-synthetic-data">
+   Reasons to use Synthetic Data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-domain-gap">
+   The Domain Gap
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#generative-models-with-conditioning">
+   Generative Models with Conditioning
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#for-speech-recognition">
+   For Speech Recognition
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="synthetic-data">
+<h1>Synthetic Data<a class="headerlink" href="#synthetic-data" title="Permalink to this headline">¶</a></h1>
+<p>Synthetic data was first used in computer vision, and to this day synthetic data is most commonly used in this domain. For example, 3D scenes are rendered as static images to train models for image segmentation or for creating depth maps, or entire environments are simulated for autonomous driving. But there are also fields outside of computer vision using synthetic data, such as generating network logs for intrusion detection, or candidate molecules in bioinformatics <a class="reference external" href="references.html#nikolenko2021synthetic">(Nikolenko, 2021, p. 217-222)</a>.</p>
+<div class="section" id="reasons-to-use-synthetic-data">
+<h2>Reasons to use Synthetic Data<a class="headerlink" href="#reasons-to-use-synthetic-data" title="Permalink to this headline">¶</a></h2>
+<p>The main reasons synthetic data is used in these fields are the following:</p>
+<ol class="simple">
+<li><p>there simply isn’t enough real data</p></li>
+<li><p>the labels that come with the synthetic data are preferred</p></li>
+</ol>
+<p>While the 1) is easy enough to understand, 2) is a bit trickier, and best explained with an example: When labeling the landmarks (eyes, nose, etc.) in human faces, human annotators can only be so accurate, while we can extract perfect masks when 3D rendering a synthetic human face <a class="reference external" href="references.html#wood2021face">(Wood et al., 2021)</a>.</p>
+</div>
+<div class="section" id="the-domain-gap">
+<h2>The Domain Gap<a class="headerlink" href="#the-domain-gap" title="Permalink to this headline">¶</a></h2>
+<p>Usually, synthetic data still isn’t quite the same as the real data, which makes domain transfer a core issue, which can be solved by either adapting models or the data itself. But the best approach is to generate synthetic data that is as close to the real data as possible. To stick to the previous example, in the field of face-related machine-learning tasks, using synthetic data with a reduced <em>domain gap</em> due to high-quality assets and simulation alone has lead to results comparable to using real data <a class="reference external" href="references.html#wood2021face">(Wood et al., 2021)</a>.</p>
+</div>
+<div class="section" id="generative-models-with-conditioning">
+<h2>Generative Models with Conditioning<a class="headerlink" href="#generative-models-with-conditioning" title="Permalink to this headline">¶</a></h2>
+<p>What all the domains I listed so far have in common is that we understand the processes behind these data (for example light transport in computer vision, or molecule structures in bioinformatics) sufficiently well to generate synthetic data programmatically, without the use of the real data we want to emulate. But what if that isn’t the case?</p>
+<p>We could just train a generative model on real data to get an infinite supply of synthetic data - but the model will merely approximate the real data (and often lead to a drop in quality), and as far as I know, this approach alone has never led to better performance than just training on the original (real) data. But using generative models in combination with one or several <em>conditions</em> has yielded promising results. For example, <a class="reference external" href="references.html#kuznichov2019leaf">Kuznichov et al. (2019)</a> generate synthetic images of leaves using a GAN <em>conditioned</em> on segmentation masks of said leaves. <a class="reference external" href="references.html#fogel2020scrabblegan">Fogel et al. (2020)</a> train a model to generate handwriting <em>conditioned</em> on text, and manage to improve handwritten text recognition results by augmenting the real training data with data generate by their model.</p>
+<div class="boxed figure align-default" id="id1">
+<img alt="../_images/simulated_vs_generated.svg" src="../_images/simulated_vs_generated.svg" /><p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text"><em>Simulated</em> compared to <em>Conditionally Generated</em> Synthetic Data.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="for-speech-recognition">
+<h2>For Speech Recognition<a class="headerlink" href="#for-speech-recognition" title="Permalink to this headline">¶</a></h2>
+<p>The equivalent for what we call “simulated synthetic data” in speech would be <em>articulatory speech synthesis</em> which simulates an entire vocal tract to generate speech <a class="reference external" href="references.html#stone2020articulatory">(Stone et al., 2020)</a>. The results are promising, especially because the parameters of the vocal tract are known, which usually isn’t the case for real data. These parameters could potentially be used as labels superior to graphemes or phonemes for speech recognition. However, as far as I know, none of the work in this field has been successfully used to train ASR models, probably because the domain gap is still to large between this type of synthesis and real speech.</p>
+<p>Creating “conditionally generated synthetic data” for training ASR systems was first attempted by <a class="reference external" href="references.html#gales2009svm">Gales et al. (2009)</a> to recognize words not in the training data (with the external condition being said words) and later by <a class="reference external" href="references.html#rygaard2015lowresource">Rygaard (2015)</a> to show that web-scraped text could be used to improve performance. Both systems used HTS, an HMM-based speech synthesis system <a class="reference external" href="references.html#zen2007hts">(Zen et al., 2007)</a>, and focused on English.</p>
+<p>With the widespread use of end-to-end TTS and ASR models, interest in the topic of conditionally generated synthetic speech for ASR has increased, with two main families of tasks, which I call <strong>data augmentation</strong>  and <strong>knowledge transfer</strong> tasks. <strong>Data augmentation</strong>-based approaches train TTS models on data very similar to existing ASR data, and add synthesized data to the original data, most commonly to increase lexical diversity, but sometimes to increase prosodic or speaker diversity as well. <strong>knowledge transfer</strong>-based ones use a dataset in a particular domain (usually with plenty of data) for TTS training and then attempt to synthesize speech in another domain (usually with little data), attempting to <em>transfer</em> the diversity in the original dataset to the domain with little data.</p>
+<p>Both approaches are also frequently applied to ASR for low-resource languages, which I explore in the <a class="reference internal" href="03_low_resource_asr.html"><span class="doc std std-doc">low-resource ASR chapter</span></a>. For this, <strong>data augmentation</strong> usually is used to increase lexical diversity in the low resource language using externally sourced text. At the same time <strong>knowledge transfer</strong> has been mainly used to transfer diversity from a high-resource to a low-resource language. I go into detail on those two techniques in (you guessed it) the <a class="reference internal" href="05_augmentation.html"><span class="doc std std-doc">data augmentation</span></a> and <a class="reference internal" href="06_transfer.html"><span class="doc std std-doc">knowledge transfer</span></a> chapters. In the <a class="reference internal" href="02_tts.html"><span class="doc std std-doc">next chapter</span></a>, I look at how synthetic speech is generated in more detail.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cdminix/tts-for-asr",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./markdown"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="../index.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">TTS for Low-Resource ASR</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="02_tts.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Synthetic Speech</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By <a href='https://cdminix.me'>Christoph Minixhofer</a> <a href='https://twitter.com/cdminix'><img height='24' width='24' src='_images/twitter.svg' alt='Twitter' style='width:24px'></a><br/>
+        
+            &copy; Copyright 2022.<br/>
+          <div class="extra_footer">
+            Licensed under CC-BY 4.0, Template based on <a href='https://goodresearch.dev'>goodresearch.dev</a>.
+          </div>
+      </p>
+    </div>
+  </footer>
+  <!-- Place this tag in your head or just before your close body tag. -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

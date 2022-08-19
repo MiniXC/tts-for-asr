@@ -71,7 +71,7 @@
     <link rel="shortcut icon" href="_static/favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Synthetic Data" href="markdown/other_fields.html" />
+    <link rel="next" title="Synthetic Data" href="markdown/01_other_fields.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -129,22 +129,22 @@
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="markdown/other_fields.html">
+  <a class="reference internal" href="markdown/01_other_fields.html">
    Synthetic Data
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="markdown/tts.html">
+  <a class="reference internal" href="markdown/02_tts.html">
    Synthetic Speech
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="markdown/low_resource_asr.html">
+  <a class="reference internal" href="markdown/03_low_resource_asr.html">
    Low-Resource ASR
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="markdown/lr-tts-overview.html">
+  <a class="reference internal" href="markdown/04_low_resource_tts.html">
    Low-Resource TTS
   </a>
  </li>
@@ -156,12 +156,12 @@
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="markdown/augmentation.html">
+  <a class="reference internal" href="markdown/05_augmentation.html">
    Data Augmentation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="markdown/transfer.html">
+  <a class="reference internal" href="markdown/06_transfer.html">
    Knowledge Transfer
   </a>
  </li>
@@ -173,27 +173,27 @@
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="markdown/fastspeech2.html">
+  <a class="reference internal" href="markdown/08_fastspeech2.html">
    FastSpeech 2
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="markdown/conditioning.html">
+  <a class="reference internal" href="markdown/09_conditioning.html">
    Conditioning
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="markdown/snr.html">
+  <a class="reference internal" href="markdown/10_snr.html">
    SNR Variance
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="markdown/german-to-english.html">
+  <a class="reference internal" href="markdown/11_german-to-english.html">
    German-to-English Transfer
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="markdown/future.html">
+  <a class="reference internal" href="markdown/12_future.html">
    Future Work
   </a>
  </li>
@@ -317,7 +317,7 @@
 <h1>TTS for Low-Resource ASR<a class="headerlink" href="#tts-for-low-resource-asr" title="Permalink to this headline">¶</a></h1>
 <p>This is a summary of my efforts to generate synthetic speech <a class="footnote-reference brackets" href="#tts" id="id1">1</a> to improve speech recognition <a class="footnote-reference brackets" href="#asr" id="id2">2</a> in the first year of my PhD in Speech Recognition at the <a class="reference external" href="https://www.cstr.ed.ac.uk/">CSTR</a>. But wait, can’t a model that generates speech only approximate what’s already in the data, making it impossible for the speech recognition system to learn anything new?</p>
 <p>Yes, but only if we have nothing new to add – and there are many things we can add, for example new speakers, new lexical content, or even new variances (such as the pitch or duration of the speech). And we can also do this across languages and domains, making a model trained on English speakers produce Swahili speech or a make model trained on audiobooks read medical transcripts!</p>
-<p>More data is always better, and the closer the data is to the target domain, the better as well. This means that synthetic data is most useful when there isn’t plenty of high-quality data in the target domain available. ASR, in this case, is often described as <strong>low-resource</strong>. A lot of work has been done in this area, with varying definitions of what low-resource means (more on this in <a class="reference internal" href="markdown/low_resource_asr.html"><span class="doc std std-doc">Low-Resource ASR</span></a>). I will give an overview of how synthetic data has been used to improve low-resource ASR, and present my own findings as well. In <a class="reference internal" href="#roadmap"><span class="std std-numref">Fig. 1</span></a>, you can see all the major areas covered in this report and how they are related to each other.</p>
+<p>More data is always better, and the closer the data is to the target domain, the better as well. This means that synthetic data is most useful when there isn’t plenty of high-quality data in the target domain available. ASR, in this case, is often described as <strong>low-resource</strong>. A lot of work has been done in this area, with varying definitions of what low-resource means (more on this in <a class="reference internal" href="markdown/03_low_resource_asr.html"><span class="doc std std-doc">Low-Resource ASR</span></a>). I will give an overview of how synthetic data has been used to improve low-resource ASR, and present my own findings as well. In <a class="reference internal" href="#roadmap"><span class="std std-numref">Fig. 1</span></a>, you can see all the major areas covered in this report and how they are related to each other.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>For brevities’ sake, I refer to TTS for Low-Resource ASR as <strong>TTS-for-ASR</strong> in this work.</p>
@@ -325,7 +325,7 @@
 <div class="boxed figure align-default" id="roadmap">
 <img alt="_images/roadmap.svg" src="_images/roadmap.svg" /><p class="caption"><span class="caption-number">Fig. 1 </span><span class="caption-text">The main concepts I cover in this report.</span><a class="headerlink" href="#roadmap" title="Permalink to this image">¶</a></p>
 </div>
-<p>There is also a more formal version of this report for submission to the University, which you can download here.</p>
+<!-- There is also a more formal version of this report for submission to the University, which you can download here. -->
 <hr class="footnotes docutils" />
 <dl class="footnote brackets">
 <dt class="label" id="tts"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
@@ -375,7 +375,7 @@
 <div class='prev-next-bottom'>
     
      <div id="next">
-        <a class="right-next" href="markdown/other_fields.html" title="next page">
+        <a class="right-next" href="markdown/01_other_fields.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
                 <p class="prevnext-title">Synthetic Data</p>
@@ -394,7 +394,7 @@
         
           By <a href='https://cdminix.me'>Christoph Minixhofer</a> <a href='https://twitter.com/cdminix'><img height='24' width='24' src='_images/twitter.svg' alt='Twitter' style='width:24px'></a><br/>
         
-            &copy; Copyright 2021.<br/>
+            &copy; Copyright 2022.<br/>
           <div class="extra_footer">
             Licensed under CC-BY 4.0, Template based on <a href='https://goodresearch.dev'>goodresearch.dev</a>.
           </div>
