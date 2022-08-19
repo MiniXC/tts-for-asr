@@ -63,6 +63,6 @@ While hybrid models certainly perform well in low-resource settings, pre-trained
 In the [next chapter](04_low_resource_tts), I explain the techniques used when little TTS training data is available.
 
 [^kaldi]: [kaldi.org](https://kaldi-asr.org/)
-[^E2E]: As of August 2022, WavLM (Chen et al., 2022), data2vec (Baevski et al., 2022), HuBERT (Hsu et al., 2021), wav2vec 2.0 (Baevski et al., 2020) and other large pre-trained end-to-end models dominate the [SUPERB benchmark leaderboard](https://superbbenchmark.org/leaderboard).
+[^E2E]: As of August 2022, WavLM (Chen et al., 2022), data2vec (Baevski et al., 2022), HuBERT (Hsu et al., 2021), wav2vec 2.0 (Baevski et al., 2020) and other large pre-trained end-to-end models dominate the [SUPERB benchmark leaderboard](https://superbbenchmark.org/leaderboard). 
 
 <!-- TODO: add citations! -->

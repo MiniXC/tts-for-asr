@@ -44,6 +44,6 @@ name: speakers
 The different knowledge transfer techniques regarding speakers for low-resource ASR.
 ```
 
-Since this chapter and the [previous chapter](03_low_resource_asr) have covered the details of low-resource TTS and ASR respectively, the next two chapters cover how they can be combined: Using [Data Augmentation](05_augmentation) and [Knowledge Transfer](06_transfer).
+Since this chapter and the [previous chapter](03_low_resource_asr) have covered the details of low-resource TTS and ASR respectively, the next two chapters cover how they can be combined: Using [Data Augmentation](05_augmentation) and [Knowledge Transfer](06_transfer). 
 
 <!-- ## Speechchain - not that important, only do this one if there's time -->
