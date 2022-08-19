@@ -15,6 +15,8 @@ Several **TTS-for-ASR** systems simply combine real and synthetic data using a 5
 
 ## Augmentation$^2$
 
-Synthetic speech is often combined with other augmentation methods, such as SpecAugment [(Park et al., 2019)](references.html#park2019specaugment) or RIR (room impulse response) generation [(Habets, 2010)](references.html#habets2010rir), to introduce more diversity and to make it harder for ASR systems to overfit to the synthetic data ([Wang et al., 2020](references.html#wang2020scl); [Sun et al. (2020)](references.html#sun2020vae); [Casanova et al., 2022](references.html#casanova2022singlespeaker))
+Synthetic speech is often combined with other augmentation methods, such as SpecAugment [(Park et al., 2019)](references.html#park2019specaugment) or RIR (room impulse response) generation [(Habets, 2010)](references.html#habets2010rir), to introduce more diversity and to make it harder for ASR systems to overfit to the synthetic data ([Wang et al., 2020](references.html#wang2020scl); [Sun et al. (2020)](references.html#sun2020vae))
+
+In the [next chapter](06_transfer), I look at cases were instead of simply augmenting the lexical or speaker diversity of a dataset, TTS is used to transfer diversity from a high to a low-resource domain.
 
 [^synthonly]: Except when training on synthetic data only.
