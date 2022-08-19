@@ -5,19 +5,19 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta property="og:title" content="Knowledge Transfer" />
+<meta property="og:title" content="Domain Transfer" />
   
 <meta property="og:type" content="website" />
   
 <meta property="og:url" content="cdminix.me/markdown/06_transfer.html" />
   
-<meta property="og:description" content="As I have outlined in the synthetic data chapter, knowledge transfer occurs when TTS is used to transfer diversity found in a particular dataset to another one. The different dimensions real speech..." />
+<meta property="og:description" content="The different dimensions real speech can be augmented with using synthetic speech., As I have outlined in the synthetic data chapter, domain transfer occurs when TTS is used to transfer diversity f..." />
   
 <meta property="og:image" content="https://goodresearch.dev/_images/unicorn.png" />
   
-<meta property="og:image:alt" content="Knowledge Transfer" />
+<meta property="og:image:alt" content="Domain Transfer" />
   
-    <title>Knowledge Transfer &#8212; TTS for ASR</title>
+    <title>Domain Transfer &#8212; TTS for ASR</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -163,7 +163,7 @@
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Knowledge Transfer
+   Domain Transfer
   </a>
  </li>
 </ul>
@@ -314,12 +314,17 @@
         
               <div>
                 
-  <div class="section" id="knowledge-transfer">
-<h1>Knowledge Transfer<a class="headerlink" href="#knowledge-transfer" title="Permalink to this headline">¶</a></h1>
-<p>As I have outlined in the <a class="reference internal" href="01_other_fields.html"><span class="doc std std-doc">synthetic data chapter</span></a>, <strong>knowledge transfer</strong> occurs when TTS is used to transfer diversity found in a particular dataset to another one.</p>
+  <div class="section" id="domain-transfer">
+<h1>Domain Transfer<a class="headerlink" href="#domain-transfer" title="Permalink to this headline">¶</a></h1>
 <div class="boxed figure align-default" id="augdim">
 <img alt="../_images/augdimensions.svg" src="../_images/augdimensions.svg" /><p class="caption"><span class="caption-number">Fig. 8 </span><span class="caption-text">The different dimensions real speech can be augmented with using synthetic speech.</span><a class="headerlink" href="#augdim" title="Permalink to this image">¶</a></p>
 </div>
+<p>As I have outlined in the <a class="reference internal" href="01_other_fields.html"><span class="doc std std-doc">synthetic data chapter</span></a>, <strong>domain transfer</strong> occurs when TTS is used to transfer diversity found in a particular dataset to another one. There are two main cases in which a transfer like this can be desireable in <strong>TTS-for-ASR</strong>:</p>
+<ul class="simple">
+<li><p><em>Lexical domain transfer</em> entails synthesizing speech with lexical content in a different domain than the speech the TTS was trained on. For example, <a class="reference external" href="references.html#fazel2021medical">Fazel et al. (2021)</a> transfer from general purpose ASR to the medical domain using synthetic speech.</p></li>
+<li><p><em>Cross-lingual transfer</em> was already discussed in the <span class="xref myst">low-resource TTS chapter</span> and aims to transfer acoustic (mainly speaker) diversity from one or more high-resource language to the desired low-resource language(s).</p></li>
+</ul>
+<p>I mostly focus on the <em>cross-lingual transfer</em> case, since it is far more wide-spread and more aligned with low-resource ASR.</p>
 </div>
 
     <script type="text/x-thebe-config">

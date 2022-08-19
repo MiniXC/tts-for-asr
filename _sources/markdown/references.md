@@ -28,6 +28,8 @@
 
 <a name="fang2019pretrained"></a>Fang, W., Chung, Y.-A., & Glass, J. (2019). Towards Transfer Learning for End-to-End Speech Synthesis from Deep Pre-Trained Language Models [arXiv:1906.07307](https://arxiv.org/abs/1906.07307).
 
+<a name="fazel2021medical"></a>Fazel, A., Yang, W., Liu, Y., Barra-Chicote, R., Meng, Y., Maas, R., & Droppo, J. (2021). SynthASR: Unlocking Synthetic Data for Speech Recognition. Interspeech 2021.
+
 <a name="fogel2020scrabblegan"></a>Fogel, S., Averbuch-Elor, H., Cohen, S., Mazor, S., & Litman, R. (2020). ScrabbleGAN: Semi-Supervised Varying Length Handwritten Text Generation. CVPR 2020.
 
 <a name="gales2009svm"></a>Gales, M. J. F., Ragni, A., AlDamarki, H., & Gautier, C. (2009). Support vector machines for noise robust ASR. ASRU 2009.

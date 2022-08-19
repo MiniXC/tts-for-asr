@@ -75,4 +75,4 @@ Since it's essentially free to generate more data once a model is trained, data 
 
 In the [next chapter](03_low_resource_asr), I show where and how TTS-generated data is used for low-resource ASR.
 
-[^VAE]: As you can see in {numref}`ttstable`, they are used by [Rosenberg et al. (2019)](references.html#rosenberg2019ttsasr), [Laptev et al. (2020)](references.html#laptev2020moredata), [Sun et al. (2020)](references.html#sun2020vae), [Du & Yu (2020)](references.html#duyu2020sc), [Chen et al. (2021)](references.html#chen2021mixmatch) and [Casanova et al. (2022)](references.html#casanova2022singlespeaker). 
+[^VAE]: As you can see in {numref}`ttstable`, they are used by [Rosenberg et al. (2019)](references.html#rosenberg2019ttsasr), [Laptev et al. (2020)](references.html#laptev2020moredata), [Sun et al. (2020)](references.html#sun2020vae), [Du & Yu (2020)](references.html#duyu2020sc), [Chen et al. (2021)](references.html#chen2021mixmatch) and [Casanova et al. (2022)](references.html#casanova2022singlespeaker).  
