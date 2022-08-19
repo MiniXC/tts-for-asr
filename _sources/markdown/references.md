@@ -143,6 +143,8 @@
 
 <a name="wu2022srvc"></a>Wu, J., Polyak, A., Taigman, Y., Fong, J., Agrawal, P., & He, Q. (2022). Multilingual Text-To-Speech Training Using Cross Language Voice Conversion And Self-Supervised Learning Of Speech Representations. ICASSP 2022.
 
+<a name="xin2021scl"></a>Xin, D., Saito, Y., Takamichi, S., Koriyama, T., & Saruwatari, H. (2021). Cross-Lingual Speaker Adaptation Using Domain Adaptation and Speaker Consistency Loss for Text-To-Speech Synthesis. Interspeech 2021.
+
 <a name="yang2020universal"></a>Yang, J., & He, L. (2020). Towards Universal Text-to-Speech. Interspeech 2020.
 
 <a name="yang2022multiling"></a>Yang, J., & He, L. (2022). Cross-Lingual Text-to-Speech Using Multi-Task Learning and Speaker Classifier Joint Training. [arXiv:2201.08124](http://arxiv.org/abs/2201.08124).
