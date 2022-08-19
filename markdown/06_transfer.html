@@ -71,7 +71,7 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="FastSpeech 2" href="08_fastspeech2.html" />
+    <link rel="next" title="References" href="references.html" />
     <link rel="prev" title="Data Augmentation" href="05_augmentation.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -164,38 +164,6 @@
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Domain Transfer
-  </a>
- </li>
-</ul>
-<p class="caption">
- <span class="caption-text">
-  My Work
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="08_fastspeech2.html">
-   FastSpeech 2
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="09_conditioning.html">
-   Conditioning
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="10_snr.html">
-   SNR Variance
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="11_german-to-english.html">
-   German-to-English Transfer
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="12_future.html">
-   Future Work
   </a>
  </li>
 </ul>
@@ -335,7 +303,7 @@
 <p>As I have outlined in the <a class="reference internal" href="01_other_fields.html"><span class="doc std std-doc">synthetic data chapter</span></a>, <strong>domain transfer</strong> occurs when TTS is used to transfer diversity found in a particular dataset to another one. There are two main cases in which a transfer like this can be desireable in <strong>TTS-for-ASR</strong>:</p>
 <ul class="simple">
 <li><p><em>Lexical domain transfer</em> entails synthesizing speech with lexical content in a different domain than the speech the TTS was trained on. For example, <a class="reference external" href="references.html#fazel2021medical">Fazel et al. (2021)</a> transfer from general purpose ASR to the medical domain using synthetic speech.</p></li>
-<li><p><em>Cross-lingual transfer</em> was already discussed in the <span class="xref myst">low-resource TTS chapter</span> and aims to transfer acoustic (mainly speaker) diversity from one or more high-resource language to the desired low-resource language(s).</p></li>
+<li><p><em>Cross-lingual transfer</em> was already discussed in the <a class="reference internal" href="04_low_resource_tts.html"><span class="doc std std-doc">low-resource TTS chapter</span></a> and aims to transfer acoustic (mainly speaker) diversity from one or more high-resource language to the desired low-resource language(s).</p></li>
 </ul>
 <p>I mostly focus on the <em>cross-lingual transfer</em> case, since it is far more wide-spread and more aligned with low-resource ASR.</p>
 <div class="section" id="cross-lingual-transfer">
@@ -346,7 +314,7 @@
 <p class="caption"><span class="caption-number">Fig. 9 </span><span class="caption-text">The different domains that can be transferred in TTS.</span><a class="headerlink" href="#chenfig" title="Permalink to this image">¶</a></p>
 </div>
 <p>One approach to mitigate this is to incentivize the model to have speaker-agnostic components. For example, if we somehow forced the encoder to be completely speaker agnostic, the hidden representations should be more consistent between speakers across languages. <a class="reference external" href="references.html#chen2021mixmatch">Chen et. al (2021)</a> do exactly that by introducing an adversarial speaker classifier to their encoder and VAE, as can be seen in <a class="reference internal" href="#chenfig"><span class="std std-numref">Fig. 9</span></a>. Augmenting a proprietary Kannada-language dataset with English speakers yielded a relative WER improvement of 7.7%.</p>
-<p>Another solution is to use external speaker embeddings, as I already discussed in the <span class="xref myst">low-resource TTS chapter</span>. Together with speaker consistency loss <a class="reference external" href="references.html#xin2021scl">(Xin et al., 2021)</a>, <a class="reference external" href="references.html#casanova2022singlespeaker">Casanova et al. (2022)</a> managed to improve WER by 21% (relative) for Russian Common Voice and 1% (relative) for Portuguese Common Voice.</p>
+<p>Another solution is to use external speaker embeddings, as I already discussed in the <a class="reference internal" href="04_low_resource_tts.html"><span class="doc std std-doc">low-resource TTS chapter</span></a>. Together with speaker consistency loss <a class="reference external" href="references.html#xin2021scl">(Xin et al., 2021)</a>, <a class="reference external" href="references.html#casanova2022singlespeaker">Casanova et al. (2022)</a> managed to improve WER by 21% (relative) for Russian Common Voice and 1% (relative) for Portuguese Common Voice.</p>
 </div>
 </div>
 
@@ -389,10 +357,10 @@
         </a>
     </div>
      <div id="next">
-        <a class="right-next" href="08_fastspeech2.html" title="next page">
+        <a class="right-next" href="references.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title">FastSpeech 2</p>
+                <p class="prevnext-title">References</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>

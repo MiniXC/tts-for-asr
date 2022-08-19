@@ -123,6 +123,99 @@
 </ul>
 <p class="caption">
  <span class="caption-text">
+  Fundmentals
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/other_fields.html">
+   Synthetic Data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/low_resource_asr.html">
+   Low-Resource ASR
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/tts.html">
+   TTS
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  TTS for Low-Resource
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/cross_speaker.html">
+   Cross-Speaker Transfer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/cross_lingual.html">
+   Cross-Lingual Transfer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/speechchain.html">
+   Speech Chain / Backtransformation
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Combining ASR &amp; TTS
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/augmentation.html">
+   Data Augmentation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/transfer.html">
+   Knowledge Transfer
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  My Work
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/fastspeech2.html">
+   FastSpeech 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/conditioning.html">
+   Conditioning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/snr.html">
+   SNR Variance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/german-to-english.html">
+   German-to-English Transfer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown/future.html">
+   Future Work
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
   References
  </span>
 </p>
@@ -471,8 +564,8 @@
 <p>This function has a side effect: it modifies its argument <code class="docutils literal notranslate"><span class="pre">arr</span></code>. In Python and many other languages, arguments of complex types like lists, dictionaries and objects are passed by reference, which means they can be modified by the function. That breaks the normal data flow - the arguments are also returns!</p>
 <p>In the base Python library, a function which modifies its argument returns <code class="docutils literal notranslate"><span class="pre">None</span></code>. For instance, the function <code class="docutils literal notranslate"><span class="pre">sort</span></code> sorts its input argument, modifies it in place, and returns <code class="docutils literal notranslate"><span class="pre">None</span></code>. This function has a side effect, but it’s obvious: if a function returns <code class="docutils literal notranslate"><span class="pre">None</span></code>, yet does useful work, it must have a side effect. When we both modify an argument and return it, we break this convention and confuse the Python reader. We can fix this by returning <code class="docutils literal notranslate"><span class="pre">None</span></code> in our function (good), or returning an entirely new list (better):</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="55d197da-45e2-453b-a6a9-4960be855571" name="53075b8f-c060-4022-b958-dc4077f4a80f" type="radio">
-</input><label class="tabbed-label" for="55d197da-45e2-453b-a6a9-4960be855571">
+<input checked="checked" id="07300306-4f2b-40a0-81d9-f833fe557d60" name="d45bdd3b-fcf8-45d3-8806-0bfd729204c7" type="radio">
+</input><label class="tabbed-label" for="07300306-4f2b-40a0-81d9-f833fe557d60">
 good</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">reversi</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Reverses a list.&quot;&quot;&quot;</span>
@@ -482,8 +575,8 @@ good</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="80301baf-ded8-4bab-ba61-f3ef36155056" name="53075b8f-c060-4022-b958-dc4077f4a80f" type="radio">
-</input><label class="tabbed-label" for="80301baf-ded8-4bab-ba61-f3ef36155056">
+<input id="96a22488-0665-4c9d-882d-773e761e8046" name="d45bdd3b-fcf8-45d3-8806-0bfd729204c7" type="radio">
+</input><label class="tabbed-label" for="96a22488-0665-4c9d-882d-773e761e8046">
 better</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">reversi</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Reverses a list.&quot;&quot;&quot;</span>
@@ -708,8 +801,8 @@ better</label><div class="tabbed-content docutils">
 <h3>Improving legibility<a class="headerlink" href="#improving-legibility" title="Permalink to this headline">¶</a></h3>
 <p>We can improve legibility further by using descriptive names and using f-strings. The finalized code can be compared with the old code side-by-side.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="0b12c2ad-dda7-425b-b300-fafc0c3182b7" name="52f66904-6d7a-4cd6-ad6f-67503ac80b8a" type="radio">
-</input><label class="tabbed-label" for="0b12c2ad-dda7-425b-b300-fafc0c3182b7">
+<input checked="checked" id="3e2b1dd6-2776-48e2-9373-ef69242e0184" name="d86dc4a9-44d1-42dc-92ec-1a5e52a657a6" type="radio">
+</input><label class="tabbed-label" for="3e2b1dd6-2776-48e2-9373-ef69242e0184">
 Improved</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">collections</span>
 <span class="kn">import</span> <span class="nn">re</span>
@@ -732,8 +825,8 @@ Improved</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="0f272e95-fc72-47e2-87e7-0bf663e56791" name="52f66904-6d7a-4cd6-ad6f-67503ac80b8a" type="radio">
-</input><label class="tabbed-label" for="0f272e95-fc72-47e2-87e7-0bf663e56791">
+<input id="faaeb666-43b6-41cc-84f7-d526829b263d" name="d86dc4a9-44d1-42dc-92ec-1a5e52a657a6" type="radio">
+</input><label class="tabbed-label" for="faaeb666-43b6-41cc-84f7-d526829b263d">
 Original</label><div class="tabbed-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">count_words_in_file</span><span class="p">(</span><span class="n">in_file</span><span class="p">,</span> <span class="n">out_file</span><span class="p">):</span>
     <span class="n">counts</span> <span class="o">=</span> <span class="p">{}</span>
@@ -819,7 +912,7 @@ Original</label><div class="tabbed-content docutils">
         
           By <a href='https://cdminix.me'>Christoph Minixhofer</a> <a href='https://twitter.com/cdminix'><img height='24' width='24' src='_images/twitter.svg' alt='Twitter' style='width:24px'></a><br/>
         
-            &copy; Copyright 2022.<br/>
+            &copy; Copyright 2021.<br/>
           <div class="extra_footer">
             Licensed under CC-BY 4.0, Template based on <a href='https://goodresearch.dev'>goodresearch.dev</a>.
           </div>

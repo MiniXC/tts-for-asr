@@ -1,0 +1,514 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta property="og:title" content="Brains & coding" />
+  
+<meta property="og:type" content="website" />
+  
+<meta property="og:url" content="https://goodresearch.dev/brains.html" />
+  
+<meta property="og:description" content="What makes coding uniquely difficult? Coding is hard on your memory. This book’s theme is that writing good research code is about freeing your memory. Neuroscientists distinguish different subtype..." />
+  
+<meta property="og:image" content="https://goodresearch.dev/_images/unicorn.png" />
+  
+<meta property="og:image:alt" content="Brains & coding" />
+  
+    <title>Brains &amp; coding &#8212; TTS for ASR</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+  <!-- add `style` or `link` tags with your CSS `@font-face` declarations here -->
+  <!-- ... and optionally preload the `woff2` for snappier page loads -->
+  <link rel="preload" href="_static/et-book/et-book-bold-line-figures/et-book-bold-line-figures.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="_static/et-book/et-book-display-italic-old-style-figures/et-book-display-italic-old-style-figures.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="_static/et-book/et-book-roman-line-figures/et-book-roman-line-figures.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="_static/et-book/et-book-roman-old-style-figures/et-book-roman-old-style-figures.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="_static/et-book/et-book-semi-bold-old-style-figures/et-book-semi-bold-old-style-figures.woff" as="font" type="font/woff" crossorigin>
+
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.59e7d1499aa759519747cb2a1a335dc4.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/tufte.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.90c857b2bf8f3d46aa488b0ed8bf60a6.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://cdminix.me/tts-for-asr/brains.html" />
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Set up your project" href="setup.html" />
+    <link rel="prev" title="Roadmap" href="roadmap.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@patrickmineault" />
+    <meta name="twitter:title" content="The Good Research Code Handbook" />
+    <meta name="twitter:description" content="This handbook is for grad students, postdocs and PIs who do a lot of programming as part of their research. It will teach you, in a practical manner, how to organize your code so that it is easy to understand and works reliably." />
+    <meta name="twitter:image" content="https://goodresearch.dev/_images/unicorn.png" />
+
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-3Q6LDVNS0X"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){ dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-3Q6LDVNS0X');
+    </script>
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      <img src="_static/unicorn.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">TTS for ASR</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="index.html">
+   TTS for Low-Resource ASR
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Intro
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="roadmap.html">
+   Roadmap
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Brains &amp; coding
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Lessons
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="setup.html">
+   Set up your project
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tidy.html">
+   Keep things tidy
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="decoupled.html">
+   Write decoupled code
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="testing.html">
+   Test your code
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="docs.html">
+   Document your code
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="pipelines.html">
+   Document your project
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="social.html">
+   Make it social
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="zipf.html">
+   A sample project: Zipf’s law
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Extras
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="cka.html">
+   Test numerical code: CKA
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tools.html">
+   Use good tools
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="acknowledgements.html">
+   Acknowledgements
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+<nav class="bd-links" id="nav-social">
+    <div class="bd-toc-item">
+        <p class="caption">
+            <span class="caption-text">Social</span>
+        </p>
+        <ul class="nav bd-sidenav" style="display:block">
+            <li class="toctree-l1"><a class="github-button" href="https://github.com/patrickmineault/codebook" data-icon="octicon-star" data-show-count="true" data-size="large" aria-label="Star patrickmineault/codebook on GitHub">Star on Github</a></li>
+            <li class="toctree-l1"><a href="http://eepurl.com/hHgNOH">Subscribe for updates</a></li>
+            <li class="toctree-l1"><a href="http://twitter.com/share?text=The+Good+Research+Code+Handbook.+Learn+to+write+readable%2C+maintainable+research+code+in+Python.&url=https://goodresearch.dev&user&via=patrickmineault" class="twitter-share-button" data-text="The Good Research Code Handbook. Learn to write readable, maintainable code in Python." data-via="patrickmineault" data-show-count="false">Tweet this handbook</a></li>
+        </ul>
+    </div>
+</nav>
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/brains.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cdminix/tts-for-asr"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cdminix/tts-for-asr/issues/new?title=Issue%20on%20page%20%2Fbrains.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/cdminix/tts-for-asr/edit/main/./brains.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#working-memory">
+   Working memory
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#saving-our-working-memory">
+     Saving our working memory
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#long-term-memory">
+   Long-term memory
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#discussion">
+   Discussion
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="brains-coding">
+<h1>Brains &amp; coding<a class="headerlink" href="#brains-coding" title="Permalink to this headline">¶</a></h1>
+<div class="admonition-optional admonition">
+<p class="admonition-title">Optional</p>
+<p>This section is optional - it’s about the neuroscience of writing code. Feel free to skip to the next section if it doesn’t speak to you.</p>
+</div>
+<p>What makes coding uniquely difficult? Coding is hard on your memory. This book’s theme is that <strong>writing good research code is about freeing your memory</strong>. Neuroscientists distinguish different subtypes of memory, and coding strongly depends on two subtypes:</p>
+<ul class="simple">
+<li><p>Working memory</p></li>
+<li><p>Long-term memory</p></li>
+</ul>
+<p>Let’s look at how these two types of memory are involved during programming.</p>
+<div class="section" id="working-memory">
+<h2>Working memory<a class="headerlink" href="#working-memory" title="Permalink to this headline">¶</a></h2>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Felienne Hermans has a fantastic <a class="reference external" href="https://www.youtube.com/watch?v=g1ib43q3uXQ">talk</a> and <a class="reference external" href="https://www.manning.com/books/the-programmers-brain">book</a> on programming in the brain.</p>
+</div>
+<p>What do you think coding looks like in the brain? The term <em>programming language</em> makes it seem that reading code is like reading natural language. Neuroscientists have looked at what circuits are engaged when people read code. <a class="reference external" href="https://elifesciences.org/articles/58906">Ivanova and colleagues at MIT</a> measured brain activity while people read Python in the scanner. They found that activations didn’t overlap much with conventional language and speech areas.</p>
+<div class="boxed figure align-default" id="id1">
+<img alt="_images/wm-federenko.png" src="_images/wm-federenko.png" />
+<p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text">Code problems (CP; purple bars) created activations with higher overlap with the multiple demand system (left and center) than with the language system (right) compared with other tasks like sentence problems (SP), sentence reading (SR) or non-word reading (NR). From Ivanova et al. (2020), used under a CC-BY 4.0 license.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+<p>Instead, they found high overlap with the <strong>multiple-demand system</strong> - a network of areas typically recruited during math, logic and problem solving. The multiple-demand system is also involved in <strong>working memory</strong>, a type of memory that can hold information for a short amount of time. You may have heard that people can only hold approximately 7 items in working memory - for instance, the digits of a phone number. This idea was popularized by the Harvard psychologist George Miller in the 1950’s. While there’s debate about the exact number of items we can remember in the short term, neuroscientists generally agree that our working memory capacity is very limited.</p>
+<p>Programming involves juggling in your mind many different pieces of information: the definition of the function you want to write, the name of variables you defined, the boundary conditions of the <code class="docutils literal notranslate"><span class="pre">for</span></code> loop you’re writing, etc. If you have too many details to juggle, eventually you will forget about one detail, and you will have to slowly reconstruct that detail from context. Do that enough times, and you will completely cease to make progress. Your working memory is very precious indeed.</p>
+<div class="section" id="saving-our-working-memory">
+<h3>Saving our working memory<a class="headerlink" href="#saving-our-working-memory" title="Permalink to this headline">¶</a></h3>
+<p>One of our strongest weapons against overloading our working memory is <em>convention</em>. Conventions mean that you don’t have to remember details in your working memory - you can rely on your long-term memory instead. For example, let’s say you want to call a helper function that splits a url into its constituent parts. You might instinctively know that the function to call is <code class="docutils literal notranslate"><span class="pre">split_url</span></code> and not <code class="docutils literal notranslate"><span class="pre">splitUrl</span></code> or <code class="docutils literal notranslate"><span class="pre">splitURL</span></code> or <code class="docutils literal notranslate"><span class="pre">URLSplitterFactory().do</span></code>. That’s because Python has a convention that says that you separate words in a variable name with underscores (snake case). If you abide by the convention, you’ve just saved yourself a working memory slot. To be clear, it’s a completely arbitrary convention: JavaScript uses a different convention (camel case) and it works fine.</p>
+<p>We’ll see many more examples of organizing code such that it saves our working memory:</p>
+<ul class="simple">
+<li><p>Writing small functions</p></li>
+<li><p>Writing functions with low number of side effects</p></li>
+<li><p>Writing decoupled functions</p></li>
+<li><p>Following the Python style guide to the letter</p></li>
+<li><p>Using an auto-formatter</p></li>
+</ul>
+<p>Your working memory is precious, save it!</p>
+</div>
+</div>
+<div class="section" id="long-term-memory">
+<h2>Long-term memory<a class="headerlink" href="#long-term-memory" title="Permalink to this headline">¶</a></h2>
+<blockquote class="epigraph">
+<div><p>What is this?</p>
+<p class="attribution">—You, squinting at code you wrote a year ago</p>
+</div></blockquote>
+<p><em>Research</em> code in particular is challenging on <strong>long-term memory</strong>. This is because:</p>
+<ul class="simple">
+<li><p>The project’s endpoint might be unclear</p></li>
+<li><p>Correct can be hard to define</p></li>
+<li><p>There can be lots of exploration and dead ends before you produce a unit of research</p></li>
+<li><p>Sometimes, manual steps are involved requiring human judgement</p></li>
+<li><p>You have to remember all the dead ends for the code to even make sense</p></li>
+</ul>
+<div class="admonition-has-this-ever-happened-to-you admonition">
+<p class="admonition-title">Has this ever happened to you?</p>
+<p>You work on a project for many months, and you submit a paper. You receive reviews months later requiring revisions. You sit down to code and it takes you several days to figure out how to run a supplementary analysis that ended up taking only a few lines of code.</p>
+</div>
+<p>While the scientific method, as traditionally taught, is fairly linear, real lab work often involves a high nonlinear process of discovery.</p>
+<div class="boxed figure align-default" id="id2">
+<a class="reference internal image-reference" href="_images/lifecycle_complex.svg"><img alt="_images/lifecycle_complex.svg" src="_images/lifecycle_complex.svg" width="450px" /></a>
+<p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">Generating a research paper can be a messy process.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+<p>Future you will have forgotten 90% of that process. Code that sticks to convention, is tidy and well-documented will be far easier to use in the future than clever, obtuse code. Boring code is good code!</p>
+</div>
+<div class="section" id="discussion">
+<h2>Discussion<a class="headerlink" href="#discussion" title="Permalink to this headline">¶</a></h2>
+<blockquote class="epigraph">
+<div><p>Simple is better than complicated. Complicated is better than complex.</p>
+<p class="attribution">—The Zen of Python</p>
+</div></blockquote>
+<p>We’ve seen that coding - especially research code - is difficult along two axes:</p>
+<ul class="simple">
+<li><p>working memory</p></li>
+<li><p>long-term memory</p></li>
+</ul>
+<p>We’ve discussed some of our overall strategies to deal with these limitations, namely:</p>
+<ul class="simple">
+<li><p>using convention</p></li>
+<li><p>keeping code tidy</p></li>
+<li><p>documenting our code</p></li>
+</ul>
+<p>Let’s see how you can implement these strategies in practice. Let’s jump in!</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cdminix/tts-for-asr",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="roadmap.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Roadmap</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="setup.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Set up your project</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By <a href='https://xcorr.net'>Christoph Minixhofer</a> <a href='https://twitter.com/cdminix'><img height='24' width='24' src='_images/twitter.svg' alt='Twitter' style='width:24px'></a><br/>
+        
+            &copy; Copyright 2021.<br/>
+          <div class="extra_footer">
+            Licensed under <a href='https://github.com/patrickmineault/codebook/blob/main/LICENSE'>CC-BY 4.0</a> [<a href='https://github.com/patrickmineault/codebook'>source</a>].<br /><a href='https://github.com/patrickmineault/codebook/issues'>Report issue</a>.
+          </div>
+      </p>
+    </div>
+  </footer>
+  <!-- Place this tag in your head or just before your close body tag. -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-3Q6LDVNS0X"></script>
+<script>
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){ dataLayer.push(arguments); }
+                    gtag('config', 'G-3Q6LDVNS0X');
+                </script>
+
+  </body>
+</html>

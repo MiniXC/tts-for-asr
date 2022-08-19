@@ -15,7 +15,7 @@ While non-autoregressive models have become quite popular for TTS, they haven't 
 
 The model architectures I have summarised above have been modified to better account for different factors suitable for **TTS-for-ASR**.
 
-```{figure} ../figures/tts-table.svg
+```{figure} ../figures/tts_table.svg
 ---
 figclass: boxed
 name: ttstable
