@@ -182,4 +182,6 @@
 
 <a name="zen2019libritts"></a>Zen, H., Dang, V., Clark, R., Zhang, Y., Weiss, R. J., Jia, Y., Chen, Z., & Wu, Y. (2019). LibriTTS: A Corpus Derived from LibriSpeech for Text-to-Speech. Interspeech 2019.
 
+<a name="zhang2019vr"></a>Zhang, J., Tai, L., Yun, P., Xiong, Y., Liu, M., Boedecker, J., & Burgard, W. (2019). VR-Goggles for Robots: Real-to-Sim Domain Adaptation for Visual Control. RA-L 2019.
+
 <a name="zhu2022byt5g2p"></a>Zhu, J., Zhang, C., & Jurgens, D. (2022). ByT5 model for massively multilingual grapheme-to-phoneme conversion [arXiv:2204.03067](http://arxiv.org/abs/2204.03067).
