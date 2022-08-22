@@ -5,7 +5,7 @@ As I have mentioned before, synthetic data is most useful in the case of little 
 - *Transfer learning* aims to transfer model knowledge from a high-resource source task to the low-resource target task, usually using a pre-training/fine-tuning approach. 
 - *Meta learning* means to learn from previous a learning task (also called "learning to learn") to adapt to a new task using meta-data from said initial task.
 
-{numref}`lowresource` shows an overview of these different approaches for low-resource ASR.
+{numref}`lowresource` shows an overview of these different approaches for low-resource ASR. 
 
 ```{figure} ../figures/low-resource.svg
 ---
@@ -44,14 +44,14 @@ While it can be helpful to have labels for how "low-resource" a certain setup is
 figclass: boxed
 name: lrspeech-fig
 ---
-Xu et al. (2020) classify both ASR and TTS into "Rich Resource", "Low Resource", "Extremely Low Resource" and "Unsupervised".
+[Xu et al. (2020)](references.html#xu2020lrspeech) classify both ASR and TTS into "Rich Resource", "Low Resource", "Extremely Low Resource" and "Unsupervised".
 ```
 
 ## Which ASR architectures are best for Low-Resource?
 
 There are two main approaches in recent work for low-resource ASR:
 - *Hybrid HMM-DNN systems* trained using LF-MMI (lattice-free maximum mutual information) [(Hadian et al., 2018)](references.html#hadian2018lfmmi). This is usually achieved using the Kaldi framework [^kaldi], and the DNN portion of the system is most commonly a variant of a TDNN (Time-Delay Neural Network) [(Waibel et al., 1989)](references.html#waibel1989tdnn).
-- *Large end-to-end models* , which are usually pre-trained on unlabeled data self-supervised learning, and fine-tuned for ASR using CTC (Connectionist Temporal Classification) [(Graves et al., 2006)](references.html#graves2006ctc). To some extent, this has been made possible by the efficiency of training Transformers [(Vaswani et al., 2017)](references.html#vaswani2017attention) and Conformers, which are more suitable for speech [(Guo et al., 2021)](references.html#guo2021conformer).
+- *Large end-to-end models* , which are usually pre-trained on unlabeled data self-supervised learning, and fine-tuned for ASR using CTC (Connectionist Temporal Classification) [(Graves et al., 2006)](references.html#graves2006ctc). To some extent, this has been made possible by the efficiency of training Transformers [(Vaswani et al., 2017)](references.html#vaswani2017attention) and Conformers [(Gulati et al., 2020)](references.html#gulati2020conformer), which are convolution-augmented Transformers, and have been found to be more suitable for speech [(Guo et al., 2021)](references.html#guo2021conformer).
 
 Despite the dominance of large end-to-end models for high-resource ASR and other speech-related tasks[^E2E], they are relatively unproven for low-resource ASR -- [Alumäe & Kong (2021)](references.html#alumaekong2021hybrid) found a hybrid CNN-TDNNF model to compare competitively with a fine-tuned XLSR-53 [(Conneau et al., 2020)](references.html#conneau2020xlsr53) without the need for any pre-training. They also found (unsurprisingly) that a Conformer model without pre-training performed extremely poorly. [Perero-Codosero et al. (2022)](references.html#perero2022hybrid) found that when not doing any pre-training, hybrid models still outperform end-to-end models, even in a relatively high-resource scenario (600 hours of data). Specific to synthetic data augmentation, [Rossenbach et al. (2021)](references.html#rossenbach2021hybrid), found that hybrid models did not benefit from the synthetic data, while Transformer models did. In the field of **TTS-for-ASR**, even recent work utilizing features derived from pre-trained end-to-end models [(Ueno et al., 2021)](references.html#ueno2021dth) do not fine-tune said models, perhaps due to the large amount of resources required for fine-tuning.
 

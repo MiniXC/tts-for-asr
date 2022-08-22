@@ -37,6 +37,10 @@ In previous work, silences between words were either not mentioned [(Ren et al.,
 
 Since FastSpeech 2 predicts mel-spectrograms rather than raw audio, a vocoder is needed. For this I use Hifi-GAN [(Kong et al., 2020)](references.html#kong2020hifigan). To ensure the vocoder isn't holding back the **TTS-for-ASR** system, I conducted an experiment where LibriSpeech training data is converted to mel-spectrograms and re-synthesized using Hifi-GAN. I then trained two ASR models, one on the re-synthesized data, and one on the original data. I found that for LibriSpeech [(Panayotov et al., 2015)](references.html##panayotov2015librispeech), there is no significant different between re-synthesized and original audio for ASR training.
 
+## Performance and Multi-Speaker Improvements
+
+Various performance improvements for FastSpeech 2 have been proposed by [Luo et al. (2021)](references.html#luo2021lightspeech), the main one being the use of depthwise separable convolutions [(Sifre & Mallat, 2014)](references.html#sifre2014depthwise), a more efficient type of convolution operation, in the conformer [(Gulati et al., 2020)](references.html#gulati2020conformer) layers. I adopted the same architecture, but found that changing the kernel sizes as they report did not lead to a significant improvement. The associated efficiency gain allowed me to increase the number of decoder layers from 4 to 6, which helped FastSpeech 2 accurately model multiple speakers.
+
 ## Variances
 
 ```{figure} ../figures/variance_adaptor.png
@@ -52,14 +56,44 @@ A key premise of FastSpeech 2 is reducing the one-to-many problem in TTS. Since 
 - *During training* the variance adaptor (show in {numref}`varadapt`) is trained to predict the previously extracted variances. However, the ground-truth values are quantized and added to the hidden representation rather than the predicted values.
 - *During inference*, the predicted variances are quantized and added to the hidden representations, leading to said mismatch.
 
-In the [next chapter](09_conditioning), I discuss how I reduced this mismatch using utterance-level conditioning.
-
 ```{figure} ../figures/examples.svg
 ---
 figclass: boxed
 name: example
 ---
 An example utterance and it's variances synthesized using FastSpeech 2. ☐ indicate optional silences.
+```
+
+In the [next chapter](09_conditioning), I discuss how I reduced the aforementioned mismatch using utterance-level conditioning.
+
+### Additional SNR Variance
+
+From qualitative assessment of the synthetic speech, there seemed be metallic-sounding artifacts in the produced speech. Some speakers would consistently have these artifacts, while others would produce very clean audio. I hypothesized that the artifacts could be an attempt by the model to produce probabilistic noise for the speakers with noisier environments. Using Waveform Amplitude Distribution Analysis (WADA) [(Kim & Stern, 2008)](references.html#kimstern2008wada), which is a SNR (signal-to-noise ratio) estimation algorithm, I found that speakers with a lower SNR in the training data indeed lead to more artifacts. To allow the TTS system to better model noise, I added this estimated SNR value as an additional variance, leading to significant improvement in mel-spectrogram MAE (mean absolute error) of 3.7% relative.
+
+### Duration Augmentation
+
+Since the alignments using forced alignment aren't perfect, I experimented with "duration augmentation" -- during training, each phoneme duration is increased or reduced by a length in the range $[1, 3]$ frames with probability $p_d$. This improves the MAE of the produced mel-spectrograms by 1.3% relative.
+
+### JSD Early-Stopping
+
+I found that the variance adaptor tended to overfit to the train-
+ing data, and tested the following early stopping strategy to avoid this problem: I froze the weights of the variance adaptor corresponding to a specific variance if a metric computed on the predicted variances on held-out data does not improve for 3 epochs. I also set the weights to their state at the epoch where the best value of said metric was reached. I tested two different metrics, with the first one being the JSD
+(Jensen-Shannon-Divergence) [(Fuglede & Topsoe, 2004)](references.html#fuglede2004jsd), which measures the similarity of two probability distributions $P$ and $Q$ as follows, where D is the Kullback-Leibler Divergence:
+
+$${\rm JSD}(P \parallel Q)= \frac{1}{2}D(P \parallel M)+\frac{1}{2}D(Q \parallel M)$$
+
+We approximate P and Q using KDE (kernel density estimation). The second metric is the MAE
+of the predictions. As can be seen in {numref}`jsdwer`, my early stopping approach for TTS improves downstream ASR performance (for more details on the ASR setup, see the [utterance-level conditioning chapter](09_conditioning)). I found JSD to be the more appropriate metric.
+My hypothesis as to why that is is that the similarity of the variance distributions is more important for diverse TTS than their absolute error, as the latter can be easily skewed by outliers.
+ 
+```{figure} ../figures/jsd_wer.png
+---
+figclass: boxed
+name: jsdwer
+height: 100px
+---
+Effects of early stopping of the variance adaptor
+during training.
 ```
 
 [^pyworld]: [github.com/JeremyCCHsu/Python-Wrapper-for-World-Vocoder](https://github.com/JeremyCCHsu/Python-Wrapper-for-World-Vocoder)

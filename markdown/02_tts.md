@@ -30,7 +30,7 @@ enhancing acoustic-to-word speech recognition"  Mimura et al. 2018 -->
 <!-- TODO: Huan -> Huang -->
 <!-- TODO: Chenet -> Chen et. -->
 
-### Controllability
+### Controllability 
 
 Controllable (also called expressive) TTS aims at better solving the one-to-many problem in TTS, where one utterance can be realized in many different ways. For example, if I trained a model using L1-loss, the produced mel-spectrograms will likely be oversmoothed, as the model learns to predict the average rather than the different possible realizations of each text input. This is done by explicitly or implicitly modeling **variation information** [(Tan et al., 2021)](references.html#tan2021survey). The **variation information** used falls into four categories:
 - *Text Content*, in the form of characters or phonemes is the most basic variation information. Some works use representations from pre-trained language models to enhance this information (for example [Fang et al., 2019](references.html#fang2019pretrained)).
