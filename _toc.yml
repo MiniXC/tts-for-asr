@@ -14,10 +14,10 @@ parts:
 - caption: My Work
   chapters:
     - file: markdown/08_fastspeech2
-#     - file: markdown/09_conditioning
-#     - file: markdown/10_snr
-#     - file: markdown/11_german-to-english
-#     - file: markdown/12_future
+    - file: markdown/09_conditioning
+    - file: markdown/10_snr
+    - file: markdown/11_german-to-english
+    - file: markdown/12_future
 - caption: References
   chapters:
   - file: markdown/references

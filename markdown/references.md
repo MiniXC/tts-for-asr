@@ -16,6 +16,8 @@
 
 <a name="chen2021mixmatch"></a>Chen, Z., Rosenberg, A., Zhang, Y., Zen, H., Ghodsi, M., Huang, Y., Emond, J., Wang, G., Ramabhadran, B., & Moreno, P. J. (2021). Semi-Supervision in ASR: Sequential MixMatch and Factorized TTS-Based Augmentation. Interspeech 2021.
 
+<a name="chien2021fastspeech2dvec"></a>Chien, C.-M., Lin, J.-H., Huang, C., Hsu, P., & Lee, H. (2021). Investigating on Incorporating Pretrained and Learnable Speaker Representations for Multi-Speaker Multi-Style Text-to-Speech. ICASSP 2021.
+
 <a name="chung2019semisuptts"></a>Chung, Y.-A., Wang, Y., Hsu, W.-N., Zhang, Y., & Skerry-Ryan, R. J. (2019). Semi-Supervised Training for Improving Data Efficiency in End-to-End Speech Synthesis. ICASSP 2019.
 
 <a name="conneau2020xlsr53"></a>Conneau, A., Baevski, A., Collobert, R., Mohamed, A., & Auli, M. (2020). Unsupervised Cross-lingual Representation Learning for Speech Recognition. [arXiv:2006.13979](http://arxiv.org/abs/2006.13979).
@@ -72,6 +74,8 @@
 
 <a name="kingmawelling2014vae"></a>Kingma, D. P., & Welling, M. (2014). Auto-Encoding Variational Bayes [arXiv:1312.6114](http://arxiv.org/abs/1312.6114).
 
+<a name="kong2020hifigan"></a>Kong, J., Kim, J., & Bae, J. (2020). HiFi-GAN: Generative Adversarial Networks for Efficient and High Fidelity Speech Synthesis. NeurIPS 2020.
+
 <a name="kuznichov2019leaf"></a>Kuznichov, D., Zvirin, A., Honen, Y., & Kimmel, R. (2019). Data Augmentation for Leaf Segmentation and Counting Tasks in Rosette Plants. CVF 2019.
 
 <a name="laptev2020moredata"></a>Laptev, A., Korostik, R., Svischev, A., Andrusenko, A., Medennikov, I., & Rybin, S. (2020). You Do Not Need More Data: Improving End-To-End Speech Recognition by Text-To-Speech Data Augmentation. CISP-BMEI 2020.
@@ -84,11 +88,15 @@
 
 <a name="mcauliffe2017mfa"></a>McAuliffe, M., Socolof, M., Mihuc, S., Wagner, M., & Sonderegger, M. (2017). Montreal Forced Aligner: Trainable Text-Speech Alignment Using Kaldi. Interspeech 2017.
 
+<a name="nagrani2017voxceleb"></a>Nagrani, A., Chung, J. S., & Zisserman, A. (2017). VoxCeleb: A large-scale speaker identification dataset. Interspeech 2017.
+
 <a name="nikolenko2021synthetic"></a>Nikolenko, S. I. (2021). Synthetic Data for Deep Learning (Vol. 174). Springer International Publishing.
 
 <a name="oord2016wavenet"></a>Oord, A. van den, Dieleman, S., Zen, H., Simonyan, K., Vinyals, O., Graves, A., Kalchbrenner, N., Senior, A., & Kavukcuoglu, K. (2016). WaveNet: A Generative Model for Raw Audio. [arXiv:1609.03499](https://arxiv.org/abs/1609.03499).
 
 <a name="oord2017vqvae"></a>Oord, A. van den, Vinyals, O., & Kavukcuoglu, K. (2017). Neural Discrete Representation Learning. NeurIPS 2017.
+
+<a name="panayotov2015librispeech"></a>Panayotov, V., Chen, G., Povey, D., & Khudanpur, S. (2015). Librispeech: An ASR corpus based on public domain audio books. ICASSP 2015.
 
 <a name="park2019specaugment"></a>Park, D. S., Chan, W., Zhang, Y., Chiu, C.-C., Zoph, B., Cubuk, E. D., & Le, Q. V. (2019). SpecAugment: A Simple Data Augmentation Method for Automatic Speech Recognition. Interspeech 2019.
 
@@ -107,7 +115,6 @@
 <a name="rossenbach2020ttsasr"></a>Rossenbach, N., Zeyer, A., Schlüter, R., & Ney, H. (2020). Generating Synthetic Audio Data for Attention-Based Speech Recognition Systems. ICASSP 2020.
 
 <a name="rossenbach2021hybrid"></a>Rossenbach, N., Zeineldeen, M., Hilmes, B., Schlüter, R., & Ney, H. (2021). Comparing the Benefit of Synthetic Training Data for Various Automatic Speech Recognition Architectures (arXiv:2104.05379). ASRU 2021.
-
 
 <a name="rygaard2015lowresource"></a>Rygaard, L. V. (2015). Using synthesized speech to improve speech recognition for lowresource languages.
 
@@ -132,6 +139,8 @@
 <a name="vaswani2017attention"></a>Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., Kaiser, Ł., & Polosukhin, I. (2017). Attention is All you Need. NeurIPS (2017).
 
 <a name="waibel1989tdnn"></a>Waibel, A., Hanazawa, T., Hinton, G., Shikano, K., & Lang, K. J. (1989). Phoneme recognition using time-delay neural networks. IEEE Transactions on Acoustics, Speech, and Signal Processing (1989).
+
+<a name="wan2018g2e"></a>Wan, L., Wang, Q., Papir, A., & Moreno, I. L. (2020). Generalized End-to-End Loss for Speaker Verification. ICASSP 2018.
 
 <a name="wang2015wordvec"></a>Wang, P., Qian, Y., Soong, F. K., He, L., & Zhao, H. (2015). Word embedding for recurrent neural network based TTS synthesis. ICASSP 2015.
 
