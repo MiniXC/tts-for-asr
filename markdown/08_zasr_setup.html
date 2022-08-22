@@ -5,17 +5,19 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta property="og:title" content="Voice Conversion" />
+<meta property="og:title" content="Hybrid DNN-HMM" />
   
 <meta property="og:type" content="website" />
   
-<meta property="og:url" content="cdminix.me/markdown/vc.html" />
+<meta property="og:url" content="cdminix.me/markdown/08_zasr_setup.html" />
+  
+<meta property="og:description" content="For my TTS-for-ASR experiments, I used Hybrid HMM-DNN system due to it’s suitability for low-resource ASR I explained in the low-resource ASR chapter. So far, I have mostly focused on enhancing TTS..." />
   
 <meta property="og:image" content="https://goodresearch.dev/_images/unicorn.png" />
   
-<meta property="og:image:alt" content="Voice Conversion" />
+<meta property="og:image:alt" content="Hybrid DNN-HMM" />
   
-    <title>Voice Conversion &#8212; TTS for ASR</title>
+    <title>Hybrid DNN-HMM &#8212; TTS for ASR</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -65,12 +67,12 @@
         const thebe_selector_output = ".output,.cell_output"
     </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <link rel="canonical" href="https://cdminix.me/tts-for-asr/markdown/vc.html" />
+    <link rel="canonical" href="https://cdminix.me/tts-for-asr/markdown/08_zasr_setup.html" />
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="FastSpeech 2" href="fastspeech2.html" />
-    <link rel="prev" title="Speech Chain / Backtransformation" href="speechchain.html" />
+    <link rel="next" title="FastSpeech 2" href="08_fastspeech2.html" />
+    <link rel="prev" title="Domain Transfer" href="06_transfer.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -103,7 +105,7 @@
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
-      <img src="../_static/unicorn.png" class="logo" alt="logo">
+      <img src="../_static/one.png" class="logo" alt="logo">
       
       
       <h1 class="site-logo" id="site-title">TTS for ASR</h1>
@@ -128,35 +130,23 @@
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="other_fields.html">
-   Synthetic Data in Other Fields
+  <a class="reference internal" href="01_other_fields.html">
+   Synthetic Data
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="low_resource_asr.html">
+  <a class="reference internal" href="02_tts.html">
+   Synthetic Speech
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_low_resource_asr.html">
    Low-Resource ASR
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="tts.html">
-   TTS
-  </a>
- </li>
-</ul>
-<p class="caption">
- <span class="caption-text">
-  TTS for Low-Resource
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="cross_speaker.html">
-   Cross-Speaker Transfer
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="cross_lingual.html">
-   Cross-Lingual Transfer
+  <a class="reference internal" href="04_low_resource_tts.html">
+   Low-Resource TTS
   </a>
  </li>
 </ul>
@@ -165,20 +155,15 @@
   Combining ASR &amp; TTS
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="augmentation.html">
-   Synthetic Speech as Augmentation
+  <a class="reference internal" href="05_augmentation.html">
+   Data Augmentation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="speechchain.html">
-   Speech Chain / Backtransformation
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Voice Conversion
+  <a class="reference internal" href="06_transfer.html">
+   Domain Transfer
   </a>
  </li>
 </ul>
@@ -187,33 +172,38 @@
   My Work
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Hybrid DNN-HMM
+  </a>
+ </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="fastspeech2.html">
+  <a class="reference internal" href="08_fastspeech2.html">
    FastSpeech 2
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="priors.html">
-   Priors
+  <a class="reference internal" href="09_conditioning.html">
+   Utterance-Level Conditioning
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="snr.html">
-   SNR Variance
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="german-to-english.html">
+  <a class="reference internal" href="11_german-to-english.html">
    German-to-English Transfer
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="future.html">
+  <a class="reference internal" href="12_future.html">
    Future Work
   </a>
  </li>
 </ul>
+<p class="caption">
+ <span class="caption-text">
+  References
+ </span>
+</p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="references.html">
@@ -273,7 +263,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/markdown/vc.md"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/markdown/08_zasr_setup.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -293,10 +283,10 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/cdminix/tts-for-asr/issues/new?title=Issue%20on%20page%20%2Fmarkdown/vc.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/cdminix/tts-for-asr/issues/new?title=Issue%20on%20page%20%2Fmarkdown/08_zasr_setup.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/cdminix/tts-for-asr/edit/main/./markdown/vc.md"><button
+        <a class="edit-button" href="https://github.com/cdminix/tts-for-asr/edit/main/./markdown/08_zasr_setup.md"><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
@@ -316,6 +306,24 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cnn-tdnn">
+   CNN-TDNN
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cmvn">
+   CMVN
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -324,8 +332,23 @@
         
               <div>
                 
-  <div class="section" id="voice-conversion">
-<h1>Voice Conversion<a class="headerlink" href="#voice-conversion" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="hybrid-dnn-hmm">
+<h1>Hybrid DNN-HMM<a class="headerlink" href="#hybrid-dnn-hmm" title="Permalink to this headline">¶</a></h1>
+<p>For my <strong>TTS-for-ASR</strong> experiments, I used <em>Hybrid HMM-DNN system</em> due to it’s suitability for low-resource ASR I explained in the <a class="reference internal" href="03_low_resource_asr.html"><span class="doc std std-doc">low-resource ASR chapter</span></a>. So far, I have mostly focused on enhancing TTS systems for better use with ASR systems, I have found some improvements which make ASR more suitable for being trained with TTS data.</p>
+<div class="section" id="cnn-tdnn">
+<h2>CNN-TDNN<a class="headerlink" href="#cnn-tdnn" title="Permalink to this headline">¶</a></h2>
+<p>I found that the CNN+TDNN model in Kaldi <a class="footnote-reference brackets" href="#cnntdnn" id="id1">1</a> improves performance over a TDNN for synthetic speech (1.8% relative WER reduction), while not showing any significant difference over a regular TDNN for real speech.</p>
+</div>
+<div class="section" id="cmvn">
+<h2>CMVN<a class="headerlink" href="#cmvn" title="Permalink to this headline">¶</a></h2>
+<p>Cepstral mean-variance normalization (CMVN) <a class="reference external" href="references.html#viikkilaurila1998cmvn">(Viikki and Laurila, 1998)</a>, which is a normalization technique linearly transforming the cepstral coefficients to have the same segmental statistics, seems to have a similar effect as a CNN+TDNN in that it only yields a marginal improvement for real speech, but a significant improvement for synthetic speech (3.6% relative WER reduction).</p>
+<hr class="footnotes docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="cnntdnn"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p><a class="reference external" href="https://github.com/kaldi-asr/kaldi/blob/master/egs/wsj/s5/local/chain/tuning/run_cnn_tdnn_1a.sh">github.com/kaldi-asr/kaldi/blob/master/egs/wsj/s5/local/chain/tuning/run_cnn_tdnn_1a.sh</a></p>
+</dd>
+</dl>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -358,16 +381,16 @@
 <div class='prev-next-bottom'>
     
     <div id="prev">
-        <a class="left-prev" href="speechchain.html" title="previous page">
+        <a class="left-prev" href="06_transfer.html" title="previous page">
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">Speech Chain / Backtransformation</p>
+                <p class="prevnext-title">Domain Transfer</p>
             </div>
         </a>
     </div>
      <div id="next">
-        <a class="right-next" href="fastspeech2.html" title="next page">
+        <a class="right-next" href="08_fastspeech2.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
                 <p class="prevnext-title">FastSpeech 2</p>
@@ -386,9 +409,9 @@
         
           By <a href='https://cdminix.me'>Christoph Minixhofer</a> <a href='https://twitter.com/cdminix'><img height='24' width='24' src='_images/twitter.svg' alt='Twitter' style='width:24px'></a><br/>
         
-            &copy; Copyright 2021.<br/>
+            &copy; Copyright 2022.<br/>
           <div class="extra_footer">
-            Licensed under CC-BY 4.0, Template based on <a href='goodresearch.dev'>goodresearch.dev</a>.
+            Licensed under CC-BY 4.0, Template based on <a href='https://goodresearch.dev'>goodresearch.dev</a>.
           </div>
       </p>
     </div>

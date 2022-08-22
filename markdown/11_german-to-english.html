@@ -11,6 +11,8 @@
   
 <meta property="og:url" content="cdminix.me/markdown/11_german-to-english.html" />
   
+<meta property="og:description" content="In some of my earliest experiments, I tested a naive TTS-for-ASR approach utilizing phone-based multi-lingual transfer from the German subset of the GlobalPhone dataset(Schultz et al., 2002) to Lib..." />
+  
 <meta property="og:image" content="https://goodresearch.dev/_images/unicorn.png" />
   
 <meta property="og:image:alt" content="German-to-English Transfer" />
@@ -69,6 +71,8 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Future Work" href="12_future.html" />
+    <link rel="prev" title="Utterance-Level Conditioning" href="09_conditioning.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -160,6 +164,38 @@
  <li class="toctree-l1">
   <a class="reference internal" href="06_transfer.html">
    Domain Transfer
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  My Work
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="08_zasr_setup.html">
+   Hybrid DNN-HMM
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08_fastspeech2.html">
+   FastSpeech 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09_conditioning.html">
+   Utterance-Level Conditioning
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   German-to-English Transfer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="12_future.html">
+   Future Work
   </a>
  </li>
 </ul>
@@ -270,6 +306,24 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Phone Mapping
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#asr-training">
+   ASR Training
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -280,6 +334,42 @@
                 
   <div class="section" id="german-to-english-transfer">
 <h1>German-to-English Transfer<a class="headerlink" href="#german-to-english-transfer" title="Permalink to this headline">¶</a></h1>
+<p>In some of my earliest experiments, I tested a naive <strong>TTS-for-ASR</strong> approach utilizing phone-based multi-lingual transfer from the German subset of the GlobalPhone dataset <a class="reference external" href="references.html#schultz2002globalphone">(Schultz et al., 2002)</a> to LibriSpeech <a class="reference external" href="references.html##panayotov2015librispeech">(Panayotov et al., 2015)</a>.
+To allow for a qualitative assessment of the synthetic speech, I went with an artificial low-resource scenario, using English as the target language, but restricting the amount of data.
+I trained the TTS model described in the <a class="reference internal" href="08_fastspeech2.html"><span class="doc std std-doc">FastSpeech 2 chapter</span></a> on the German portion of GlobalPhone alone, without any fine-tuning on English data.</p>
+<p>As can be seen in <a class="reference internal" href="#phone-mapping"><span class="std std-numref">Fig. 18</span></a>, when using the model to generate additional English training data for ASR, this happens in the following steps:</p>
+<ol class="simple">
+<li><p>Convert English text to phoneme sequence using G2P.</p></li>
+<li><p>Map the phonemes that are only present in English, but not in German, to their closest German counterparts.</p></li>
+<li><p>Synthesize the altered phoneme sequence.</p></li>
+</ol>
+<div class="boxed figure align-default" id="phone-mapping">
+<a class="reference internal image-reference" href="../_images/phone_mapping.png"><img alt="../_images/phone_mapping.png" src="../_images/phone_mapping.png" style="height: 200px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 18 </span><span class="caption-text">Phone mapping approach for cross-lingual TTS.</span><a class="headerlink" href="#phone-mapping" title="Permalink to this image">¶</a></p>
+</div>
+<div class="section" id="id1">
+<h2>Phone Mapping<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>Since different languages often have differing phone inventories, it is necessary to map to closest phone in a target language when using this approach. To do so without the need for handcrafting this mapping, I utilized the PHOIBLE database and phonological distinctive feature system <a class="reference external" href="references.html#moran2019phoible">(Moran et al., 2019)</a>, in which every phoneme in every language in said database has a corresponding feature vector. By computing the cosine similarity between phone vectors across different languages, we can substitute non-existing phones in the target language with its closest counterpart in the source language. In the case of German-to-English, for example, the <code class="docutils literal notranslate"><span class="pre">ð</span></code> is converted to the closest phoneme in German, <code class="docutils literal notranslate"><span class="pre">d</span></code>.</p>
+<div class="tip admonition note">
+<p class="admonition-title">Note</p>
+<p>I have created an utility library for doing this phone mapping called <a class="reference external" href="https://cdminix.me/phones">phones</a>.</p>
+</div>
+<p>You can hear the result of this approach by listening to the audio below – A male voice says “This is a test.” with a noticeably German accent stemming from the replacement of <code class="docutils literal notranslate"><span class="pre">ð</span></code> with <code class="docutils literal notranslate"><span class="pre">d</span></code>.</p>
+<audio controls="1" controlslist="nodownload nofullscreen noremoteplayback" alt="The Sound File">
+<source src="https://sndup.net/jf9h/d", type="audio/wav">
+Your browser does not support the audio tag.
+</audio>
+</div>
+<div class="section" id="asr-training">
+<h2>ASR Training<a class="headerlink" href="#asr-training" title="Permalink to this headline">¶</a></h2>
+<p>As mentioned before, I restricted the amount of English data to emulate a low-resource setting, to 1 and 15 hours respectively. I used 15 hours of synthetic speech for all experiments.
+I used the large pre-trained XLSR-53 model <a class="reference external" href="references.html#conneau2020xlsr53">(Conneau et al., 2020)</a> for ASR. I found that for this model, combining the synthetic and real speech yielded worse results. Instead, a pre-training/fine-tuning approach has to be used, where the model is pre-trained on the synthetic data and fine-tuned on the real data. This improved WER by 18% (relative) for the 15 hours setting and by 23% for the 1 hour setting, as can be seen in <a class="reference internal" href="#gerenresults"><span class="std std-numref">Fig. 19</span></a>.</p>
+<div class="boxed figure align-default" id="gerenresults">
+<a class="reference internal image-reference" href="../_images/gerenresults.png"><img alt="../_images/gerenresults.png" src="../_images/gerenresults.png" style="height: 100px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 19 </span><span class="caption-text">WER (CER) for <strong>TTS-for-ASR</strong> using a German TTS system with phone mapping to synthesize English speech.</span><a class="headerlink" href="#gerenresults" title="Permalink to this image">¶</a></p>
+</div>
+<p>In the <a class="reference internal" href="12_future.html"><span class="doc std std-doc">next chapter</span></a>, I discuss how I want to continue and expand on this work and expand on it going forward.</p>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -311,6 +401,24 @@
 
 <div class='prev-next-bottom'>
     
+    <div id="prev">
+        <a class="left-prev" href="09_conditioning.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Utterance-Level Conditioning</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="12_future.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Future Work</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
 
 </div>
         

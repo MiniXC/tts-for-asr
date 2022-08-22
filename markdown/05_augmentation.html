@@ -171,6 +171,38 @@
 </ul>
 <p class="caption">
  <span class="caption-text">
+  My Work
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="08_zasr_setup.html">
+   Hybrid DNN-HMM
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08_fastspeech2.html">
+   FastSpeech 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09_conditioning.html">
+   Utterance-Level Conditioning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11_german-to-english.html">
+   German-to-English Transfer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="12_future.html">
+   Future Work
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
   References
  </span>
 </p>
@@ -316,17 +348,17 @@
 In this chapter, I focus on how this augmentation can best be achieved, and which factors influence the ASR performance of a model trained with synthetic-augmented speech data.</p>
 <div class="section" id="filtering-sampling">
 <h2>Filtering/Sampling<a class="headerlink" href="#filtering-sampling" title="Permalink to this headline">¶</a></h2>
-<p>Before any synthetic data is added to the real data, it can be helpful to filter the data or to sample from the model in a way beneficial to ASR. This can be helpful because the amount of data that can be generated using a TTS model is usually not the limiting factor in a <strong>TTS-for-ASR</strong> system. This means we can generate more data than we need and then <em>filter</em> it. Or, seeing it from the perspective of <em>sampling</em>, we only generate samples fulfilling certain conditions in the first place. One way to filter out low-quality TTS results is computing the WER (word error rate) on said results and dropping ones above a threshold of 20% WER <a class="reference external" href="references.html#rosenberg2019ttsasr">(Rosenberg et al., 2019)</a>. <a class="reference external" href="references.html#wang2020scl">Wang et al. (2020)</a> performed copy synthesis using scheduled sampling at inference time, feeding the model ground-truth predictions at inference time with a probability of <span class="math notranslate nohighlight">\(0.2\)</span>, leading to more high-quality inference and lower WER. <a class="reference external" href="references.html#sun2020vae">Sun et al. (2020)</a> performed copy synthesis as well, with the addition that their VAE-TTS systems allowed them to sample from different latent style representations at inference time to produce different styles of the same utterance. <a class="reference external" href="references.html#casanova2022singlespeaker">Casanova et al.(2022)</a> randomly sample from their model temperature (<span class="math notranslate nohighlight">\(T\)</span>), duration predictor temperature (<span class="math notranslate nohighlight">\(T_{DP}\)</span>) and length multiplier (<span class="math notranslate nohighlight">\(L\)</span>) to increase diversity. Unfortunately, they do not evaluate the effect of these parameters on ASR results. Another new method to make the TTS data distribution closer to the real data by sampling is discriminator rejection sampling <a class="reference external" href="references.html#azadi2018rejection">(Azadi et al., 2018)</a>. This uses the probability produced by a discriminator to reject samples which are far away from the real speech distribution, and was successfully used by <a class="reference external" href="references.html#hu2022synt">Hu et al. (2022)</a>.</p>
+<p>Before any synthetic data is added to the real data, it can be helpful to filter the data or to sample from the model in a way beneficial to ASR. This can be helpful because the amount of data that can be generated using a TTS model is usually not the limiting factor in a <strong>TTS-for-ASR</strong> system. This means we can generate more data than we need and then <em>filter</em> it. Or, seeing it from the perspective of <em>sampling</em>, we only generate samples fulfilling certain conditions in the first place. One way to filter out low-quality TTS results is computing the WER (word error rate) on said results and dropping ones with a high WER <a class="reference external" href="references.html#rosenberg2019ttsasr">(Rosenberg et al., 2019)</a>. <a class="reference external" href="references.html#wang2020scl">Wang et al. (2020)</a> performed copy synthesis using scheduled sampling at inference time, feeding the model ground-truth predictions at inference time with a probability of <span class="math notranslate nohighlight">\(0.2\)</span>, leading to more high-quality inference and lower WER. <a class="reference external" href="references.html#sun2020vae">Sun et al. (2020)</a> performed copy synthesis as well, with the addition that their VAE-TTS systems allowed them to sample from different latent style representations at inference time to produce different styles of the same utterance. <a class="reference external" href="references.html#casanova2022singlespeaker">Casanova et al.(2022)</a> randomly sample from their model temperature (<span class="math notranslate nohighlight">\(T\)</span>), duration predictor temperature (<span class="math notranslate nohighlight">\(T_{DP}\)</span>) and length multiplier (<span class="math notranslate nohighlight">\(L\)</span>) to increase diversity. Unfortunately, they do not evaluate the effect of these parameters on ASR results. Another new method to make the TTS data distribution closer to the real data by sampling is discriminator rejection sampling <a class="reference external" href="references.html#azadi2018rejection">(Azadi et al., 2018)</a>. This uses the probability produced by a discriminator to reject samples which are far away from the real speech distribution, and was successfully used by <a class="reference external" href="references.html#hu2022synt">Hu et al. (2022)</a>.</p>
 <p>But the TTS model is not the only component that can be sampled from when generating synthetic speech – <a class="reference external" href="references.html#huang2020adapt">Huang et al. (2020)</a> sample from an LSTM language model with diversity constraints (e.g. penalizing repeating tokens) to generate the inputs for their TTS system. <a class="reference external" href="references.html#chen2021mixmatch">Chen et al., (2021)</a> also sample on a lexical level. They do so by filtering a very large text dataset down to 30 million samples per language using contrastive unspoken text selection <a class="reference external" href="references.html#chen2020cuts">(Chen et al., 2020)</a>.</p>
 </div>
 <div class="section" id="combining-the-data">
 <h2>Combining the Data<a class="headerlink" href="#combining-the-data" title="Permalink to this headline">¶</a></h2>
-<p>Several <strong>TTS-for-ASR</strong> systems simply combine real and synthetic data using a 50:50 split (<a class="reference external" href="references.html#li2018ttsasr">Li et al., 2018</a>; <a class="reference external" href="references.html#rosenberg2019ttsasr">Rosenberg et al., 2019</a>; <a class="reference external" href="references.html#wang2020scl">Wang et al., 2020</a>) – the former find that a 33:66 (real:synthetic) split degrades performance compare to a 50:50 split but still slightly outperforms the baseline. <a class="reference external" href="references.html#hayashi2018dth">Hayashi et al. (2018)</a>, who directly generate the hidden states of an ASR model using their method, use a 22:78 split successfully, but only when using acoustic rather than hidden features for the real data to avoid overfitting. Thanks to increased style diversity enabled by a VAE, <a class="reference external" href="references.html#sun2020vae">Sun et al. (2020)</a> improve their ASR’s WER by 16% (relative) with a 9:91 split.</p>
+<p>Several <strong>TTS-for-ASR</strong> systems combine real and synthetic data using a 50:50 split (<a class="reference external" href="references.html#li2018ttsasr">Li et al., 2018</a>; <a class="reference external" href="references.html#rosenberg2019ttsasr">Rosenberg et al., 2019</a>; <a class="reference external" href="references.html#wang2020scl">Wang et al., 2020</a>) – the former find that a 33:66 (real:synthetic) split degrades performance compare to a 50:50 split but still slightly outperforms the baseline. <a class="reference external" href="references.html#hayashi2018dth">Hayashi et al. (2018)</a>, who directly generate the hidden states of an ASR model using their method, use a 22:78 split successfully, but only when using acoustic rather than hidden features for the real data to avoid overfitting. Thanks to increased style diversity enabled by a VAE, <a class="reference external" href="references.html#sun2020vae">Sun et al. (2020)</a> improve their ASR’s WER by 16% (relative) with a 9:91 split.</p>
 </div>
 <div class="section" id="augmentation-2">
 <h2>Augmentation<span class="math notranslate nohighlight">\(^2\)</span><a class="headerlink" href="#augmentation-2" title="Permalink to this headline">¶</a></h2>
 <p>Synthetic speech is often combined with other augmentation methods, such as SpecAugment <a class="reference external" href="references.html#park2019specaugment">(Park et al., 2019)</a> or RIR (room impulse response) generation <a class="reference external" href="references.html#habets2010rir">(Habets, 2010)</a>, to introduce more diversity and to make it harder for ASR systems to overfit to the synthetic data (<a class="reference external" href="references.html#wang2020scl">Wang et al., 2020</a>; <a class="reference external" href="references.html#sun2020vae">Sun et al. (2020)</a>)</p>
-<p>In the <a class="reference internal" href="06_transfer.html"><span class="doc std std-doc">next chapter</span></a>, I look at cases were instead of simply augmenting the lexical or speaker diversity of a dataset, TTS is used to transfer diversity from a high to a low-resource domain.</p>
+<p>In the <a class="reference internal" href="06_transfer.html"><span class="doc std std-doc">next chapter</span></a>, I look at cases were instead of augmenting the lexical or speaker diversity of a dataset, TTS is used to transfer diversity from a high to a low-resource domain.</p>
 <hr class="footnotes docutils" />
 <dl class="footnote brackets">
 <dt class="label" id="synthonly"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>

@@ -169,6 +169,38 @@
 </ul>
 <p class="caption">
  <span class="caption-text">
+  My Work
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="08_zasr_setup.html">
+   Hybrid DNN-HMM
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08_fastspeech2.html">
+   FastSpeech 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09_conditioning.html">
+   Utterance-Level Conditioning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11_german-to-english.html">
+   German-to-English Transfer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="12_future.html">
+   Future Work
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
   References
  </span>
 </p>
@@ -312,9 +344,9 @@
                 
   <div class="section" id="low-resource-asr">
 <h1>Low-Resource ASR<a class="headerlink" href="#low-resource-asr" title="Permalink to this headline">¶</a></h1>
-<p>As I have mentioned before, synthetic data is most useful in the case of little data being available in the target domain. ASR for low-resource languages is one of those cases, and the one I have focused my own work on so far. Beyond making ASR models themselves more robust to overfitting, there are two main areas of research in low-resource ASR as described by <a class="reference external" href="references.html#yu2020lowresourceoverview">Yu et al. (2020)</a>: <strong>Data Augmentation</strong> and <strong>domain Transfer</strong>. <strong>Data augmentation</strong> encompasses various techniques which usually add perturbed versions of training samples to the data to increase diversity and make the ASR model more robust. While data augmentation expands the space of the data, <strong>domain transfer</strong> is about expanding the space of tasks a model has to perform:</p>
+<p>As I have mentioned before, synthetic data is most useful in the case of little data being available in the target domain. ASR for low-resource languages is one of those cases, and the one I have focused my own work on so far. Beyond making ASR models themselves more robust to overfitting, there are two main areas of research in low-resource ASR as described by <a class="reference external" href="references.html#yu2020lowresourceoverview">Yu et al. (2020)</a>: <strong>Data Augmentation</strong> and <strong>domain transfer</strong>. <strong>Data augmentation</strong> encompasses various techniques which usually add perturbed versions of training samples to the data to increase diversity and make the ASR model more robust. While data augmentation expands the space of the data, <strong>domain transfer</strong> is about expanding the space of tasks a model has to perform:</p>
 <ul class="simple">
-<li><p><em>Multitask learning</em> simply adds more tasks (for example, each additional language can be seen as an additional task). When the tasks are closely related, a model trained on many tasks often outperforms a model trained on a single task. One of the reasons for this is that the model learns more robust hidden representations.</p></li>
+<li><p><em>Multitask learning</em> adds more tasks (for example, each additional language can be seen as an additional task). When the tasks are closely related, a model trained on many tasks often outperforms a model trained on a single task. One of the reasons for this is that the model learns more robust hidden representations.</p></li>
 <li><p><em>Transfer learning</em> aims to transfer model knowledge from a high-resource source task to the low-resource target task, usually using a pre-training/fine-tuning approach.</p></li>
 <li><p><em>Meta learning</em> means to learn from previous a learning task (also called “learning to learn”) to adapt to a new task using meta-data from said initial task.</p></li>
 </ul>
@@ -325,12 +357,12 @@
 <div class="section" id="synthetic-speech-data-augmentation">
 <h2>Synthetic Speech ≠ Data Augmentation<a class="headerlink" href="#synthetic-speech-data-augmentation" title="Permalink to this headline">¶</a></h2>
 <p>While synthetic speech data is usually referred to as a data augmentation technique, I agree with <a class="reference external" href="references.html#nikolenko2021synthetic">Nikolenko (2021, p. 12)</a> that while the line between data augmentation and synthetic data can be blurry, it is helpful to distinguish between the two. To illustrate this, let’s assume the most extreme case: <em>training a model using synthetic data alone</em> - there is no original data being augmented, so I would hesitate to call this data augmentation.</p>
-<p>When viewing synthetic speech as a technique outside of data augmentation, it’s also easy to see that many techniques used for <strong>domain transfer</strong> in low-resource ASR have been applied to the generation of synthetic speech, making many works in this field a combination of <strong>domain transfer</strong> and <strong>data augmentation</strong>. I discuss these in more detail in the <a class="reference internal" href="06_transfer.html"><span class="doc std std-doc">domain Transfer</span></a> and <a class="reference internal" href="05_augmentation.html"><span class="doc std std-doc">Data Augmentation</span></a> chapters.</p>
+<p>When viewing synthetic speech as a technique outside of data augmentation, it’s also easy to see that many techniques used for <strong>domain transfer</strong> in low-resource ASR have been applied to the generation of synthetic speech, making many works in this field a combination of <strong>domain transfer</strong> and <strong>data augmentation</strong>. I discuss these in more detail in the <a class="reference internal" href="06_transfer.html"><span class="doc std std-doc">domain transfer</span></a> and <a class="reference internal" href="05_augmentation.html"><span class="doc std std-doc">Data Augmentation</span></a> chapters.</p>
 </div>
 <div class="section" id="tts-voice-conversion">
 <h2>TTS &amp; Voice Conversion<a class="headerlink" href="#tts-voice-conversion" title="Permalink to this headline">¶</a></h2>
 <p>I further divide synthetic speech for ASR approaches into <strong>TTS</strong> and <strong>Voice Conversion</strong> approaches.
-In both cases the data is <em>conditionally generated</em>, as I outlined in the <a class="reference internal" href="01_other_fields.html"><span class="doc std std-doc">Synthetic Data chapter</span></a>. The difference between the two is the condition: for <strong>Text</strong>-to-Speech, the main condition is obviously text (although there can be additional conditions), while for <strong>Voice Conversion</strong>, the conditions are an utterance and a desired style, and the result will be an utterance in a different style. While <strong>Voice Conversion</strong> is less popular than <strong>TTS</strong> approaches, it has been successfully used for low-resource ASR by <a class="reference external" href="references.html#thai2019improvinglowresource">Thai et al. (2019)</a>, and there is some work that combines the two by utilizing “Style Equalization” to train a <strong>TTS</strong> model to produce styles based on reference audio without requiring style labels <a class="reference external" href="references.html#hu2022synt">(Hu et al., 2021)</a>.</p>
+In both cases the data is <em>conditionally generated</em>, as I outlined in the <a class="reference internal" href="01_other_fields.html"><span class="doc std std-doc">Synthetic Data chapter</span></a>. The difference between the two is the condition: for <strong>Text</strong>-to-Speech, the main condition is text (although there can be additional conditions), while for <strong>Voice Conversion</strong>, the conditions are an utterance and a desired style, and the result will be an utterance in a different style. While <strong>Voice Conversion</strong> is less popular than <strong>TTS</strong> approaches, it has been successfully used for low-resource ASR by <a class="reference external" href="references.html#thai2019improvinglowresource">Thai et al. (2019)</a>, and there is some work that combines the two by utilizing “Style Equalization” to train a <strong>TTS</strong> model to produce styles based on reference audio without requiring style labels <a class="reference external" href="references.html#hu2022synt">(Hu et al., 2021)</a>.</p>
 <div class="tip admonition note">
 <p class="admonition-title">Note</p>
 <p>Since I haven’t focused on voice conversion so far in my work, I only gave an overview over TTS in the <a class="reference internal" href="02_tts.html"><span class="doc std std-doc">Synthetic Speech chapter</span></a>.</p>
@@ -338,14 +370,14 @@ In both cases the data is <em>conditionally generated</em>, as I outlined in the
 </div>
 <div class="section" id="what-is-low-resource">
 <h2>What is Low-Resource?<a class="headerlink" href="#what-is-low-resource" title="Permalink to this headline">¶</a></h2>
-<p>There is no single definition for what is or isn’t a low-resource setting for ASR. Further, some works refer to terms like “Moderate Low-Resource” or “Extreme Low-Resource” or “Zero-Resource” (for an example, see <a class="reference internal" href="#lrspeech-fig"><span class="std std-numref">Fig. 5</span></a>). There is no consensus on how many hours of supervised data can be considered low-resource. But it’s important to highlight that this isn’t just about the number of hours of paired data, but also about auxillary data such as a <em>pronunciation lexicon or model</em>, <em>unpaired speech</em>, <em>unpaired text</em> or simply <em>low-quality paired speech</em>. For example, a model capable of G2P for 100 languages, many of them considered low-resource, has recently been released by <a class="reference external" href="references.html#zhu2022byt5g2p">Zhu et al. (2022)</a>. It is not obvious to me if a case with paired speech data of just several minutes while having access to a large pronunciation lexicon and unpaired text is less or more of a “low-resource” case than one where an hour of paired speech is available with no unpaired text or pronunciations whatsoever.</p>
+<p>There is no single definition for what is or isn’t a low-resource setting for ASR. Further, some works refer to terms like “Moderate Low-Resource” or “Extreme Low-Resource” or “Zero-Resource” (for an example, see <a class="reference internal" href="#lrspeech-fig"><span class="std std-numref">Fig. 5</span></a>). There is no consensus on how many hours of supervised data can be considered low-resource. But it’s important to highlight that this isn’t just about the number of hours of paired data, but also about auxillary data such as a <em>pronunciation lexicon or model</em>, <em>unpaired speech</em>, <em>unpaired text</em> or <em>low-quality paired speech</em>. For example, a model capable of G2P for 100 languages, many of them considered low-resource, has recently been released by <a class="reference external" href="references.html#zhu2022byt5g2p">Zhu et al. (2022)</a>. It is not obvious to me if a case with paired speech data of just several minutes while having access to a large pronunciation lexicon and unpaired text is less or more of a “low-resource” case than one where an hour of paired speech is available with no unpaired text or pronunciations whatsoever.</p>
 <div class="tip admonition">
 <p class="admonition-title">Opinion</p>
 <p>While it can be helpful to have labels for how “low-resource” a certain setup is, it is not useful to see this as a purely linear scale from “Rich/High” resource all the way to “Zero” resource.</p>
 </div>
 <div class="boxed figure align-default" id="lrspeech-fig">
 <img alt="../_images/lrspeech-table.png" src="../_images/lrspeech-table.png" />
-<p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text">Xu et al. (2020) classify both ASR and TTS into “Rich Resource”, “Low Resource”, “Extremely Low Resource” and “Unsupervised”.</span><a class="headerlink" href="#lrspeech-fig" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text"><a class="reference external" href="references.html#xu2020lrspeech">Xu et al. (2020)</a> classify both ASR and TTS into “Rich Resource”, “Low Resource”, “Extremely Low Resource” and “Unsupervised”.</span><a class="headerlink" href="#lrspeech-fig" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="which-asr-architectures-are-best-for-low-resource">
@@ -353,9 +385,9 @@ In both cases the data is <em>conditionally generated</em>, as I outlined in the
 <p>There are two main approaches in recent work for low-resource ASR:</p>
 <ul class="simple">
 <li><p><em>Hybrid HMM-DNN systems</em> trained using LF-MMI (lattice-free maximum mutual information) <a class="reference external" href="references.html#hadian2018lfmmi">(Hadian et al., 2018)</a>. This is usually achieved using the Kaldi framework <a class="footnote-reference brackets" href="#kaldi" id="id1">1</a>, and the DNN portion of the system is most commonly a variant of a TDNN (Time-Delay Neural Network) <a class="reference external" href="references.html#waibel1989tdnn">(Waibel et al., 1989)</a>.</p></li>
-<li><p><em>Large end-to-end models</em> , which are usually pre-trained on unlabeled data self-supervised learning, and fine-tuned for ASR using CTC (Connectionist Temporal Classification) <a class="reference external" href="references.html#graves2006ctc">(Graves et al., 2006)</a>. To some extent, this has been made possible by the efficiency of training Transformers <a class="reference external" href="references.html#vaswani2017attention">(Vaswani et al., 2017)</a> and Conformers, which are more suitable for speech <a class="reference external" href="references.html#guo2021conformer">(Guo et al., 2021)</a>.</p></li>
+<li><p><em>Large end-to-end models</em> , which are usually pre-trained on unlabeled data self-supervised learning, and fine-tuned for ASR using CTC (Connectionist Temporal Classification) <a class="reference external" href="references.html#graves2006ctc">(Graves et al., 2006)</a>. To some extent, this has been made possible by the efficiency of training Transformers <a class="reference external" href="references.html#vaswani2017attention">(Vaswani et al., 2017)</a> and Conformers <a class="reference external" href="references.html#gulati2020conformer">(Gulati et al., 2020)</a>, which are convolution-augmented Transformers, and have been found to be more suitable for speech <a class="reference external" href="references.html#guo2021conformer">(Guo et al., 2021)</a>.</p></li>
 </ul>
-<p>Despite the dominance of the latter for high-resource ASR and other speech-related tasks<a class="footnote-reference brackets" href="#e2e" id="id2">2</a>, they are relatively unproven for low-resource ASR – <a class="reference external" href="references.html#alumaekong2021hybrid">Alumäe &amp; Kong (2021)</a> found a hybrid CNN-TDNNF model to compare competitively with a fine-tuned XLSR-53 <a class="reference external" href="references.html#conneau2020xlsr53">(Conneau et al., 2020)</a> without the need for any pre-training. They also found (unsurprisingly) that a Conformer model without pre-training performed extremely poorly. <a class="reference external" href="references.html#perero2022hybrid">Perero-Codosero et al. (2022)</a> found that when not doing any pre-training, hybrid models still outperform end-to-end models, even in a relatively high-resource scenario (600 hours of data). Specific to synthetic data augmentation, <a class="reference external" href="references.html#rossenbach2021hybrid">Rossenbach et al. (2021)</a>, found that hybrid models did not benefit from the synthetic data, while Transformer models did. In the field of <strong>TTS-for-ASR</strong>, even recent work utilizing features derived from pre-trained end-to-end models <a class="reference external" href="references.html#ueno2021dth">(Ueno et al., 2021)</a> do not fine-tune said models, perhaps due to the large amount of resources required for fine-tuning.</p>
+<p>Despite the dominance of large end-to-end models for high-resource ASR and other speech-related tasks<a class="footnote-reference brackets" href="#e2e" id="id2">2</a>, they are relatively unproven for low-resource ASR – <a class="reference external" href="references.html#alumaekong2021hybrid">Alumäe &amp; Kong (2021)</a> found a hybrid CNN-TDNNF model to compare competitively with a fine-tuned XLSR-53 <a class="reference external" href="references.html#conneau2020xlsr53">(Conneau et al., 2020)</a> without the need for any pre-training. They also found (unsurprisingly) that a Conformer model without pre-training performed extremely poorly. <a class="reference external" href="references.html#perero2022hybrid">Perero-Codosero et al. (2022)</a> found that when not doing any pre-training, hybrid models still outperform end-to-end models, even in a relatively high-resource scenario (600 hours of data). Specific to synthetic data augmentation, <a class="reference external" href="references.html#rossenbach2021hybrid">Rossenbach et al. (2021)</a>, found that hybrid models did not benefit from the synthetic data, while Transformer models did. In the field of <strong>TTS-for-ASR</strong>, even recent work utilizing features derived from pre-trained end-to-end models <a class="reference external" href="references.html#ueno2021dth">(Ueno et al., 2021)</a> do not fine-tune said models, perhaps due to the large amount of resources required for fine-tuning.</p>
 <div class="tip admonition">
 <p class="admonition-title">Opinion</p>
 <p>While hybrid models certainly perform well in low-resource settings, pre-trained end-to-end models are currently underutilized in <strong>TTS-for-ASR</strong>.</p>

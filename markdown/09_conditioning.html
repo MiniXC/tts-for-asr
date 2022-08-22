@@ -5,17 +5,19 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta property="og:title" content="Conditioning" />
+<meta property="og:title" content="Utterance-Level Conditioning" />
   
 <meta property="og:type" content="website" />
   
 <meta property="og:url" content="cdminix.me/markdown/09_conditioning.html" />
   
+<meta property="og:description" content="For the following experiments, I chose LibriTTS(Zen et al., 2019) as our training dataset and LibriSpeech(Panayotov et al., 2015) for validation. When training the TTS system, I always used the tra..." />
+  
 <meta property="og:image" content="https://goodresearch.dev/_images/unicorn.png" />
   
-<meta property="og:image:alt" content="Conditioning" />
+<meta property="og:image:alt" content="Utterance-Level Conditioning" />
   
-    <title>Conditioning &#8212; TTS for ASR</title>
+    <title>Utterance-Level Conditioning &#8212; TTS for ASR</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -58,6 +60,8 @@
     <script src="../_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.90c857b2bf8f3d46aa488b0ed8bf60a6.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe,.cell"
@@ -69,6 +73,8 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="German-to-English Transfer" href="11_german-to-english.html" />
+    <link rel="prev" title="FastSpeech 2" href="08_fastspeech2.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -160,6 +166,38 @@
  <li class="toctree-l1">
   <a class="reference internal" href="06_transfer.html">
    Domain Transfer
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  My Work
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="08_zasr_setup.html">
+   Hybrid DNN-HMM
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08_fastspeech2.html">
+   FastSpeech 2
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Utterance-Level Conditioning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11_german-to-english.html">
+   German-to-English Transfer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="12_future.html">
+   Future Work
   </a>
  </li>
 </ul>
@@ -270,6 +308,19 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#utterance-level-variance-control">
+   Utterance-Level Variance Control
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -278,8 +329,50 @@
         
               <div>
                 
-  <div class="section" id="conditioning">
-<h1>Conditioning<a class="headerlink" href="#conditioning" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="utterance-level-conditioning">
+<h1>Utterance-Level Conditioning<a class="headerlink" href="#utterance-level-conditioning" title="Permalink to this headline">¶</a></h1>
+<p>For the following experiments, I chose
+LibriTTS <a class="reference external" href="references.html#zen2019libritts">(Zen et al., 2019)</a>  as our training dataset and LibriSpeech <a class="reference external" href="references.html#panayotov2015librispeech">(Panayotov et al., 2015)</a> for
+validation. When training the TTS system, I always used
+the <code class="docutils literal notranslate"><span class="pre">train-clean-360</span></code> split, and when training the ASR
+system, we always use <code class="docutils literal notranslate"><span class="pre">train-clean-100</span></code> to avoid overlap. To make my experiments as close to the case in which
+little real data is available, I limited the size of both synthetic
+and real speech datasets to 10 hours. The synthetic speech
+was always generated using the transcripts found in the corresponding real data to avoid lexical mismatch between TTS
+and ASR.</p>
+<p>As I discussed in <a class="reference external" href="02_tts.html#controllability">the TTS chapter</a>, FastSpeech 2 is controllable due to it’s variances. <a class="reference external" href="references.html#ren2021fastspeech2">Ren et al. (2021)</a> describe controlling the output by multiplying these variances by a factor, allowing to generate faster/slower, more high-pitched/low-pitched or louder/quieter speech. I investigated if this could be used to make up for the diversity that is lost due to <a class="reference external" href="02_tts.html#controllability">oversmoothing</a>. In my experiments I modified the phone-level utterance predictions created by the model at inference time. I attempted this in the following ways:</p>
+<ul class="simple">
+<li><p>add gaussian noise to the predicted duration</p></li>
+<li><p>item sample from all observed durations during training</p>
+<ul>
+<li><p>conditioned on the respective speakers</p></li>
+<li><p>conditioned on the respective phones</p></li>
+</ul>
+</li>
+<li><p>scale the predicted durations by a random factor</p></li>
+</ul>
+<p>I call this variance augmentation.
+As you can see in <a class="reference internal" href="#varaug"><span class="std std-numref">Fig. 15</span></a>, only sampling from observed observations, conditioned on phones seems to yield a (slight) improvement. I hypothesized that the improvement is only slight due to a trade-off between more diverse speech improving ASR performance, while the random nature of the resulting diversity is hindering ASR training.</p>
+<div class="boxed figure align-default" id="varaug">
+<a class="reference internal image-reference" href="../_images/varaug.png"><img alt="../_images/varaug.png" src="../_images/varaug.png" style="height: 200px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 15 </span><span class="caption-text">Effects of variance augmentation for ASR training.</span><a class="headerlink" href="#varaug" title="Permalink to this image">¶</a></p>
+</div>
+<p>To evaluate if more diverse variances are helpful at all, I conducted a range of oracle experiments which use the ground-truth variances rather than the predicted ones. This can be seen in <a class="reference internal" href="#oracles"><span class="std std-numref">Fig. 16</span></a> in terms of <span class="math notranslate nohighlight">\(WER_s/WER_r\)</span> (the ratio of WER when trained on synthetic data to WER when trained on real data).</p>
+<div class="boxed figure align-default" id="oracles">
+<a class="reference internal image-reference" href="../_images/oracles.png"><img alt="../_images/oracles.png" src="../_images/oracles.png" style="height: 200px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 16 </span><span class="caption-text">The improvement gained from using differing ground-
+truth variance values. ”None” uses predicted Variances, while
+”All” uses all ground-truth values..</span><a class="headerlink" href="#oracles" title="Permalink to this image">¶</a></p>
+</div>
+<div class="section" id="utterance-level-variance-control">
+<h2>Utterance-Level Variance Control<a class="headerlink" href="#utterance-level-variance-control" title="Permalink to this headline">¶</a></h2>
+<p>Instead of altering the synthetic speech at a phone level, I added one input to the model for each variance, representing the variance mean across the utterance. This reduces the one-to-many problem of TTS at the cost of needing to provide a value for each variance at inference. Since the variances are specific to speakers, I created a normal distribution of each variance for each speaker. Two example distributions for energy and duration can be seen in <a class="reference internal" href="#vardists"><span class="std std-numref">Fig. 17</span></a>. At inference time, a random sample is drawn from each distribution and fed to the model – represented by the red line in <a class="reference internal" href="#vardists"><span class="std std-numref">Fig. 17</span></a>.</p>
+<div class="boxed figure align-default" id="vardists">
+<a class="reference internal image-reference" href="../_images/vardists.png"><img alt="../_images/vardists.png" src="../_images/vardists.png" style="height: 150px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 17 </span><span class="caption-text">Effects of variance augmentation for ASR training.</span><a class="headerlink" href="#vardists" title="Permalink to this image">¶</a></p>
+</div>
+<p>However, it turns out sampling these variances from a normal distribution doesn’t improve but decreases performance (2.1% relative WER increase). When visualising the original distributions using KDE (Kernel Density Estimation), it becomes clear why this is the case – the ground-truth distributions are fat-tailed, with many outliers on either side. This means that approximating this with a normal distribution effectively reduces performance. Once I replaced the sampling distribution with a uniform one, <strong>Utterance-Level Conditioning</strong> the TTS model improved ASR performance.</p>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -311,6 +404,24 @@
 
 <div class='prev-next-bottom'>
     
+    <div id="prev">
+        <a class="left-prev" href="08_fastspeech2.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">FastSpeech 2</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="11_german-to-english.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">German-to-English Transfer</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
 
 </div>
         

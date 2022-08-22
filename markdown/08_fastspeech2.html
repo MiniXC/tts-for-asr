@@ -11,6 +11,8 @@
   
 <meta property="og:url" content="cdminix.me/markdown/08_fastspeech2.html" />
   
+<meta property="og:description" content="My TTS architecture of choice for TTS-for-ASR is FastSpeech 2(Ren et al., 2021). It non-autoregressive, which sets it apart from the most commonly used architecture for TTS-for-ASR, Tacotron 2(Shen..." />
+  
 <meta property="og:image" content="https://goodresearch.dev/_images/unicorn.png" />
   
 <meta property="og:image:alt" content="FastSpeech 2" />
@@ -58,6 +60,8 @@
     <script src="../_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.90c857b2bf8f3d46aa488b0ed8bf60a6.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe,.cell"
@@ -69,6 +73,8 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Utterance-Level Conditioning" href="09_conditioning.html" />
+    <link rel="prev" title="Hybrid DNN-HMM" href="08_zasr_setup.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -160,6 +166,38 @@
  <li class="toctree-l1">
   <a class="reference internal" href="06_transfer.html">
    Domain Transfer
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  My Work
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="08_zasr_setup.html">
+   Hybrid DNN-HMM
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   FastSpeech 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09_conditioning.html">
+   Utterance-Level Conditioning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11_german-to-english.html">
+   German-to-English Transfer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="12_future.html">
+   Future Work
   </a>
  </li>
 </ul>
@@ -270,6 +308,56 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#overview">
+   Overview
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#zero-silences">
+   Zero-Silences
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#vocoder">
+   Vocoder
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#performance-and-multi-speaker-improvements">
+   Performance and Multi-Speaker Improvements
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#variances">
+   Variances
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#additional-snr-variance">
+     Additional SNR Variance
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#duration-augmentation">
+     Duration Augmentation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#jsd-early-stopping">
+     JSD Early-Stopping
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -280,6 +368,85 @@
                 
   <div class="section" id="fastspeech-2">
 <h1>FastSpeech 2<a class="headerlink" href="#fastspeech-2" title="Permalink to this headline">¶</a></h1>
+<p>My TTS architecture of choice for <strong>TTS-for-ASR</strong> is FastSpeech 2 <a class="reference external" href="references.html#ren2021fastspeech2">(Ren et al., 2021)</a>. It non-autoregressive, which sets it apart from the most commonly used architecture for <strong>TTS-for-ASR</strong>, Tacotron 2 <a class="reference external" href="references.html#shen2018tacotron2">(Shen et al., 2018)</a>, and is controllable, as opposed to the less used VITS <a class="reference external" href="references.html#kim2021vits">(Kim et al., 2021)</a> (see <a class="reference internal" href="#ttscomp"><span class="std std-numref">Fig. 10</span></a>).</p>
+<div class="boxed figure align-default" id="ttscomp">
+<img alt="../_images/ttscomparison.svg" src="../_images/ttscomparison.svg" /><p class="caption"><span class="caption-number">Fig. 10 </span><span class="caption-text">Comparsion of the three architectures used for <strong>TTS-for-ASR</strong>.</span><a class="headerlink" href="#ttscomp" title="Permalink to this image">¶</a></p>
+</div>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>FastSpeech 2 training can be divided into three stages:</p>
+<ol class="simple">
+<li><p><em>Grapheme-to-Phoneme conversion and forced alignment</em> <a class="reference external" href="references.html#mcauliffe2017mfa">(McAuliffe et al., 2017)</a> is used to align phoneme sequences with audio in the training data.</p></li>
+<li><p><em>Variances are extracted</em> from the raw audio and/or mel spectrograms – for FastSpeech 2 these are the <em>pitch contour</em> using PyWorldVocoder <a class="footnote-reference brackets" href="#pyworld" id="id1">1</a>, <em>energy (volume)</em> is computed as the L2-norm of the amplitude of the mel-spectrogram and <em>durations</em> using the forced alignment from before. In FastSpeech 2, only the durations are computed on phoneme-level, while <em>pitch</em> and <em>energy</em> are computed on frame-level. <a class="reference external" href="references.html#chien2021fastspeech2dvec">Chien et al. (2021)</a> however, showed phoneme-level <em>pitch</em> and <em>energy</em> prediction to work better, and I found the same in my work.</p></li>
+<li><p><em>End-to-End</em> model is trained to predict the mel-spectrogram and extracted variances simultaneously. The encoder-decoder architecture duplicates hidden states according to the predicted durations, rather than using alignment learning such as Tacotron 2 or VITS, which allows for more data-efficient training <a class="reference external" href="references.html#pine2022lowresourcefastspeech">(Pine et al., 2022)</a>.</p></li>
+</ol>
+<p>The original FastSpeech 2 system is designed for single-speaker use. To make the TTS model suitable for multi-speaker training, I use d-vectors <a class="reference external" href="references.html#variani2014dvectors">(Variani et al., 2014)</a> extracted from utterances and averaged to arrive at one d-vector per speaker, which are expanded and added to the hidden sequence before the encoder and decoder (see <a class="reference internal" href="#base"><span class="std std-numref">Fig. 11</span></a>). I use a publicly available d-vector extractor <a class="footnote-reference brackets" href="#dvec" id="id2">2</a> pretrained on VoxCeleb <a class="reference external" href="references.html#nagrani2017voxceleb">(Nagrani et al., 2017)</a> using GE2E loss <a class="reference external" href="references.html#wan2018g2e">(Wan et al., 2018)</a>.</p>
+<div class="boxed figure align-default" id="base">
+<img alt="../_images/fastspeech2base.svg" src="../_images/fastspeech2base.svg" /><p class="caption"><span class="caption-number">Fig. 11 </span><span class="caption-text">An overview of the FastSpeech 2 architecture.</span><a class="headerlink" href="#base" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="zero-silences">
+<h2>Zero-Silences<a class="headerlink" href="#zero-silences" title="Permalink to this headline">¶</a></h2>
+<p>In previous work, silences between words were either not mentioned <a class="reference external" href="references.html#ren2021fastspeech2">(Ren et al., 2021)</a> or only added to the input when detected using forced alignment <a class="reference external" href="references.html#chien2021fastspeech2dvec">Chien et al. (2021)</a>. This creates a mismatch between training and inference, which I avoid by adding one silence token between each word, regardless if silence is present or not. There are special labels for punctuation (<code class="docutils literal notranslate"><span class="pre">,;!?.</span></code>) since they are often associated with silence. The model is then tasked to predict the silence length – and opposed to previous work, it also has to predict the absence of silence by predicting lengths of zero.</p>
+<!-- add a figure for this -->
+</div>
+<div class="section" id="vocoder">
+<h2>Vocoder<a class="headerlink" href="#vocoder" title="Permalink to this headline">¶</a></h2>
+<p>Since FastSpeech 2 predicts mel-spectrograms rather than raw audio, a vocoder is needed. For this I use Hifi-GAN <a class="reference external" href="references.html#kong2020hifigan">(Kong et al., 2020)</a>. To ensure the vocoder isn’t holding back the <strong>TTS-for-ASR</strong> system, I conducted an experiment where LibriSpeech training data is converted to mel-spectrograms and re-synthesized using Hifi-GAN. I then trained two ASR models, one on the re-synthesized data, and one on the original data. I found that for LibriSpeech <a class="reference external" href="references.html##panayotov2015librispeech">(Panayotov et al., 2015)</a>, there is no significant different between re-synthesized and original audio for ASR training.</p>
+</div>
+<div class="section" id="performance-and-multi-speaker-improvements">
+<h2>Performance and Multi-Speaker Improvements<a class="headerlink" href="#performance-and-multi-speaker-improvements" title="Permalink to this headline">¶</a></h2>
+<p>Various performance improvements for FastSpeech 2 have been proposed by <a class="reference external" href="references.html#luo2021lightspeech">Luo et al. (2021)</a>, the main one being the use of depthwise separable convolutions <a class="reference external" href="references.html#sifre2014depthwise">(Sifre &amp; Mallat, 2014)</a>, a more efficient type of convolution operation, in the conformer <a class="reference external" href="references.html#gulati2020conformer">(Gulati et al., 2020)</a> layers. I adopted the same architecture, but found that changing the kernel sizes as they report did not lead to a significant improvement. The associated efficiency gain allowed me to increase the number of decoder layers from 4 to 6, which helped FastSpeech 2 accurately model multiple speakers.</p>
+</div>
+<div class="section" id="variances">
+<h2>Variances<a class="headerlink" href="#variances" title="Permalink to this headline">¶</a></h2>
+<div class="boxed figure align-default" id="varadapt">
+<img alt="../_images/variance_adaptor.png" src="../_images/variance_adaptor.png" />
+<p class="caption"><span class="caption-number">Fig. 12 </span><span class="caption-text">The “Variance adaptor” introduced by <a class="reference external" href="references.html#ren2021fastspeech2">Ren et al. (2021)</a>.</span><a class="headerlink" href="#varadapt" title="Permalink to this image">¶</a></p>
+</div>
+<p>A key premise of FastSpeech 2 is reducing the one-to-many problem in TTS. Since there are many possible realizations of an utterance, training a discriminative model with L1-Loss alone would result in oversmoothing (as I discussed in the <a class="reference external" href="02_tts#controllability">synthetic speech chapter</a>). The solution in FastSpeech 2 is controllability, which is achieved using the variances I discussed <a class="reference external" href="#overview">above</a>. There is, however, the following training-inference mismatch:</p>
+<ul class="simple">
+<li><p><em>During training</em> the variance adaptor (show in <a class="reference internal" href="#varadapt"><span class="std std-numref">Fig. 12</span></a>) is trained to predict the previously extracted variances. However, the ground-truth values are quantized and added to the hidden representation rather than the predicted values.</p></li>
+<li><p><em>During inference</em>, the predicted variances are quantized and added to the hidden representations, leading to said mismatch.</p></li>
+</ul>
+<div class="boxed figure align-default" id="example">
+<img alt="../_images/examples.svg" src="../_images/examples.svg" /><p class="caption"><span class="caption-number">Fig. 13 </span><span class="caption-text">An example utterance and it’s variances synthesized using FastSpeech 2. ☐ indicate optional silences.</span><a class="headerlink" href="#example" title="Permalink to this image">¶</a></p>
+</div>
+<p>In the <a class="reference internal" href="09_conditioning.html"><span class="doc std std-doc">next chapter</span></a>, I discuss how I reduced the aforementioned mismatch using utterance-level conditioning.</p>
+<div class="section" id="additional-snr-variance">
+<h3>Additional SNR Variance<a class="headerlink" href="#additional-snr-variance" title="Permalink to this headline">¶</a></h3>
+<p>From qualitative assessment of the synthetic speech, there seemed be metallic-sounding artifacts in the produced speech. Some speakers would consistently have these artifacts, while others would produce very clean audio. I hypothesized that the artifacts could be an attempt by the model to produce probabilistic noise for the speakers with noisier environments. Using Waveform Amplitude Distribution Analysis (WADA) <a class="reference external" href="references.html#kimstern2008wada">(Kim &amp; Stern, 2008)</a>, which is a SNR (signal-to-noise ratio) estimation algorithm, I found that speakers with a lower SNR in the training data indeed lead to more artifacts. To allow the TTS system to better model noise, I added this estimated SNR value as an additional variance, leading to significant improvement in mel-spectrogram MAE (mean absolute error) of 3.7% relative.</p>
+</div>
+<div class="section" id="duration-augmentation">
+<h3>Duration Augmentation<a class="headerlink" href="#duration-augmentation" title="Permalink to this headline">¶</a></h3>
+<p>Since the alignments using forced alignment aren’t perfect, I experimented with “duration augmentation” – during training, each phoneme duration is increased or reduced by a length in the range <span class="math notranslate nohighlight">\([1, 3]\)</span> frames with probability <span class="math notranslate nohighlight">\(p_d\)</span>. This improves the MAE of the produced mel-spectrograms by 1.3% relative.</p>
+</div>
+<div class="section" id="jsd-early-stopping">
+<h3>JSD Early-Stopping<a class="headerlink" href="#jsd-early-stopping" title="Permalink to this headline">¶</a></h3>
+<p>I found that the variance adaptor tended to overfit to the train-
+ing data, and tested the following early stopping strategy to avoid this problem: I froze the weights of the variance adaptor corresponding to a specific variance if a metric computed on the predicted variances on held-out data does not improve for 3 epochs. I also set the weights to their state at the epoch where the best value of said metric was reached. I tested two different metrics, with the first one being the JSD
+(Jensen-Shannon-Divergence) <a class="reference external" href="references.html#fuglede2004jsd">(Fuglede &amp; Topsoe, 2004)</a>, which measures the similarity of two probability distributions <span class="math notranslate nohighlight">\(P\)</span> and <span class="math notranslate nohighlight">\(Q\)</span> as follows, where D is the Kullback-Leibler Divergence:</p>
+<div class="math notranslate nohighlight">
+\[{\rm JSD}(P \parallel Q)= \frac{1}{2}D(P \parallel M)+\frac{1}{2}D(Q \parallel M)\]</div>
+<p>We approximate P and Q using KDE (kernel density estimation). The second metric is the MAE
+of the predictions. As can be seen in <a class="reference internal" href="#jsdwer"><span class="std std-numref">Fig. 14</span></a>, my early stopping approach for TTS improves downstream ASR performance (for more details on the ASR setup, see the <a class="reference internal" href="09_conditioning.html"><span class="doc std std-doc">utterance-level conditioning chapter</span></a>). I found JSD to be the more appropriate metric.
+My hypothesis as to why that is is that the similarity of the variance distributions is more important for diverse TTS than their absolute error, as the latter can be easily skewed by outliers.</p>
+<div class="boxed figure align-default" id="jsdwer">
+<a class="reference internal image-reference" href="../_images/jsd_wer.png"><img alt="../_images/jsd_wer.png" src="../_images/jsd_wer.png" style="height: 100px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 14 </span><span class="caption-text">Effects of early stopping of the variance adaptor
+during training.</span><a class="headerlink" href="#jsdwer" title="Permalink to this image">¶</a></p>
+</div>
+<hr class="footnotes docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="pyworld"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p><a class="reference external" href="https://github.com/JeremyCCHsu/Python-Wrapper-for-World-Vocoder">github.com/JeremyCCHsu/Python-Wrapper-for-World-Vocoder</a></p>
+</dd>
+<dt class="label" id="dvec"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd><p><a class="reference external" href="https://github.com/yistLin/dvector">github.com/yistLin/dvector</a></p>
+</dd>
+</dl>
+</div>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -311,6 +478,24 @@
 
 <div class='prev-next-bottom'>
     
+    <div id="prev">
+        <a class="left-prev" href="08_zasr_setup.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Hybrid DNN-HMM</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="09_conditioning.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Utterance-Level Conditioning</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
 
 </div>
         

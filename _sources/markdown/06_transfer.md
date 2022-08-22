@@ -16,8 +16,8 @@ I mostly focus on the *cross-lingual transfer* case, since it is far more wide-s
 
 ## Cross-Lingual Transfer
 
-As far as I know, there are currently two previous works successfully using cross-lingual transfer in the field of **TTS-for-ASR**, but due to the potential for low-resource ASR and the steady improvement of TTS models, there are surely more to come. The main hurdle so far is the *mutual exclusivity of speakers across languages* -- datasets with the same speakers across multiple languages are rare, and in most real-world cases, no speakers are shared across languages. This naturally makes it hard for models to learn to transfer a speaker from one language to another, since there are no examples of it.
-
+There are currently two previous works successfully using cross-lingual transfer in the field of **TTS-for-ASR**, but due to the potential for low-resource ASR and the steady improvement of TTS models, there are surely more to come. The main hurdle so far is the *mutual exclusivity of speakers across languages* -- datasets with the same speakers across multiple languages are rare, and in most real-world cases, no speakers are shared across languages. This naturally makes it hard for models to learn to transfer a speaker from one language to another, since there are no examples of it.
+ 
 ```{figure} ../figures/chenfig.png
 ---
 figclass: boxed

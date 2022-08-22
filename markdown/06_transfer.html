@@ -71,7 +71,7 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="References" href="references.html" />
+    <link rel="next" title="Hybrid DNN-HMM" href="08_zasr_setup.html" />
     <link rel="prev" title="Data Augmentation" href="05_augmentation.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -164,6 +164,38 @@
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Domain Transfer
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  My Work
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="08_zasr_setup.html">
+   Hybrid DNN-HMM
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08_fastspeech2.html">
+   FastSpeech 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09_conditioning.html">
+   Utterance-Level Conditioning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11_german-to-english.html">
+   German-to-English Transfer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="12_future.html">
+   Future Work
   </a>
  </li>
 </ul>
@@ -308,7 +340,7 @@
 <p>I mostly focus on the <em>cross-lingual transfer</em> case, since it is far more wide-spread and more aligned with low-resource ASR.</p>
 <div class="section" id="cross-lingual-transfer">
 <h2>Cross-Lingual Transfer<a class="headerlink" href="#cross-lingual-transfer" title="Permalink to this headline">¶</a></h2>
-<p>As far as I know, there are currently two previous works successfully using cross-lingual transfer in the field of <strong>TTS-for-ASR</strong>, but due to the potential for low-resource ASR and the steady improvement of TTS models, there are surely more to come. The main hurdle so far is the <em>mutual exclusivity of speakers across languages</em> – datasets with the same speakers across multiple languages are rare, and in most real-world cases, no speakers are shared across languages. This naturally makes it hard for models to learn to transfer a speaker from one language to another, since there are no examples of it.</p>
+<p>There are currently two previous works successfully using cross-lingual transfer in the field of <strong>TTS-for-ASR</strong>, but due to the potential for low-resource ASR and the steady improvement of TTS models, there are surely more to come. The main hurdle so far is the <em>mutual exclusivity of speakers across languages</em> – datasets with the same speakers across multiple languages are rare, and in most real-world cases, no speakers are shared across languages. This naturally makes it hard for models to learn to transfer a speaker from one language to another, since there are no examples of it.</p>
 <div class="boxed figure align-default" id="chenfig">
 <a class="reference internal image-reference" href="../_images/chenfig.png"><img alt="../_images/chenfig.png" src="../_images/chenfig.png" style="height: 200px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 9 </span><span class="caption-text">The different domains that can be transferred in TTS.</span><a class="headerlink" href="#chenfig" title="Permalink to this image">¶</a></p>
@@ -357,10 +389,10 @@
         </a>
     </div>
      <div id="next">
-        <a class="right-next" href="references.html" title="next page">
+        <a class="right-next" href="08_zasr_setup.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title">References</p>
+                <p class="prevnext-title">Hybrid DNN-HMM</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>
